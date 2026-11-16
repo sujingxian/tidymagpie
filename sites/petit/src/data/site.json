@@ -1,0 +1,39 @@
+{
+  "updated": "2026-11-17",
+  "launchDate": "2026-12-04",
+  "preloadDate": "2026-12-01",
+  "tagZh": {
+    "Farm Decor": "农牧装饰", "Bamboo (Material)": "竹制品", "Fertilizer": "肥料", "Green": "绿色", "Red": "红色",
+    "Black": "黑色", "Plastic": "塑料", "Beetle": "甲虫", "Wood": "木制品", "Street Decor": "户外装饰",
+    "Yellow": "黄色", "Aquatic Creature": "鱼", "Classic": "古典风格物品", "Headwear": "头部饰品",
+    "Natural Fiber": "藤草材质物品", "Grilled Dish": "烧烤", "Orange": "橙色", "Metal": "金属",
+    "Contains Fruit": "含水果的食物", "White": "白色", "Pepper (Type)": "辣椒", "Brown": "棕色",
+    "Bathtub": "浴缸", "Drink": "饮品", "Stew": "炖菜", "Glasses": "眼镜", "Multicolor": "彩色物品",
+    "Laptop": "笔记本电脑", "Glass": "玻璃", "Study Supplies": "学习用品", "Wildgrass": "杂草",
+    "Meat Dish": "荤菜", "Stone (Material)": "石制品", "Fridge": "冰箱", "Teal": "青色", "Veggie": "素菜",
+    "Plushie": "玩偶", "Dress": "连衣裙", "Flower": "鲜花", "Blue": "蓝色", "Shore-Dweller": "海岸生物",
+    "Dessert": "甜点", "Water Feature": "水景家具", "Butterfly": "蝴蝶", "Bookshelf": "书架", "Desk": "书桌",
+    "Purple": "紫色", "Contains Seafood": "含海鲜的食物"
+  },
+  "codes": [
+    { "code": "PTPL1204", "region": "Global (HoYoverse) version", "reward": "Curio Sea Whistle ×10", "expires": "January 3, 2027, 10:00 (UTC+8)" },
+    { "code": "XBGD1204", "region": "Mainland China version only", "reward": "Curio Sea Whistle ×10", "expires": "January 3, 2027, 10:00 (UTC+8)" }
+  ],
+  "sources": [
+    { "id": "official", "name": "Official Petit Planet website", "url": "https://planet.hoyoverse.com/", "use": "The authority. If anything here disagrees with an official notice, the official notice wins.", "checked": "2026-11-17" },
+    { "id": "game8-stream", "name": "Game8: pre-launch livestream summary", "url": "https://game8.co/games/Petit-Planet/archives/634490", "use": "Launch code PTPL1204, its reward and expiry.", "checked": "2026-11-17" },
+    { "id": "pp101-codes", "name": "petitplanet101.com: global and mainland China codes", "url": "https://petitplanet101.com/guides/launch-redemption-code/", "use": "The separate mainland China code and the note that the two codes are regional.", "checked": "2026-11-17" },
+    { "id": "outerhaven", "name": "The Outer Haven: official release date report", "url": "https://www.theouterhaven.net/petit-planet-receives-official-release-date/", "use": "Global launch date and launch platforms.", "checked": "2026-11-17" },
+    { "id": "saiganak", "name": "Saiga NAK: release date announcement", "url": "https://saiganak.com/news/petit-planet-release-date-announcement/", "use": "Pre-download date and pre-registration channels.", "checked": "2026-11-17" },
+    { "id": "gamesgg", "name": "games.gg: how to pre-register", "url": "https://games.gg/petit-planet/guides/how-to-pre-register-for-petit-planet-launch-rewards-guide/", "use": "Pre-registration reward and redemption steps.", "checked": "2026-11-17" },
+    { "id": "gnn", "name": "Bahamut GNN: official press release (Traditional Chinese)", "url": "https://gnn.gamer.com.tw/detail.php?sn=314291", "use": "Switch 2 timing; cross-check of character titles in Chinese.", "checked": "2026-11-17" },
+    { "id": "ppgw-neighbors", "name": "petitplanetgame.wiki: neighbor database (Final Beta snapshot, Oct 30, 2026)", "url": "https://petitplanetgame.wiki/wiki/neighbors/", "use": "Roster, neighbor type, galaxy, role and birthday.", "checked": "2026-11-17" },
+    { "id": "ppgw-gifts", "name": "petitplanetgame.wiki: gift table (Final Beta snapshot, Oct 30, 2026)", "url": "https://petitplanetgame.wiki/guides/neighbor-gifts/", "use": "Loved items, liked and disliked tags, and the reported bond values.", "checked": "2026-11-17" },
+    { "id": "ppguide", "name": "petitplanetguide.net: neighbor list", "url": "https://petitplanetguide.net/neighbors", "use": "Second listing used to cross-check roster, galaxy, role and birthday.", "checked": "2026-11-17" },
+    { "id": "pp101-gifts-zh", "name": "petitplanet101.com: gift guide, Simplified Chinese (checked Oct 16, 2026)", "url": "https://petitplanet101.com/zh-cn/guides/neighbor-gifts/", "use": "Chinese-language tag lists from the connection test, compared tag by tag against the English data.", "checked": "2026-11-17" },
+    { "id": "9game", "name": "9game: neighbor preferences from an earlier test (Dec 11, 2025)", "url": "https://www.9game.cn/xingbugudi/11578586.html", "use": "Chinese item names from an earlier test, used to confirm loved items for six neighbors.", "checked": "2026-11-17" }
+  ],
+  "changelog": [
+    { "date": "2026-11-17", "text": "First version: launch info, codes, all 17 known neighbors, gift finder, birthday calendar and launch checklist." }
+  ]
+}

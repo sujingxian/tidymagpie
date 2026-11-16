@@ -1,0 +1,125 @@
+---
+import Base from '../layouts/Base.astro';
+import { invite, allTags, tagZh } from '../lib/site';
+
+const finderData = invite.map((n) => ({ id: n.id, name: n.name, liked: n.liked, disliked: n.disliked }));
+---
+
+<Base
+  title="Petit Planet Gift Finder: Who Likes What"
+  description="Pick any gift tag in Petit Planet and see which neighbors like it and which refuse it. Includes the full table of loved gifts, likes and dislikes for all 12 invite neighbors."
+  path="/gifts/"
+>
+  <h1>Petit Planet gift finder</h1>
+  <p class="lede">
+    Holding something and not sure who wants it? Pick its tag to see who likes it and who will refuse it.
+  </p>
+  <div class="notice">
+    Beta data from the Final Beta (snapshot of October 30, 2026). In-game tags are the final word: if the gift screen
+    shows something different, trust the game and expect this page to catch up.
+  </div>
+
+  <h2>Find by tag</h2>
+  <ul class="chips" id="tags">
+    {allTags.map((t) => (
+      <li>
+        <button class="chip" type="button" data-tag={t} aria-pressed="false">{t}</button>
+      </li>
+    ))}
+  </ul>
+  <div class="result" id="result" aria-live="polite">
+    <p class="muted">Pick a tag above.</p>
+  </div>
+
+  <h2>How gifting worked in the Final Beta</h2>
+  <ul>
+    <li>One gift per neighbor per day. The day resets on server time, not your local midnight.</li>
+    <li>A loved gift gave 2 to 4 bond, depending on the item.</li>
+    <li>A gift with a liked tag gave 1 to 2 bond. A neutral gift gave 1.</li>
+    <li>A disliked gift was refused and gave nothing. It did not lower bond.</li>
+    <li>An item from Glenn's Goods that a neighbor asked for in chat gave 4 bond.</li>
+  </ul>
+  <p class="small muted">
+    These values are reported by Final Beta testers and collected at
+    <a href="https://petitplanetgame.wiki/guides/neighbor-gifts/">petitplanetgame.wiki</a>. We have not verified them
+    ourselves, and a Chinese-language guide we checked says exact bond gains were still unconfirmed in its test.
+  </p>
+
+  <h2>Full gift table</h2>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th>Neighbor</th><th>Loved gifts</th><th>Likes</th><th>Dislikes</th></tr>
+      </thead>
+      <tbody>
+        {invite.map((n) => (
+          <tr>
+            <td>
+              <a href={`/neighbors/${n.id}/`}>{n.name}</a>
+              {!n.inFinalBeta && <span class="badge">Not in Final Beta</span>}
+            </td>
+            <td>{n.loved.map((i) => i.en).join(', ')}</td>
+            <td>{n.liked.join(', ')}</td>
+            <td>{n.disliked.length ? n.disliked.join(', ') : 'None listed'}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Tags in Chinese</h2>
+  <p>
+    Playing on a Chinese client, or comparing notes with players who are? These are the tag names we could confirm in a
+    Chinese-language source.
+  </p>
+  <ul class="chips">
+    {allTags.filter((t) => tagZh(t)).map((t) => (
+      <li class="chip">{t}<small lang="zh-Hans">{tagZh(t)}</small></li>
+    ))}
+  </ul>
+</Base>
+
+<script is:inline define:vars={{ finderData }}>
+  var result = document.getElementById('result');
+  var buttons = Array.prototype.slice.call(document.querySelectorAll('#tags button'));
+
+  function links(list) {
+    return list
+      .map(function (n) { return '<a href="/neighbors/' + n.id + '/">' + n.name + '</a>'; })
+      .join(', ');
+  }
+
+  function show(tag) {
+    var known = false;
+    buttons.forEach(function (b) {
+      var on = b.getAttribute('data-tag') === tag;
+      if (on) known = true;
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    if (!known) return;
+    var likes = finderData.filter(function (n) { return n.liked.indexOf(tag) !== -1; });
+    var hates = finderData.filter(function (n) { return n.disliked.indexOf(tag) !== -1; });
+    var title = document.createElement('h3');
+    title.textContent = tag;
+    result.innerHTML = '';
+    result.appendChild(title);
+    var p1 = document.createElement('p');
+    p1.innerHTML = '<span class="chip like">Liked by</span> ' + (likes.length ? links(likes) : 'nobody we know of');
+    var p2 = document.createElement('p');
+    p2.innerHTML = '<span class="chip dislike">Refused by</span> ' + (hates.length ? links(hates) : 'nobody we know of');
+    result.appendChild(p1);
+    result.appendChild(p2);
+  }
+
+  buttons.forEach(function (b) {
+    b.addEventListener('click', function () {
+      var tag = b.getAttribute('data-tag');
+      show(tag);
+      try { history.replaceState(null, '', '#' + encodeURIComponent(tag)); } catch (e) {}
+    });
+  });
+
+  if (location.hash.length > 1) {
+    try { show(decodeURIComponent(location.hash.slice(1))); } catch (e) {}
+  }
+</script>

@@ -1,0 +1,76 @@
+---
+import Base from '../layouts/Base.astro';
+import { neighbors, formatBirthday, monthName } from '../lib/site';
+
+const withBirthday = neighbors.filter((n) => n.birthday);
+const sorted = [...withBirthday].sort((a, b) => a.birthday!.localeCompare(b.birthday!));
+const months = [...new Set(sorted.map((n) => Number(n.birthday!.slice(0, 2))))];
+const missing = neighbors.filter((n) => !n.birthday);
+// First birthdays on or after the December 4 launch date.
+const afterLaunch = [...sorted.filter((n) => n.birthday! >= '12-04'), ...sorted.filter((n) => n.birthday! < '12-04')].slice(0, 3);
+---
+
+<Base
+  title="Petit Planet Neighbor Birthdays: Full Calendar"
+  description="Every known Petit Planet neighbor birthday by month, the first birthdays after launch, and a calendar file you can add to your phone."
+  path="/birthdays/"
+>
+  <h1>Petit Planet neighbor birthdays</h1>
+  <p class="lede">
+    {withBirthday.length} of {neighbors.length} neighbors have a known birthday. The first ones after the December 4
+    launch are {afterLaunch.map((n, i) => (
+      <>
+        <a href={`/neighbors/${n.id}/`}>{n.name}</a> ({formatBirthday(n.birthday)}){i < afterLaunch.length - 1 ? ', ' : '.'}
+      </>
+    ))}
+  </p>
+
+  <p>
+    <a class="btn" href="/petit-planet-birthdays.ics">Add all birthdays to your calendar (.ics)</a>
+  </p>
+  <p class="small muted">
+    The file adds one yearly all-day event per neighbor. It works with Apple Calendar, Google Calendar and Outlook.
+  </p>
+
+  <div class="notice">
+    Beta data: these dates are from the Final Beta and its source notes that birthdays may be adjusted at launch. If
+    any change, the calendar file is rebuilt, so re-download it after December 4.
+  </div>
+
+  {months.map((m) => (
+    <>
+      <h2>{monthName(m)}</h2>
+      <div class="table-scroll">
+        <table>
+          <tbody>
+            {sorted.filter((n) => Number(n.birthday!.slice(0, 2)) === m).map((n) => (
+              <tr>
+                <td style="width:9em">{formatBirthday(n.birthday)}</td>
+                <td>
+                  <a href={`/neighbors/${n.id}/`}>{n.name}</a>
+                  {n.zh && <span class="zh" lang="zh-Hans">{n.zh}</span>}
+                </td>
+                <td class="muted">{n.type === 'invite' ? `${n.galaxy} · ${n.role}` : `Story neighbor${n.role ? ` · ${n.role}` : ''}`}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </>
+  ))}
+
+  {missing.length > 0 && (
+    <>
+      <h2>No birthday on record</h2>
+      <p>
+        {missing.map((n) => n.name).join(', ')}: no source we trust lists a date yet.
+      </p>
+    </>
+  )}
+
+  <p class="small muted">
+    Source: <a href="https://petitplanetgame.wiki/wiki/neighbors/">petitplanetgame.wiki neighbor database</a> (Final
+    Beta snapshot, October 30, 2026), cross-checked against
+    <a href="https://petitplanetguide.net/neighbors">petitplanetguide.net</a>.
+  </p>
+</Base>

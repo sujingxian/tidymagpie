@@ -1,0 +1,64 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../lib/site';
+---
+
+<Base
+  title="Sources and Updates: Petit Planet Companion"
+  description="Where every fact on this Petit Planet companion comes from, when each source was last checked, how disagreements between sources are handled, and the update log."
+  path="/sources/"
+>
+  <h1>Sources and updates</h1>
+  <p class="lede">
+    Nothing on this site comes from playing a released game, because there is not one yet. This page lists what the
+    data is built on, so you can judge how far to trust it.
+  </p>
+
+  <h2>How data gets on the site</h2>
+  <ul>
+    <li>Launch facts (dates, platforms, codes) need an official announcement or a report of one.</li>
+    <li>Neighbor data needs a listing from the Final Beta. Older tests are used only where the Final Beta has nothing, and the page says so.</li>
+    <li>An item is marked cross-checked when an English source and a Chinese-language source list it independently.</li>
+    <li>When sources disagree, the page states the disagreement and which version we went with.</li>
+    <li>If we cannot find a reliable source, the field says so. Nothing is filled in by guesswork.</li>
+  </ul>
+
+  <h2>Sources</h2>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th>Source</th><th>Used for</th><th>Checked</th></tr>
+      </thead>
+      <tbody>
+        {site.sources.map((s) => (
+          <tr>
+            <td><a href={s.url}>{s.name}</a></td>
+            <td>{s.use}</td>
+            <td style="white-space:nowrap">{s.checked}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Known gaps</h2>
+  <ul>
+    <li>Chinese names are missing for Nerina, Mors and Trixie, and for most loved gifts of six neighbors.</li>
+    <li>Trixie has no documented role or birthday.</li>
+    <li>Bond values are tester reports, not something we measured.</li>
+    <li>The server opening time on December 4 has not been announced.</li>
+  </ul>
+
+  <h2>Update log</h2>
+  <ul>
+    {site.changelog.map((c) => (
+      <li><strong>{c.date}</strong>: {c.text}</li>
+    ))}
+  </ul>
+
+  <h2>Spotted a mistake?</h2>
+  <p>
+    Corrections are welcome, especially with a screenshot from the released game. The project lives at
+    <a href="https://github.com/sujingxian/tidymagpie">github.com/sujingxian/tidymagpie</a>, where you can open an issue.
+  </p>
+</Base>

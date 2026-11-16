@@ -1,0 +1,182 @@
+[
+  {
+    "id": "yunguo", "name": "Yunguo", "zh": "云果", "type": "invite", "galaxy": "Hexia",
+    "role": "Cultivator", "birthday": "09-19", "inFinalBeta": true,
+    "loved": [
+      { "en": "Apple", "zh": "苹果" },
+      { "en": "Bamboo Log", "zh": "竹子" },
+      { "en": "Bamboo Apple Slushie", "zh": "竹香苹果冰" },
+      { "en": "Granny's Veggie Fried Rice", "zh": "外婆菜饭" }
+    ],
+    "liked": ["Bamboo (Material)", "Farm Decor", "Green", "Red", "Fertilizer"],
+    "disliked": ["Black", "Plastic"],
+    "note": ""
+  },
+  {
+    "id": "isaki", "name": "Isaki", "zh": "伊佐奇", "type": "invite", "galaxy": "Hexia",
+    "role": "Battle Beetle Trainer", "birthday": "07-22", "inFinalBeta": true,
+    "loved": [
+      { "en": "Kabuto Beetle", "zh": "独角仙" },
+      { "en": "Rustic Dog House", "zh": "野趣犬屋" },
+      { "en": "Golden Daikabutomaru Statue", "zh": "黄金大兜丸雕像" },
+      { "en": "Kabuto Rice Bun", "zh": null }
+    ],
+    "liked": ["Beetle", "Yellow", "Street Decor", "Wood", "Sporty"],
+    "disliked": ["Aquatic Creature", "Classic"],
+    "note": ""
+  },
+  {
+    "id": "dorjelang", "name": "Dorjelang", "zh": "多杰朗", "type": "invite", "galaxy": "Hexia",
+    "role": "Hatmaker", "birthday": "05-02", "inFinalBeta": true,
+    "loved": [
+      { "en": "Caterpillar Fungus Herbal Remedy", "zh": "冬虫夏草羹" },
+      { "en": "Cloudherder's Hatmaking Chest", "zh": "牧流云制帽箱" },
+      { "en": "Dreamy Shellfish & Seafood Platter", "zh": null }
+    ],
+    "liked": ["Red", "Orange", "Romantic", "Natural Fiber", "Grilled Dish", "Headwear"],
+    "disliked": ["Beetle", "Metal"],
+    "note": "An older Chinese-language list from an earlier test gave his dislike as insects in general. Final Beta data narrows it to beetles, so that is what we list."
+  },
+  {
+    "id": "manna", "name": "Manna", "zh": "蛮蛮", "type": "invite", "galaxy": "Hexia",
+    "role": "Action Actor", "birthday": "02-22", "inFinalBeta": true,
+    "loved": [
+      { "en": "Peach Grove Master Wooden Dummy", "zh": null },
+      { "en": "Peach Grove Master Plum Blossom Poles", "zh": null },
+      { "en": "Professional Projector", "zh": null }
+    ],
+    "liked": ["Black", "White", "Contains Fruit", "Slippers"],
+    "disliked": ["Cream Recycling Bin", "Pepper (Type)"],
+    "note": ""
+  },
+  {
+    "id": "msafiri", "name": "Msafiri", "zh": "萨飞里", "type": "invite", "galaxy": "Taffeh",
+    "role": "Adventure Guide", "birthday": "08-08", "inFinalBeta": true,
+    "loved": [
+      { "en": "Grainharvester's Haystacks", "zh": "拾穗麦草垛" },
+      { "en": "Yellowbloom Potted Cactus", "zh": "黄金仙人球盆栽" },
+      { "en": "Handmade Tabby Cat Plushie", "zh": null },
+      { "en": "Sunny Orange Sneakers", "zh": null },
+      { "en": "Golden Savanna Tumbleweed", "zh": null }
+    ],
+    "liked": ["Brown", "Grilled Dish", "Natural Fiber"],
+    "disliked": ["Field & Orchard Salad", "Bathtub", "Drink"],
+    "note": ""
+  },
+  {
+    "id": "harpeno", "name": "Harpeno", "zh": "哈佩诺", "type": "invite", "galaxy": "Taffeh",
+    "role": "Starsea Patrol Officer", "birthday": "12-07", "inFinalBeta": true,
+    "loved": [
+      { "en": "Harborlight Signal Mood Light", "zh": null },
+      { "en": "Carapulcra Stew", "zh": null },
+      { "en": "Harborlight Charging Bookcase", "zh": null },
+      { "en": "EV Charging Station", "zh": null }
+    ],
+    "liked": ["Stew", "Wood", "Glasses", "Multicolor"],
+    "disliked": ["Laptop", "Glass"],
+    "note": "Her birthday falls three days after launch, so it is the first neighbor birthday most players will see."
+  },
+  {
+    "id": "tika", "name": "Tika", "zh": "缇卡", "type": "invite", "galaxy": "Taffeh",
+    "role": "Agriculture Student", "birthday": "08-16", "inFinalBeta": true,
+    "loved": [
+      { "en": "Avocado", "zh": "牛油果" },
+      { "en": "Chic Black Cat-Eye Sunglasses", "zh": null },
+      { "en": "Fruit Fiesta Donut", "zh": null },
+      { "en": "Avocuddle Experimental Planter Box", "zh": null }
+    ],
+    "liked": ["Yarn (Material)", "Wood", "Green", "Tree Fruit", "Farm Decor", "Contains Fruit"],
+    "disliked": ["Wildgrass", "Study Supplies"],
+    "note": "Wildgrass is Medowlyn's loved gift and Tika's dislike. Easy to mix up when you are handing out gifts in a row."
+  },
+  {
+    "id": "rebella", "name": "Rebella", "zh": "热贝尔", "type": "invite", "galaxy": "Norvan",
+    "role": "Gemsmith", "birthday": "02-09", "inFinalBeta": true,
+    "loved": [
+      { "en": "Goldflux Ore", "zh": null },
+      { "en": "BBQ Meatshrooms", "zh": null }
+    ],
+    "liked": ["Green", "Stone (Material)", "Meat Dish", "Teal", "Fridge"],
+    "disliked": ["Veggie", "Plastic", "Classic"],
+    "note": ""
+  },
+  {
+    "id": "medowlyn", "name": "Medowlyn", "zh": "绵朵莉", "type": "invite", "galaxy": "Norvan",
+    "role": "Plushie Designer", "birthday": "07-05", "inFinalBeta": true,
+    "loved": [
+      { "en": "Wildgrass", "zh": "杂草" },
+      { "en": "Sleepymoon Nightgown", "zh": "眠月睡袍" },
+      { "en": "Cloudlet Cookies", "zh": null },
+      { "en": "Fluffy Clouds Plushie", "zh": null }
+    ],
+    "liked": ["Plushie", "Blue", "Dress", "White", "Flower", "Contains Tomato"],
+    "disliked": ["Metal", "Shore-Dweller", "Contains Seafood"],
+    "note": "Chinese-language testers report she refused an item she had asked for herself because it carried the Metal tag. Check tags even on requested items."
+  },
+  {
+    "id": "heyu", "name": "Heyu", "zh": "鹤玉", "type": "invite", "galaxy": "Hexia",
+    "role": "Hot Spring Innkeeper", "birthday": "02-15", "inFinalBeta": true,
+    "loved": [
+      { "en": "Crane of Longevity Calligraphy Set", "zh": null },
+      { "en": "Di San Xian", "zh": null },
+      { "en": "Leisurely Pause Tea Stove", "zh": null }
+    ],
+    "liked": ["White", "Black", "Dessert", "Bathtub", "Water Feature"],
+    "disliked": ["Contains Fish", "Contains Seafood"],
+    "note": ""
+  },
+  {
+    "id": "frostia", "name": "Frostia", "zh": "幻雪", "type": "invite", "galaxy": "Norvan",
+    "role": "Mystic Scholar", "birthday": "09-09", "inFinalBeta": false,
+    "loved": [
+      { "en": "Realm of Stars Ballgown", "zh": "星野礼服裙" },
+      { "en": "Quill Pen & Astrology Book", "zh": "羽笔星空书" },
+      { "en": "Glistening Fruit Pie", "zh": null }
+    ],
+    "liked": ["Butterfly", "Bookshelf", "Desk", "Purple"],
+    "disliked": [],
+    "note": "Not playable in the Final Beta; her data comes from earlier tests. An older Chinese list also gave dislikes (shore creatures and pineapple), but no Final Beta source repeats them, so we leave them out until launch."
+  },
+  {
+    "id": "nerina", "name": "Nerina", "zh": null, "type": "invite", "galaxy": "Pashah",
+    "role": "Composer", "birthday": "06-08", "inFinalBeta": false,
+    "loved": [
+      { "en": "Tidal Wave Yogurt", "zh": null },
+      { "en": "Seaside Serenade Music Stand", "zh": null },
+      { "en": "Legato Concert Jacket", "zh": null }
+    ],
+    "liked": ["Broken Seashell", "Bathtub", "Blue", "Shower", "Artistic"],
+    "disliked": ["Pepper (Type)", "Clock"],
+    "note": "Not playable in the Final Beta. Treat everything here as provisional until launch."
+  },
+  {
+    "id": "mobai", "name": "Mobai", "zh": "莫白", "type": "base", "galaxy": null,
+    "role": "Life Coordinator", "birthday": "02-19", "inFinalBeta": true,
+    "loved": [], "liked": [], "disliked": [],
+    "note": "Your guide from the first minute: he hands out the main story tasks that earn Luca for your planet's tree."
+  },
+  {
+    "id": "elsasani", "name": "Elsasani", "zh": "艾莎莎尼", "type": "base", "galaxy": null,
+    "role": "Starsea Racer", "birthday": "02-14", "inFinalBeta": true,
+    "loved": [], "liked": [], "disliked": [],
+    "note": ""
+  },
+  {
+    "id": "glenn", "name": "Glenn", "zh": "格连", "type": "base", "galaxy": null,
+    "role": "Shopkeeper", "birthday": "05-01", "inFinalBeta": true,
+    "loved": [], "liked": [], "disliked": [],
+    "note": "Runs Glenn's Goods, where you buy furniture and seeds and sell what you do not need."
+  },
+  {
+    "id": "mors", "name": "Mors", "zh": null, "type": "base", "galaxy": null,
+    "role": "Curator of the Omni-Gallery", "birthday": "12-08", "inFinalBeta": true,
+    "loved": [], "liked": [], "disliked": [],
+    "note": ""
+  },
+  {
+    "id": "trixie", "name": "Trixie", "zh": null, "type": "base", "galaxy": null,
+    "role": null, "birthday": null, "inFinalBeta": true,
+    "loved": [], "liked": [], "disliked": [],
+    "note": "Very little is documented: no reliable role or birthday yet."
+  }
+]

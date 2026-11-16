@@ -1,0 +1,72 @@
+---
+import Base from '../../layouts/Base.astro';
+import { invite, base, neighbors, formatBirthday } from '../../lib/site';
+
+const galaxies = ['Hexia', 'Taffeh', 'Norvan', 'Pashah'];
+---
+
+<Base
+  title="All Petit Planet Neighbors: Roles, Galaxies and Birthdays"
+  description={`All ${neighbors.length} known Petit Planet neighbors: the 12 you can invite to your planet and the 5 who arrive with the story, with roles, home galaxies and birthdays from the Final Beta.`}
+  path="/neighbors/"
+>
+  <h1>Petit Planet neighbors</h1>
+  <p class="lede">
+    {neighbors.length} neighbors are known so far. {invite.length} can be invited to live on your planet and have a gift
+    and bond system. {base.length} settle as part of the main story.
+  </p>
+  <div class="notice">
+    Beta data: roster, roles and birthdays are from the Final Beta (snapshot of October 30, 2026). Two neighbors,
+    Frostia and Nerina, were not playable in that test. Everything gets re-checked at launch.
+  </div>
+
+  <h2>Neighbors you can invite</h2>
+  <p>
+    You meet these neighbors on islets while sailing the Starsea, can invite them after a second meeting, and they
+    move in once your planet has room.
+  </p>
+  {galaxies.map((g) => (
+    <>
+      <h3>{g} galaxy</h3>
+      <ul class="grid">
+        {invite.filter((n) => n.galaxy === g).map((n) => (
+          <li>
+            <a class="card" href={`/neighbors/${n.id}/`}>
+              <h3>
+                {n.name}
+                {n.zh && <span class="zh" lang="zh-Hans">{n.zh}</span>}
+                {!n.inFinalBeta && <span class="badge">Not in Final Beta</span>}
+              </h3>
+              <p>{n.role} · Birthday {formatBirthday(n.birthday)}</p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </>
+  ))}
+
+  <h2>Story neighbors</h2>
+  <p>
+    These five settle on your planet through the main story. They do not take up neighbor capacity and, in the Final
+    Beta, had no gift or bond system.
+  </p>
+  <ul class="grid">
+    {base.map((n) => (
+      <li>
+        <a class="card" href={`/neighbors/${n.id}/`}>
+          <h3>
+            {n.name}
+            {n.zh && <span class="zh" lang="zh-Hans">{n.zh}</span>}
+          </h3>
+          <p>{n.role ?? 'Role not documented'} · Birthday {n.birthday ? formatBirthday(n.birthday) : 'unknown'}</p>
+        </a>
+      </li>
+    ))}
+  </ul>
+
+  <p class="small muted">
+    Sources: <a href="https://petitplanetgame.wiki/wiki/neighbors/">petitplanetgame.wiki neighbor database</a>,
+    cross-checked against <a href="https://petitplanetguide.net/neighbors">petitplanetguide.net</a>. Chinese names are
+    shown where a Chinese-language source confirms them. See <a href="/sources/">all sources</a>.
+  </p>
+</Base>

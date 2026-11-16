@@ -1,0 +1,136 @@
+---
+import Base from '../../layouts/Base.astro';
+import { neighbors, formatBirthday, tagZh, crossChecked } from '../../lib/site';
+
+export function getStaticPaths() {
+  return neighbors.map((n) => ({ params: { id: n.id }, props: { n } }));
+}
+
+const { n } = Astro.props;
+const i = neighbors.findIndex((x) => x.id === n.id);
+const prev = neighbors[(i - 1 + neighbors.length) % neighbors.length];
+const next = neighbors[(i + 1) % neighbors.length];
+const isInvite = n.type === 'invite';
+const checked = crossChecked(n);
+
+const title = isInvite
+  ? `${n.name} Gift Guide: Loved Gifts, Likes and Dislikes (Petit Planet)`
+  : `${n.name} in Petit Planet: Role and Birthday`;
+const description = isInvite
+  ? `What to give ${n.name} in Petit Planet: ${n.loved.length} loved gifts, liked tags and the gifts ${n.name} refuses, plus birthday and home galaxy. Final Beta data with sources.`
+  : `${n.name} is one of the story neighbors in Petit Planet. Role, birthday and what is known so far, with sources.`;
+---
+
+<Base title={title} description={description} path={`/neighbors/${n.id}/`}>
+  <p class="small"><a href="/neighbors/">All neighbors</a></p>
+  <h1>
+    {n.name}
+    {n.zh && <span class="zh" lang="zh-Hans">{n.zh}</span>}
+  </h1>
+  <p class="lede">
+    {isInvite
+      ? `${n.name}, the ${n.role}, is a neighbor from the ${n.galaxy} galaxy you can invite to your planet.`
+      : `${n.name}${n.role ? `, the ${n.role},` : ''} settles on your planet through the main story.`}
+  </p>
+
+  {!n.inFinalBeta && (
+    <div class="notice">{n.name} was not playable in the Final Beta. The details below come from earlier tests and are the most likely on this site to change.</div>
+  )}
+
+  <dl class="facts">
+    <dt>Type</dt>
+    <dd>{isInvite ? 'Invite neighbor' : 'Story neighbor'}</dd>
+    <dt>Home galaxy</dt>
+    <dd>{n.galaxy ?? 'Not tied to a galaxy'}</dd>
+    <dt>Role</dt>
+    <dd>{n.role ?? 'No reliable record yet'}</dd>
+    <dt>Birthday</dt>
+    <dd>{formatBirthday(n.birthday)}</dd>
+    {n.zh && (
+      <>
+        <dt>Chinese name</dt>
+        <dd lang="zh-Hans">{n.zh}</dd>
+      </>
+    )}
+  </dl>
+
+  {isInvite ? (
+    <>
+      <h2>Loved gifts</h2>
+      <p>
+        Loved gifts give the most bond.
+        {checked > 0
+          ? ` ${checked} of ${n.loved.length} ${checked === 1 ? 'is' : 'are'} cross-checked: listed independently by an English source and a Chinese-language source.`
+          : ' None of these has a second, independent listing yet, so treat them as single-source.'}
+      </p>
+      <ul class="chips">
+        {n.loved.map((item) => (
+          <li class="chip">
+            {item.en}
+            {item.zh && <small lang="zh-Hans">{item.zh}</small>}
+            {item.zh && <span class="badge ok">cross-checked</span>}
+          </li>
+        ))}
+      </ul>
+
+      <h2>Likes</h2>
+      <p>Anything carrying one of these tags counts as a liked gift.</p>
+      <ul class="chips">
+        {n.liked.map((t) => (
+          <li class="chip like">
+            <a href={`/gifts/#${encodeURIComponent(t)}`} style="color:inherit;text-decoration:none">{t}</a>
+            {tagZh(t) && <small lang="zh-Hans">{tagZh(t)}</small>}
+          </li>
+        ))}
+      </ul>
+
+      <h2>Dislikes</h2>
+      {n.disliked.length > 0 ? (
+        <>
+          <p>{n.name} refuses gifts with these tags. In the Final Beta a refused gift did not lower bond, but it wasted the day's gift.</p>
+          <ul class="chips">
+            {n.disliked.map((t) => (
+              <li class="chip dislike">
+                {t}
+                {tagZh(t) && <small lang="zh-Hans">{tagZh(t)}</small>}
+              </li>
+            ))}
+          </ul>
+        </>
+      ) : (
+        <p>No dislikes are listed in any source we trust yet.</p>
+      )}
+    </>
+  ) : (
+    <>
+      <h2>Gifts</h2>
+      <p>
+        Story neighbors had no gift or bond system in the Final Beta, so there is nothing to optimise here yet. If that
+        changes at launch, this page will say so.
+      </p>
+    </>
+  )}
+
+  {n.note && (
+    <>
+      <h2>Notes</h2>
+      <p>{n.note}</p>
+    </>
+  )}
+
+  <p class="small muted">
+    Sources: <a href="https://petitplanetgame.wiki/wiki/neighbors/">neighbor database</a>
+    {isInvite && (
+      <>
+        {' '}and <a href="https://petitplanetgame.wiki/guides/neighbor-gifts/">gift table</a>
+      </>
+    )}
+    {' '}at petitplanetgame.wiki (Final Beta snapshot, October 30, 2026); Chinese names and tags from the
+    Chinese-language sources listed on the <a href="/sources/">sources page</a>.
+  </p>
+
+  <nav class="pager" aria-label="Neighbors">
+    <a href={`/neighbors/${prev.id}/`}>← {prev.name}</a>
+    <a href={`/neighbors/${next.id}/`}>{next.name} →</a>
+  </nav>
+</Base>

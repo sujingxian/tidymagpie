@@ -1,0 +1,76 @@
+---
+import Base from '../layouts/Base.astro';
+import { site, neighbors } from '../lib/site';
+
+const cards = [
+  { href: '/release/', title: 'Release date and platforms', text: 'Launch day, pre-download, platforms and what is still unannounced.' },
+  { href: '/codes/', title: 'Codes', text: 'The launch code, what it gives, when it expires and how to redeem it.' },
+  { href: '/neighbors/', title: `All ${neighbors.length} neighbors`, text: 'Roles, galaxies, birthdays and who can be invited to your planet.' },
+  { href: '/gifts/', title: 'Gift finder', text: 'Pick a tag and see who likes it, who refuses it, and every loved gift.' },
+  { href: '/birthdays/', title: 'Birthday calendar', text: 'Every neighbor birthday in order, with a calendar file to subscribe to.' },
+  { href: '/checklist/', title: 'Launch checklist', text: 'What to do before December 4, on launch day and in your first week.' },
+];
+---
+
+<Base
+  title="Petit Planet Companion: Neighbors, Gifts, Codes and Launch Info"
+  description="A sourced companion for Petit Planet: release date and pre-download, launch codes, all 17 known neighbors, a gift finder and a birthday calendar."
+  path="/"
+>
+  <h1>Petit Planet companion</h1>
+  <p class="lede">
+    Launch info, every known neighbor and a gift finder. Each fact is tagged with where it came from, and beta data is
+    labelled as beta until we can check it against the released game.
+  </p>
+
+  <div class="countdown">
+    <strong id="cd">Launches December 4, 2026</strong>
+    <span>Global launch on PC, iOS and Android · Pre-download opens December 1</span>
+  </div>
+
+  <ul class="grid">
+    {cards.map((c) => (
+      <li>
+        <a class="card" href={c.href}>
+          <h3>{c.title}</h3>
+          <p>{c.text}</p>
+        </a>
+      </li>
+    ))}
+  </ul>
+
+  <h2>How this site handles beta data</h2>
+  <p>
+    Petit Planet is not out yet, so most of what anyone can publish comes from closed tests. Neighbor data here is from
+    the Final Beta (October 2026) unless a page says otherwise. Where an English source and a Chinese-language source
+    agree on an item, we mark it as cross-checked. Where sources disagree, the neighbor's page says so instead of
+    picking silently.
+  </p>
+  <p>
+    The full list of sources, with the date each was last checked, is on the <a href="/sources/">sources page</a>.
+  </p>
+
+  <h2>Latest updates</h2>
+  <ul>
+    {site.changelog.map((c) => (
+      <li>
+        <strong>{c.date}</strong>: {c.text}
+      </li>
+    ))}
+  </ul>
+</Base>
+
+<script is:inline>
+  (function () {
+    var el = document.getElementById('cd');
+    if (!el) return;
+    var now = new Date();
+    var today = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate());
+    var launch = Date.UTC(2026, 11, 4);
+    var days = Math.round((launch - today) / 86400000);
+    if (days > 1) el.textContent = days + ' days until launch';
+    else if (days === 1) el.textContent = 'Launches tomorrow';
+    else if (days === 0) el.textContent = 'Launch day: December 4, 2026';
+    else el.textContent = 'Launched December 4, 2026';
+  })();
+</script>

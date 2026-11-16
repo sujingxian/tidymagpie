@@ -1,0 +1,83 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../lib/site';
+---
+
+<Base
+  title="Petit Planet Codes: PTPL1204, Reward, Expiry and How to Redeem"
+  description="The Petit Planet launch code PTPL1204 gives 10 Curio Sea Whistles. It works after the December 4, 2026 launch and expires January 3, 2027. Redemption steps and the separate mainland China code."
+  path="/codes/"
+>
+  <h1>Petit Planet codes</h1>
+  <p class="lede">
+    One code has been announced for the global version so far. It cannot be redeemed until the game launches on
+    December 4, 2026.
+  </p>
+
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th>Code</th><th>Version</th><th>Reward</th><th>Expires</th></tr>
+      </thead>
+      <tbody>
+        {site.codes.map((c) => (
+          <tr>
+            <td>
+              <span class="code">{c.code}</span>
+              <button class="btn" type="button" data-copy={c.code}>Copy</button>
+            </td>
+            <td>{c.region}</td>
+            <td>{c.reward}</td>
+            <td>{c.expires}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="notice">
+    The two codes are regional. PTPL1204 is the one for the global HoYoverse version. XBGD1204 was announced for the
+    mainland China version, and nothing official says it works anywhere else.
+  </div>
+
+  <h2>How to redeem</h2>
+  <ol>
+    <li>Wait for launch. Codes only work once servers are open on December 4, 2026.</li>
+    <li>In the game, open Settings, then Account, then Redemption Code.</li>
+    <li>Enter the code for your version exactly as written.</li>
+    <li>Collect the reward from your PuffPost Box.</li>
+  </ol>
+
+  <h2>What is a Curio Sea Whistle?</h2>
+  <p>
+    It is the item spent on the Starsea Call, the game's draw for seasonal curios such as furniture and outfits.
+  </p>
+
+  <h2>No other codes yet</h2>
+  <p>
+    Lists that show more than these codes before launch are guessing. New codes usually arrive with livestreams and
+    version updates, and this page only adds a code once an official source has published it.
+  </p>
+
+  <p class="small muted">
+    Sources: <a href="https://game8.co/games/Petit-Planet/archives/634490">Game8's pre-launch livestream summary</a> for
+    the code, reward and expiry;
+    <a href="https://petitplanet101.com/guides/launch-redemption-code/">petitplanet101.com</a> for the mainland China
+    code and the regional split. Checked {site.updated}.
+  </p>
+</Base>
+
+<script is:inline>
+  document.querySelectorAll('[data-copy]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var code = btn.getAttribute('data-copy');
+      var done = function () {
+        btn.textContent = 'Copied';
+        setTimeout(function () { btn.textContent = 'Copy'; }, 1500);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code).then(done, function () {});
+      }
+    });
+  });
+</script>

@@ -1,0 +1,118 @@
+---
+import Base from '../layouts/Base.astro';
+
+const sections = [
+  {
+    title: 'Before launch (now to December 3)',
+    items: [
+      { id: 'prereg', text: 'Pre-register on the platform you will play on: the official website, App Store, Google Play or Epic Games Store.', src: 'Earns the Bestie Star-Light item at launch.' },
+      { id: 'code', text: 'Save the launch code PTPL1204 somewhere you will find it on December 4.', src: 'Gives 10 Curio Sea Whistles. Expires January 3, 2027, 10:00 (UTC+8).' },
+      { id: 'preload', text: 'Pre-download the game from December 1.', src: 'Pre-download does not let you in early. Servers open December 4.' },
+      { id: 'device', text: 'Decide where you will start. PC, iOS and Android share one save, so the choice is not permanent.', src: 'Switch 2 arrives in 2027 and its account linking is not explained yet.' },
+    ],
+  },
+  {
+    title: 'Launch day (December 4)',
+    items: [
+      { id: 'redeem', text: 'Redeem PTPL1204 under Settings, Account, Redemption Code, then collect it from your PuffPost Box.', src: 'The mainland China version uses a different code, XBGD1204.' },
+      { id: 'mail', text: 'Claim your pre-registration rewards in game.', src: 'Rewards depend on the global milestones reached before launch.' },
+      { id: 'story', text: 'Follow Mobai’s first tasks. They are how you earn Luca for your planet’s tree.', src: 'Mobai and Elsasani are the first two neighbors to greet you.' },
+    ],
+  },
+  {
+    title: 'Your first week',
+    items: [
+      { id: 'daily-gift', text: 'Give each invited neighbor one gift a day. It is the steadiest way to raise bond.', src: 'One gift per neighbor per day in the Final Beta, reset on server time.' },
+      { id: 'tags', text: 'Check a gift’s tags before handing it over. A disliked gift is refused and wastes the day.', src: 'Use the gift finder to look up any tag.' },
+      { id: 'harpeno', text: 'Plan something for Harpeno on December 7 and Mors on December 8, the first two birthdays after launch.', src: 'Beta dates. Check the birthday page after launch in case they moved.' },
+      { id: 'expiry', text: 'If you have not redeemed PTPL1204 yet, do it before January 3, 2027.', src: 'Deadline is 10:00 (UTC+8) that day.' },
+    ],
+  },
+];
+---
+
+<Base
+  title="Petit Planet Launch Checklist: Before, On and After December 4"
+  description="A short, sourced checklist for the Petit Planet launch: pre-registration, pre-download, the launch code, and what to do in your first week. Progress saves in your browser."
+  path="/checklist/"
+>
+  <h1>Petit Planet launch checklist</h1>
+  <p class="lede">
+    The practical steps for launch, in order. Ticks are saved in this browser only, so there is nothing to sign up for.
+  </p>
+  <p>
+    <button class="btn" type="button" id="reset">Clear all ticks</button>
+    <span class="small muted" id="saved"></span>
+  </p>
+
+  {sections.map((s) => (
+    <>
+      <h2>{s.title}</h2>
+      <ul class="checklist">
+        {s.items.map((item) => (
+          <li>
+            <label>
+              <input type="checkbox" data-id={item.id} />
+              <span>
+                {item.text}
+                <span class="src">{item.src}</span>
+              </span>
+            </label>
+          </li>
+        ))}
+      </ul>
+    </>
+  ))}
+
+  <p>
+    More detail: <a href="/release/">release info</a>, <a href="/codes/">codes</a>,
+    <a href="/gifts/">gift finder</a>, <a href="/birthdays/">birthdays</a>.
+  </p>
+</Base>
+
+<script is:inline>
+  (function () {
+    var KEY = 'tm-petit-checklist-v1';
+    var boxes = Array.prototype.slice.call(document.querySelectorAll('.checklist input[type=checkbox]'));
+    var note = document.getElementById('saved');
+    var state = {};
+    var canStore = true;
+
+    try {
+      state = JSON.parse(localStorage.getItem(KEY) || '{}') || {};
+    } catch (e) {
+      canStore = false;
+      state = {};
+    }
+
+    function save() {
+      if (!canStore) return;
+      try {
+        localStorage.setItem(KEY, JSON.stringify(state));
+      } catch (e) {
+        canStore = false;
+        if (note) note.textContent = 'This browser is not letting the page save ticks, so they will reset when you leave.';
+      }
+    }
+
+    boxes.forEach(function (box) {
+      var id = box.getAttribute('data-id');
+      box.checked = !!state[id];
+      box.addEventListener('change', function () {
+        state[id] = box.checked;
+        save();
+      });
+    });
+
+    if (!canStore && note) note.textContent = 'This browser is not letting the page save ticks, so they will reset when you leave.';
+
+    var reset = document.getElementById('reset');
+    if (reset) {
+      reset.addEventListener('click', function () {
+        state = {};
+        boxes.forEach(function (box) { box.checked = false; });
+        save();
+      });
+    }
+  })();
+</script>
