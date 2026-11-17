@@ -101,6 +101,12 @@ node scripts/smoke.mjs            # browser check; needs: npm install --no-save 
 Every site gives the same public mailbox, `hello@tidymagpie.com`, and nothing else: no other email address and no
 link to this repository. `npm test` in `sites/home` scans all site folders and fails if either appears.
 
+## Privacy pages
+
+Each privacy page has to match what runs on the live site, including anything the host adds. Cloudflare switches
+its Web Analytics script on for the whole domain by default, so every privacy page describes it under "Visit
+counting". If that script is ever turned off in the Cloudflare dashboard, take those paragraphs out again.
+
 ## Data rules
 
 - Every fact carries a source, listed on the site's Sources page.
