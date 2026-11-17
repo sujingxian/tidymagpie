@@ -1,0 +1,106 @@
+---
+import Base from '../layouts/Base.astro';
+import Ref from '../components/Ref.astro';
+---
+
+<Base
+  title="Stranger Than Heaven Gameplay: Combat, Showbiz and Systems"
+  description="How Stranger Than Heaven plays: two-handed combat on the triggers and bumpers, the show business loop, and systems named only by the achievement list."
+  path="/gameplay/"
+>
+  <h1>Gameplay systems</h1>
+  <p class="lede">
+    Two halves: fighting your way up through the underworld, and building a career as a showman. This page separates
+    what SEGA has shown from what only the achievement list has named.
+  </p>
+
+  <h2>Fighting with two hands</h2>
+  <div class="prose">
+    <p>
+      Makoto's left and right sides are controlled separately, so one arm can block while the other strikes
+      <Ref ids={['sega-0507', 'xbox-0506']} />.
+    </p>
+  </div>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th scope="col">Input on an Xbox pad</th><th scope="col">What it does</th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">RB and RT</th><td>Makoto's right arm and leg</td></tr>
+        <tr><th scope="row">LB and LT</th><td>Makoto's left arm and leg</td></tr>
+        <tr><th scope="row">LT and RT together</th><td>A tackle</td></tr>
+        <tr><th scope="row">Hold, then release</th><td>A charged hit, stronger if released at the right moment</td></tr>
+        <tr><th scope="row">Guard with one side</th><td>Block with one arm, then hit back with the other</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="small muted">As shown in the May 2026 broadcast. <Ref ids="xbox-0506" /></p>
+  <div class="prose">
+    <p>
+      The arsenal mixes everyday tools (knives, hammers, mallets) with antique blades such as katanas and gadgets
+      newly invented in each era. Upgrades are possible, and every weapon brings its own special attacks and passive
+      abilities <Ref ids="xbox-0506" />.
+    </p>
+  </div>
+
+  <h2>Show business</h2>
+  <div class="prose">
+    <p>
+      Makoto's other life is as a showman. The loop SEGA has described <Ref ids={['sega-0507', 'xbox-0506']} />:
+    </p>
+    <ol>
+      <li><strong>Listen.</strong> Record everyday sounds around town: a broom, a passing train, a brawl. What you can hear changes with the era, the place and the time of day.</li>
+      <li><strong>Compose.</strong> Work with composers to turn those sounds into original songs, choosing instruments and mood.</li>
+      <li><strong>Scout.</strong> Follow rumours and overheard talk to find singers and musicians.</li>
+      <li><strong>Stage.</strong> Pick a five-piece band from your roster, set the running order and adjust the production, lighting included.</li>
+      <li><strong>Tour.</strong> Take the show around the country to win audiences.</li>
+    </ol>
+    <p>
+      The Deluxe Upgrade's "Skilled Performers" and "Stage Production Items" plug into this side of the game. See
+      <a href="/editions/">the editions</a>.
+    </p>
+  </div>
+
+  <h2>Named only in the achievement list</h2>
+  <p class="notice">
+    Everything in this section comes from the <a href="/achievements/">achievement list that surfaced in September 2026</a>.
+    SEGA has not described these systems, so the names are real but how they work is not known.
+  </p>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th scope="col">System</th><th scope="col">What the list says</th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">Arts</th><td>Abilities you learn. The top achievement asks for 70.</td></tr>
+        <tr><th scope="row">Health and Willpower</th><td>Two stats with levels. The top achievement asks for level 50 in both.</td></tr>
+        <tr><th scope="row">Weapon proficiency</th><td>Levels per weapon, and a separate one for bare hands. Level 10 is asked for in each.</td></tr>
+        <tr><th scope="row">Forging and awakening</th><td>Weapons are forged, then awakened, up to a limit. One achievement asks for a weapon taken all the way.</td></tr>
+        <tr><th scope="row">Weapon kinds</th><td>At least 100 different kinds to own.</td></tr>
+        <tr><th scope="row">Livelihood missions</th><td>A set of missions separate from substories. At least 30.</td></tr>
+        <tr><th scope="row">Ideas</th><td>Something you collect, at least 50 of them, listed with the show business achievements.</td></tr>
+        <tr><th scope="row">Act-specific jobs</th><td>Warehouse security in Act 1, street fighting in Act 2, black markets in Act 3, underground fights in Act 4.</td></tr>
+        <tr><th scope="row">Camera</th><td>You take photos and develop them.</td></tr>
+        <tr><th scope="row">Menko and beigoma</th><td>Collectibles. Menko are cards slapped down to flip an opponent's; beigoma are small spinning tops. At least 70 of the two combined.</td></tr>
+        <tr><th scope="row">Minigames</th><td>At least 10 different ones.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Substories and minigames</h2>
+  <div class="prose">
+    <p>
+      Each era has its own pastimes. The ones named so far are arm-wrestling, dice and card games in Kokura and target
+      shooting in Osaka <Ref ids="xbox-0506" />. In a September 2026 interview the developers added that some
+      minigames carry over from one era to the next, while others exist only in the Kokura period
+      <Ref ids="automaton" />.
+    </p>
+    <p>
+      Substories exist in every act: the achievement list has one entry per city for finishing them all. The
+      <a href="/acts/">act pages</a> collect what is known city by city. What the game does not have, according to
+      the studio, is a cabaret club or karaoke. That is part of
+      <a href="/like-a-dragon-connection/">why it is not sold as a Like a Dragon game</a>.
+    </p>
+  </div>
+</Base>

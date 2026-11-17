@@ -1,0 +1,55 @@
+---
+import Base from '../layouts/Base.astro';
+
+const items = [
+  { id: 'platform', title: 'Pick where you will play', text: 'PlayStation 5, Xbox Series X|S, or PC through Steam or the Microsoft Store. An Xbox purchase covers console and PC.', href: '/release/', link: 'Platforms' },
+  { id: 'gamepass', title: 'Check whether Game Pass covers you', text: 'It is in Game Pass from day one. If you subscribe, you may not need to buy anything.', href: '/release/', link: 'Game Pass details' },
+  { id: 'edition', title: 'Choose an edition', text: 'Standard has the whole game. Deluxe adds seven in-game extras, and that upgrade can also be bought later.', href: '/editions/', link: 'Editions compared' },
+  { id: 'preorder', title: 'Decide about the pre-order weapon', text: 'Dosu: Kagekiri is the pre-order bonus, and it unlocks as you advance through the game. If you want it, order before 15 January 2027.', href: '/editions/', link: 'How the bonus works' },
+  { id: 'collector', title: "Want the Collector's Edition? Order early", text: 'It is a limited physical run with a vinyl record and SteelBook.', href: '/editions/', link: "What is in the box" },
+  { id: 'pc', title: 'On PC: look again nearer launch', text: 'System requirements are not published yet. The Steam version uses Denuvo.', href: '/release/', link: 'PC version' },
+  { id: 'wishlist', title: 'Wishlist it on your store', text: 'Stores send a notice when preload opens or the game unlocks. Neither time has been announced.', href: '/release/', link: 'What is unannounced' },
+  { id: 'spoilers', title: 'Set your spoiler level', text: 'The tracker masks the 13 hidden story achievement names until you ask to see them.', href: '/achievements/', link: 'Open the tracker' },
+  { id: 'acts', title: 'Skim the act lists', text: 'Some achievements belong to one city. Until we know whether you can go back, finish each act before moving on.', href: '/acts/', link: 'Act by act' },
+];
+const universe = items.map((item) => ({ id: item.id, group: 'launch', act: null, hidden: false }));
+---
+
+<Base
+  title="Stranger Than Heaven Launch Checklist"
+  description="Nine things to sort out before Stranger Than Heaven launches on 15 January 2027: platform, Game Pass, edition, the pre-order weapon and more."
+  path="/checklist/"
+>
+  <h1>Launch checklist</h1>
+  <p class="lede">Nine small decisions to make before 15 January 2027. Ticks are saved in this browser.</p>
+
+  <section class="tracker" data-ticklist="tm-heaven-launch-v1" data-universe={JSON.stringify(universe)}>
+    <div class="tracker-progress">
+      <progress data-progress max={items.length} value="0" aria-label="Steps ticked"></progress>
+      <span data-progress-text>0 of {items.length} done</span>
+    </div>
+    <div class="tracker-bar">
+      <div class="controls">
+        <button class="btn" type="button" data-reset>Clear all ticks</button>
+      </div>
+      <noscript><p class="small muted">Ticks are saved with JavaScript. Without it, this is a plain list.</p></noscript>
+    </div>
+    <ul class="ach-list">
+      {items.map((item) => (
+        <li class="ach" data-item={item.id} data-group="launch">
+          <label>
+            <input type="checkbox" />
+            <span class="ach-text">
+              <span class="ach-name">{item.title}</span>
+              <span class="ach-req">{item.text}</span>
+            </span>
+          </label>
+          <span class="ach-tags"><a class="tag" href={item.href}>{item.link}</a></span>
+        </li>
+      ))}
+    </ul>
+  </section>
+  <script>
+    import '../lib/ticks.ts';
+  </script>
+</Base>

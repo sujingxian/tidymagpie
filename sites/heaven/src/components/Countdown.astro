@@ -1,0 +1,12 @@
+---
+import { site } from '../lib/site';
+---
+
+<div class="countdown" data-countdown={site.release.date}>
+  <strong data-days>15 Jan 2027</strong>
+  <span class="days-label" data-days-label></span>
+  <span class="when">Out {site.release.weekday} 15 January 2027. Exact unlock times have not been announced.</span>
+</div>
+<script>
+  import '../lib/ticks.ts';
+</script>

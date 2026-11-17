@@ -1,0 +1,79 @@
+---
+import Base from '../layouts/Base.astro';
+import Ref from '../components/Ref.astro';
+import { actBy, cast } from '../lib/site';
+---
+
+<Base
+  title="Stranger Than Heaven Cast: All 17 Characters and Actors"
+  description="Who plays whom in Stranger Than Heaven: Yu Shirota as Makoto Daito, Dean Fujioka, Snoop Dogg, Ado, Tori Kelly and the rest of the 17 named characters."
+  path="/cast/"
+>
+  <h1>Cast and characters</h1>
+  <p class="lede">
+    SEGA has named {cast.length} characters so far. The cast mixes Japanese film actors with musicians from Japan and
+    the United States <Ref ids="sega-0925" />.
+  </p>
+
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th scope="col">Character</th><th scope="col">Played by</th><th scope="col">Who they are</th><th scope="col">Where</th></tr>
+      </thead>
+      <tbody>
+        {cast.map((c) => (
+          <tr id={c.id}>
+            <th scope="row">{c.name}<span class="sub">{c.role}</span></th>
+            <td>{c.performer}</td>
+            <td>{c.about}</td>
+            <td>{c.act ? <a href={`/acts/${actBy(c.act).slug}/`}>{actBy(c.act).city}, {actBy(c.act).year}</a> : <span class="muted">Not stated</span>}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p class="small muted">
+    "Where" is filled in only when SEGA or Xbox has tied the character to a city. Descriptions are restated from the
+    official character notes.
+  </p>
+
+  <h2>Two characters built from archive footage</h2>
+  <div class="prose">
+    <p>
+      Genzo Iwaki has the face of Bunta Sugawara, the Japanese film star who died in 2014. SEGA says the character is
+      made in CG using archive footage from Toei, with the formal consent of his family, and is voiced by Takashi
+      Ukaji <Ref ids={['sega-0507', 'sega-0925']} />.
+    </p>
+    <p>
+      Amaru has the likeness of Tupac Shakur. SEGA says the studio is working with Amaru Entertainment, the company
+      that manages his legacy, building the character in CG from archive footage and photographs, and not using AI.
+      Who voices him has not been announced <Ref ids={['sega-0608', 'sega-0925']} />.
+    </p>
+  </div>
+
+  <h2>The theme song</h2>
+  <div class="prose">
+    <p>
+      The main theme shares the game's name. It is performed by Snoop Dogg, Satoshi Fujihara, Ado and Tori Kelly
+      <Ref ids="sega-0507" />, and written by Tori Kelly and Satoshi Fujihara <Ref ids="xbox-0506" />. All four also
+      play characters in the game.
+    </p>
+  </div>
+
+  <h2>One voice track</h2>
+  <div class="prose">
+    <p>
+      There is no separate English or Japanese dub to pick from. Characters speak whichever language fits the scene.
+      Details are on the <a href="/release/">release page</a>.
+    </p>
+  </div>
+
+  <h2>Familiar voices</h2>
+  <div class="prose">
+    <p>
+      Takaya Kuroda, who has voiced Kazuma Kiryu since the first Yakuza game, plays the craftsman Takeo Godai. For how
+      this game sits beside that series, see
+      <a href="/like-a-dragon-connection/">the Like a Dragon connection</a>.
+    </p>
+  </div>
+</Base>

@@ -1,0 +1,103 @@
+---
+import Base from '../layouts/Base.astro';
+import AchList from '../components/AchList.astro';
+import Ref from '../components/Ref.astro';
+import { achievements, listMeta } from '../lib/site';
+
+const visible = listMeta.total - listMeta.hidden;
+---
+
+<Base
+  title="Stranger Than Heaven Achievements: All 59, with Tracker"
+  description="Every Stranger Than Heaven achievement and trophy in one checklist: 59 entries by category and act, saved on your device, with hidden story names masked."
+  path="/achievements/"
+>
+  <h1>Stranger Than Heaven achievements: all {listMeta.total}, with a tracker</h1>
+  <p class="lede">
+    Tick each one as you earn it. Your progress is saved in this browser, and the {listMeta.hidden} story achievements
+    that Steam hides stay masked until you choose to see their names.
+  </p>
+  <p class="notice">
+    <strong>Pre-release list.</strong> These {listMeta.total} entries surfaced on 8 and 9 September 2026, when achievement
+    data for unreleased games turned out to be readable through Steam. SEGA has not confirmed the list and it can
+    change before launch.
+    PlayStation trophies normally match. <a href="#where">Where it came from</a>.
+  </p>
+
+  <AchList items={achievements} mode="full" />
+
+  <h2>What finishing the list takes</h2>
+  <div class="prose">
+    <p>Reading the highest step of each chain, a full clear means:</p>
+    <ul>
+      <li>the whole main story, five acts;</li>
+      <li>every substory in all five cities, and the Showbiz story in all five;</li>
+      <li>30 livelihood missions, 50 shows, 10 different singers and 50 ideas;</li>
+      <li>1,000 enemies defeated, 70 Arts abilities, and Health and Willpower both at level 50;</li>
+      <li>100 kinds of weapon, 30 forges, one weapon forged and awakened to its limit, and proficiency level 10 with one weapon and with bare hands;</li>
+      <li>the act-specific job in each of Acts 1 to 4;</li>
+      <li>20 developed photos, 20 hand-rolled cigarettes, 70 menko cards and beigoma tops, and 10 different minigames.</li>
+    </ul>
+    <p>
+      Nothing on the list mentions a difficulty setting, a time limit or anything online
+      <Ref ids="list" />.
+    </p>
+  </div>
+
+  <h2>Can you miss any of them?</h2>
+  <div class="prose">
+    <p>
+      Nobody outside SEGA knows yet. Three of the categories are tied to a single act: the substories, the
+      Showbiz story and the act-specific job each name their act, and every act is a different city in a different
+      decade. Whether the game lets you go back to an earlier act has not been said.
+    </p>
+    <p>
+      Until that is known, the cautious way to play is to clear an act's own list before finishing its last chapter.
+      The <a href="/acts/">act pages</a> show that short list for each city. This page will be updated as soon as the
+      answer is confirmed.
+    </p>
+    <p>
+      One hint that some content is tied to its era: the developers have said certain minigames exist only in the
+      Kokura period <Ref ids="automaton" />. The minigame achievement asks for any 10 different ones, so it does not
+      depend on a particular game, but it is a reason to try what each city offers while you are there.
+    </p>
+  </div>
+
+  <h2>What the list suggests about the game</h2>
+  <div class="prose">
+    <p>These are readings of the list, not announcements:</p>
+    <ul>
+      <li>Five acts, one per city. Acts 1 to 4 each have an entry for Chapter 1, for Chapter 2 and for finishing the act. Act 5 has one for Chapter 1 and one for the final chapter.</li>
+      <li>Three kinds of side content run alongside the story: substories, a Showbiz story in every act, and livelihood missions.</li>
+      <li>Fighting has more to grow than fists: Arts abilities, Health and Willpower levels, weapon proficiency, and weapons that are forged and then awakened.</li>
+      <li>There are at least 10 minigames, and things to collect: menko cards and beigoma tops, both old Japanese children's games.</li>
+    </ul>
+    <p>More on each system, and which parts SEGA has described itself, is on the <a href="/gameplay/">gameplay page</a>.</p>
+  </div>
+
+  <h2 id="where">Where the list came from</h2>
+  <div class="prose">
+    <p>
+      Overnight on 8 and 9 September 2026, achievement lists for dozens of unreleased Steam games appeared on
+      Exophase, a site that tracks achievements by scanning Steam automatically. Its owner said the data should have
+      been private and was reachable through Steam's API, which pointed to a mistake on Valve's side
+      <Ref ids="leak" />. Stranger Than Heaven was among the games. Trophy site PowerPyx published the 59 entries on
+      9 September <Ref ids="list" />, and a second write-up counted {visible} visible entries and
+      {listMeta.hidden} hidden ones <Ref ids="list-2" />.
+    </p>
+    <p>
+      The names on this page are the reported names. The requirements are restated in our own words from those two
+      copies, which agree on every number. Steam's store page does not show an achievement list at the moment
+      (checked {listMeta.checked}) <Ref ids="steam" />.
+    </p>
+  </div>
+
+  <h2>About spoilers</h2>
+  <div class="prose">
+    <p>
+      The {listMeta.hidden} hidden entries are all main-story achievements, one for each chapter and act. Their
+      requirements give nothing away, so those are shown. Their names might hint at the story, so they are masked
+      until you tick "Show hidden achievement names". The choice is remembered on this device.
+    </p>
+  </div>
+</Base>

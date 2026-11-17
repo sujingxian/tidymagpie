@@ -1,0 +1,64 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../lib/site';
+---
+
+<Base
+  title="Sources and Updates: Stranger Than Heaven Tracker"
+  description="Every source behind this Stranger Than Heaven site, what each one is used for, how the pre-release achievement list is handled, and a log of changes."
+  path="/sources/"
+>
+  <h1>Sources and updates</h1>
+  <p class="lede">Where each fact comes from, and what has changed on the site.</p>
+
+  <h2>Sources</h2>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th scope="col">Source</th><th scope="col">Used for</th><th scope="col">Checked</th></tr>
+      </thead>
+      <tbody>
+        {site.sources.map((source) => (
+          <tr id={source.id}>
+            <td><a href={source.url}>{source.name}</a></td>
+            <td>{source.use}</td>
+            <td style="white-space:nowrap">{source.checked}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>How facts are handled</h2>
+  <div class="prose">
+    <ul>
+      <li>Official statements from SEGA, RGG Studio, Xbox and the store pages come first.</li>
+      <li>Where an outlet is the source, it is named beside the fact.</li>
+      <li>Nothing is copied: descriptions and achievement requirements are restated in our own words. Achievement names are given as reported, because they are names.</li>
+      <li>What has not been announced is listed as unannounced, not guessed.</li>
+      <li>No game artwork, screenshots or trailer stills are used.</li>
+    </ul>
+  </div>
+
+  <h2>The achievement list</h2>
+  <div class="prose">
+    <p>
+      The list did not come from an announcement. Overnight on 8 and 9 September 2026, achievement data for dozens
+      of unreleased Steam games turned out to be readable through Steam's API, and the tracking site Exophase, which
+      scans Steam automatically, recorded it. Its owner put that down to a mistake on Valve's side. SEGA has not
+      confirmed or denied the list.
+    </p>
+    <p>
+      It is used here because it was published widely the same day, and because a checklist is only useful if it is
+      complete. It is labelled as pre-release on every page that uses it, and it will be checked against the released
+      game in launch week.
+    </p>
+  </div>
+
+  <h2>Updates</h2>
+  <ul>
+    {site.changelog.map((entry) => (
+      <li><strong>{entry.date}:</strong> {entry.text}</li>
+    ))}
+  </ul>
+</Base>

@@ -1,0 +1,94 @@
+---
+import Base from '../../layouts/Base.astro';
+import AchList from '../../components/AchList.astro';
+import Ref from '../../components/Ref.astro';
+import { acts, castInAct, inAct, type Act } from '../../lib/site';
+
+export function getStaticPaths() {
+  return acts.map((act) => ({ params: { slug: act.slug }, props: { act } }));
+}
+
+interface Props {
+  act: Act;
+}
+
+const { act } = Astro.props;
+const list = inAct(act.n);
+const people = castInAct(act.n);
+const previous = acts.find((a) => a.n === act.n - 1);
+const next = acts.find((a) => a.n === act.n + 1);
+const jobs = list.filter((a) => a.group === 'underworld');
+---
+
+<Base
+  title={`Stranger Than Heaven Act ${act.n}: ${act.city}, ${act.year} (Checklist)`}
+  description={`Act ${act.n} of Stranger Than Heaven: ${act.label}, ${act.year}. What is confirmed about the city and its characters, plus the ${list.length} achievements tied to this act.`}
+  path={`/acts/${act.slug}/`}
+>
+  <p class="crumbs"><a href="/acts/">All acts</a> › Act {act.n}</p>
+  <h1>Act {act.n}: {act.city}, {act.year}</h1>
+  <p class="lede">
+    {act.label}. {act.setting[0].text}
+  </p>
+
+  <h2>Finish these before you leave {act.city}</h2>
+  <p class="prose">
+    These {list.length} achievements name Act {act.n}. It is not yet known whether the game lets you return to an
+    earlier act, so the safe assumption is that it does not.
+    {jobs.length === 0 && ' Unlike the first four acts, this one has no act-specific job on the list.'}
+  </p>
+  <AchList items={list} mode="act" />
+  <p class="after-list"><a href={`/achievements/#act-${act.n}`}>Open the full tracker filtered to Act {act.n}</a></p>
+
+  <h2>The city</h2>
+  <ul class="prose">
+    {act.setting.map((fact) => (
+      <li>{fact.text} <Ref ids={fact.src} /></li>
+    ))}
+  </ul>
+
+  <h2>What happens here</h2>
+  <ul class="prose">
+    {act.story.map((fact) => (
+      <li>{fact.text} <Ref ids={fact.src} /></li>
+    ))}
+  </ul>
+
+  <h2>Things to do</h2>
+  <ul class="prose">
+    {act.activities.map((fact) => (
+      <li>{fact.text} <Ref ids={fact.src} /></li>
+    ))}
+  </ul>
+
+  {people.length > 0 && (
+    <>
+      <h2>Characters tied to {act.city}</h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th scope="col">Character</th><th scope="col">Played by</th><th scope="col">Who they are</th></tr>
+          </thead>
+          <tbody>
+            {people.map((c) => (
+              <tr>
+                <th scope="row">{c.name}</th>
+                <td>{c.performer}</td>
+                <td>{c.about}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="small muted">
+        Only characters SEGA has linked to this city are listed. <a href="/cast/">The full cast</a> has everyone.
+      </p>
+    </>
+  )}
+
+  <p>
+    {previous && <a href={`/acts/${previous.slug}/`}>← Act {previous.n}: {previous.city}, {previous.year}</a>}
+    {previous && next && ' · '}
+    {next && <a href={`/acts/${next.slug}/`}>Act {next.n}: {next.city}, {next.year} →</a>}
+  </p>
+</Base>

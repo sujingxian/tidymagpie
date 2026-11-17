@@ -1,0 +1,48 @@
+---
+import Base from '../../layouts/Base.astro';
+import Ref from '../../components/Ref.astro';
+import { acts, inAct } from '../../lib/site';
+---
+
+<Base
+  title="Stranger Than Heaven Acts and Cities: 1915 to 1965"
+  description="The five acts of Stranger Than Heaven: Kokura 1915, Kure 1929, Osaka 1943, Atami 1951 and Shinjuku 1965. What is confirmed about each, and its achievements."
+  path="/acts/"
+>
+  <h1>The five acts and their cities</h1>
+  <p class="lede">
+    Stranger Than Heaven follows Makoto Daito for fifty years. Each act is a different city in a different decade
+    <Ref ids="sega-0507" />.
+  </p>
+
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th scope="col">Act</th><th scope="col">Year</th><th scope="col">Where</th><th scope="col">In one line</th><th scope="col">Achievements</th></tr>
+      </thead>
+      <tbody>
+        {acts.map((act) => (
+          <tr>
+            <th scope="row"><a href={`/acts/${act.slug}/`}>Act {act.n}</a></th>
+            <td>{act.year}</td>
+            <td>{act.label}</td>
+            <td>{act.setting[0].text}</td>
+            <td>{inAct(act.n).length}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="prose">
+    <p>
+      SEGA describes the cities as a version of Japan inspired by real places of each period, not a recreation. The
+      numbering of the acts comes from the <a href="/achievements/">achievement list</a>, which ties each act to a city
+      by name: Kokura, Kure, Osaka, Atami and Shinjuku.
+    </p>
+    <p>
+      Each act page gives what has been confirmed about the city, the characters tied to it, and the short list of
+      achievements that belong to that act alone.
+    </p>
+  </div>
+</Base>

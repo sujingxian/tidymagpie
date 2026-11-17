@@ -1,0 +1,125 @@
+---
+import Base from '../layouts/Base.astro';
+import Countdown from '../components/Countdown.astro';
+import Ref from '../components/Ref.astro';
+import { site } from '../lib/site';
+
+const ratings = [
+  { where: 'United States and Canada (ESRB)', rating: 'M, Mature 17+', why: 'Intense violence, blood and gore, suggestive themes, strong language, use of drugs' },
+  { where: 'Europe (PEGI)', rating: '18', why: 'Extreme violence, simulated gambling, in-game purchases' },
+  { where: 'Japan (CERO)', rating: 'D, ages 17 and up', why: 'Crime, gambling, violence' },
+  { where: 'Germany (USK)', rating: '18', why: 'Drastic violence, criminal role models, gambling themes, in-game purchases' },
+  { where: 'Australia', rating: 'R 18+', why: 'High impact simulated gambling, in-game purchases' },
+  { where: 'New Zealand', rating: 'R16', why: 'Bloody violence, offensive language, content that may disturb' },
+];
+const subtitles = ['English', 'French', 'Italian', 'German', 'Spanish (Spain)', 'Spanish (Latin America)', 'Japanese', 'Korean', 'Polish', 'Portuguese (Brazil)', 'Russian', 'Simplified Chinese', 'Traditional Chinese'];
+---
+
+<Base
+  title="Stranger Than Heaven Release Date, Platforms and Game Pass"
+  description="Stranger Than Heaven is out 15 January 2027 on PS5, Xbox Series X|S and PC, with Game Pass from day one. Platforms, PC details, languages, age ratings."
+  path="/release/"
+>
+  <h1>Release date, platforms and Game Pass</h1>
+  <p class="lede">
+    Stranger Than Heaven is out on {site.release.weekday} 15 January 2027 on PlayStation 5, Xbox Series X|S and PC,
+    and it is on Game Pass from day one <Ref ids="sega-0608" />.
+  </p>
+
+  <Countdown />
+
+  <h2>The date</h2>
+  <div class="prose">
+    <p>
+      SEGA gives 15 January 2027 for every platform. Steam's US store shows 14 January 2027 <Ref ids="steam" />. A
+      one-day difference like that usually means a single worldwide unlock that falls on the evening of the 14th in
+      the Americas, but SEGA has not published unlock times, so treat that as a likelihood and not a fact.
+    </p>
+    <p>No early-access period has been announced for any edition.</p>
+  </div>
+
+  <h2>Platforms</h2>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th scope="col">Where</th><th scope="col">How</th><th scope="col">Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">PlayStation 5</th><td>Digital and physical</td><td>The boxed Collector's Edition is sold for PS5.</td></tr>
+        <tr><th scope="row">Xbox Series X|S</th><td>Digital, Game Pass</td><td>Xbox Play Anywhere: one purchase covers console and PC. US shops also list the Collector's Edition for Xbox.</td></tr>
+        <tr><th scope="row">Xbox on PC</th><td>Microsoft Store, Game Pass</td><td>Shares the Play Anywhere purchase with console.</td></tr>
+        <tr><th scope="row">Xbox Cloud Gaming</th><td>Game Pass</td><td>Listed by SEGA among the launch platforms.</td></tr>
+        <tr><th scope="row">Steam</th><td>Digital</td><td>Uses Denuvo Anti-tamper. System requirements are still marked TBD.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="small muted">SEGA has announced no other platforms. <Ref ids={['sega-0608', 'xbox-0506', 'steam']} /></p>
+
+  <h2>Game Pass</h2>
+  <div class="prose">
+    <p>
+      The game is in Xbox Game Pass on launch day <Ref ids="xbox-0506" />, and SEGA lists Xbox Series X|S, Xbox on
+      PC and Xbox Cloud Gaming among the launch platforms <Ref ids="sega-0608" />. Game Pass members do not need to
+      buy an edition to play. The pre-order weapon is tied to pre-ordering a copy, so check the store page if that
+      matters to you.
+    </p>
+  </div>
+
+  <h2>The PC version</h2>
+  <dl class="facts">
+    <dt>Stores</dt>
+    <dd>Steam, and the Microsoft Store as Xbox on PC</dd>
+    <dt>System requirements</dt>
+    <dd>Not published. Steam says only that a 64-bit processor and Windows are needed</dd>
+    <dt>DRM</dt>
+    <dd>Denuvo Anti-tamper on Steam</dd>
+    <dt>Controllers</dt>
+    <dd>Full controller support. DualSense, DualShock and Steam Input are listed by name</dd>
+    <dt>Other</dt>
+    <dd>Single-player. Steam Family Sharing is listed</dd>
+  </dl>
+  <p class="small muted">From Steam's store data, checked 17 November 2026. <Ref ids="steam" /></p>
+
+  <h2>Languages</h2>
+  <div class="prose">
+    <p>
+      Steam lists full audio for English and Japanese, and text in {subtitles.length} languages:
+      {subtitles.join(', ')} <Ref ids="steam" />.
+    </p>
+    <p>
+      There is one voice track, not a choice of dubs. Characters speak English or Japanese as the story calls for it,
+      because language is part of who Makoto is: he grew up speaking English and learned Japanese second
+      <Ref ids="prima" />.
+    </p>
+  </div>
+
+  <h2>Age ratings</h2>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th scope="col">Where</th><th scope="col">Rating</th><th scope="col">Reasons given</th></tr>
+      </thead>
+      <tbody>
+        {ratings.map((r) => (
+          <tr><th scope="row">{r.where}</th><td>{r.rating}</td><td>{r.why}</td></tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p class="small muted">
+    As listed in Steam's store data on 17 November 2026 <Ref ids="steam" />. Steam itself sets the required age at 17
+    and flags frequent violence, some sexual content and general mature content.
+  </p>
+
+  <h2>Not announced yet</h2>
+  <ul class="prose">
+    <li>Unlock times by region.</li>
+    <li>Preload dates and download size.</li>
+    <li>PC system requirements, and frame rate or resolution modes on console.</li>
+    <li>The price of the separate Deluxe Upgrade.</li>
+  </ul>
+  <p>
+    Deciding what to buy? See <a href="/editions/">the editions compared</a>, or run through the
+    <a href="/checklist/">launch checklist</a>.
+  </p>
+</Base>

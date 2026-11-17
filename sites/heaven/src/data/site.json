@@ -1,0 +1,235 @@
+{
+  "updated": "2026-11-17",
+  "release": {
+    "date": "2027-01-15",
+    "steamDate": "2027-01-14",
+    "weekday": "Friday"
+  },
+  "sources": [
+    {
+      "id": "sega-0608",
+      "name": "SEGA press release: Stranger Than Heaven launches January 15, 2027 (8 June 2026)",
+      "url": "https://sega.co.jp/en/release/260608_3.html",
+      "use": "Release date, platforms, editions and their contents, the pre-order bonus and its conditions, Japanese prices, and how the Tupac character is made.",
+      "checked": "17 November 2026",
+      "short": "SEGA, 8 Jun 2026"
+    },
+    {
+      "id": "sega-0507",
+      "name": "SEGA press release: story, cast, theme song and combat revealed (7 May 2026)",
+      "url": "https://sega.co.jp/en/release/260507_1.html",
+      "use": "The premise, the five eras and cities, the theme song, the two-handed combat system and the show business system.",
+      "checked": "17 November 2026",
+      "short": "SEGA, 7 May 2026"
+    },
+    {
+      "id": "sega-0925",
+      "name": "SEGA press release: key characters and show business (25 September 2026)",
+      "url": "https://www.gamespress.com/STRANGER-THAN-HEAVEN-SEGA-Unveils-New-Info-for-Key-Characters-Show-Bus",
+      "use": "The 17 named characters, who plays each one, and one-line descriptions.",
+      "checked": "17 November 2026",
+      "short": "SEGA, 25 Sep 2026"
+    },
+    {
+      "id": "xbox-0506",
+      "name": "Xbox Wire: Xbox Presents, A Special Look at Stranger Than Heaven (6 May 2026)",
+      "url": "https://news.xbox.com/en-us/2026/05/06/stranger-than-heaven-xbox-presents/",
+      "use": "What happens in each city, the pastimes named for each era, combat controls, the show business loop, Game Pass and Xbox Play Anywhere.",
+      "checked": "17 November 2026",
+      "short": "Xbox Wire, 6 May 2026"
+    },
+    {
+      "id": "steam",
+      "name": "Steam store data for Stranger Than Heaven (app 4260840)",
+      "url": "https://store.steampowered.com/app/4260840/STRANGER_THAN_HEAVEN/",
+      "use": "The 14 January 2027 date shown on the US store, prices, languages, controller support, Denuvo, age ratings, and system requirements still marked TBD. No achievement list is shown on the store.",
+      "checked": "17 November 2026",
+      "short": "Steam"
+    },
+    {
+      "id": "list",
+      "name": "PowerPyx: Stranger Than Heaven trophy list (9 September 2026)",
+      "url": "https://www.powerpyx.com/?p=361141",
+      "use": "The 59 achievement names and what each asks for. Requirements on this site are restated in our own words.",
+      "checked": "17 November 2026",
+      "short": "achievement list"
+    },
+    {
+      "id": "list-2",
+      "name": "Gamerfuzion: analysis of the surfaced achievement list (9 September 2026)",
+      "url": "https://www.gamerfuzion.com/stranger-than-heaven-achievements-leak/",
+      "use": "A second copy of the list, used to cross-check names and numbers, and the split of 46 visible and 13 hidden entries.",
+      "checked": "17 November 2026",
+      "short": "Gamerfuzion"
+    },
+    {
+      "id": "leak",
+      "name": "Gematsu: Steam achievements surface in large-scale leak (September 2026)",
+      "url": "https://www.gematsu.com/2026/09/persona-6-kingdom-hearts-iv-and-other-steam-achievements-surface-in-large-scale-leak",
+      "use": "How the list became public: achievement data for dozens of unreleased games was readable through Steam's API, and the tracking site Exophase recorded it.",
+      "checked": "17 November 2026",
+      "short": "Gematsu"
+    },
+    {
+      "id": "rpgsite",
+      "name": "RPG Site: editions and DLC guide (6 June 2026)",
+      "url": "https://rpgsite.net/guide/20560-stranger-than-heaven-dlc-guide-deluxe-edition-upgrade-pre-order-bonus-record-player-collectors-edition-steelbook",
+      "use": "US prices for the three editions, the Deluxe Upgrade item names, and the Collector's Edition contents.",
+      "checked": "17 November 2026",
+      "short": "RPG Site"
+    },
+    {
+      "id": "gamestop",
+      "name": "GameStop: Collector's Edition listing",
+      "url": "https://www.gamestop.com/447420.html",
+      "use": "The Collector's Edition at 129.99 US dollars on PlayStation 5 and Xbox Series X, and its contents.",
+      "checked": "17 November 2026",
+      "short": "GameStop"
+    },
+    {
+      "id": "prima",
+      "name": "Prima Games: main cast and editions coverage",
+      "url": "https://primagames.com/news/rgg-studio-reveals-stranger-than-heavens-main-cast",
+      "use": "The single mixed-language voice track and the reason for it, and the poster reported with Amazon pre-orders.",
+      "checked": "17 November 2026",
+      "short": "Prima Games"
+    },
+    {
+      "id": "gematsu-0608",
+      "name": "Gematsu: Stranger Than Heaven launches January 15, 2027",
+      "url": "https://www.gematsu.com/2026/06/stranger-than-heaven-launches-january-15-2027",
+      "use": "The release date announcement at Summer Game Fest 2026.",
+      "checked": "17 November 2026",
+      "short": "Gematsu"
+    },
+    {
+      "id": "gematsu-demo",
+      "name": "Gematsu: Gamescom 2026 demo playthrough",
+      "url": "https://gematsu.com/2026/08/stranger-than-heaven-gamescom-2026-demo-playthrough",
+      "use": "The 12-minute Gamescom demo video.",
+      "checked": "17 November 2026",
+      "short": "Gematsu"
+    },
+    {
+      "id": "vgc-title",
+      "name": "VGC: Like a Dragon studio's latest game is called Stranger Than Heaven",
+      "url": "https://www.videogameschronicle.com/news/like-a-dragon-studios-latest-game-is-called-stranger-than-heaven",
+      "use": "The Project Century reveal in December 2024 and the new title at Summer Game Fest 2025.",
+      "checked": "17 November 2026",
+      "short": "VGC"
+    },
+    {
+      "id": "gematsu-0326",
+      "name": "Gematsu: confirmed for PS5, Xbox Series and PC (March 2026)",
+      "url": "https://www.gematsu.com/2026/03/stranger-than-heaven-confirmed-for-ps5-xbox-series-and-pc",
+      "use": "Platforms and the five eras, first shown in March 2026.",
+      "checked": "17 November 2026",
+      "short": "Gematsu"
+    },
+    {
+      "id": "inven",
+      "name": "Inven Global: Stranger Than Heaven reaches 1 million wishlists",
+      "url": "https://labs.invenglobal.com/articles/25548/stranger-than-heaven-reaches-1-million-wishlists-rgg-studios-highest-pre-launch-record",
+      "use": "The wishlist milestone and that it is a record for the studio.",
+      "checked": "17 November 2026",
+      "short": "Inven Global"
+    },
+    {
+      "id": "saiganak",
+      "name": "Saiga NAK: new demo at the nationwide hands-on events in Japan",
+      "url": "https://saiganak.com/news/stranger-than-heaven-trial-event-new-demo-announcement/",
+      "use": "The hands-on tour in Japan from 14 November 2026.",
+      "checked": "17 November 2026",
+      "short": "Saiga NAK"
+    },
+    {
+      "id": "automaton",
+      "name": "Automaton: interview with the developers of Stranger Than Heaven",
+      "url": "https://automaton-media.com/en/news/stranger-than-heaven-developers-about-breaking-away-from-action-game-conventions-why-it-isnt-a-like-a-dragon-entry-and-making-long-games/",
+      "use": "An interview with the developers: why the game is not sold as a Like a Dragon entry, the Tojo Clan link, how long the game is, and minigames that exist only in one era.",
+      "checked": "17 November 2026",
+      "short": "Automaton, 29 Sep 2026"
+    },
+    {
+      "id": "gi-1016",
+      "name": "Game Informer: the Act 1: Kokura story trailer",
+      "url": "https://gameinformer.com/2026/10/16/stranger-than-heaven-snoop-dogg-teaches-protagonist-makoto-how-to-rap-in-new-story",
+      "use": "The Act 1: Kokura story trailer released on 16 October 2026.",
+      "checked": "17 November 2026",
+      "short": "Game Informer, 16 Oct 2026"
+    }
+  ],
+  "timeline": [
+    {
+      "date": "December 2024",
+      "text": "Revealed at The Game Awards under the working title Project Century.",
+      "src": "vgc-title"
+    },
+    {
+      "date": "6 June 2025",
+      "text": "Named Stranger Than Heaven at Summer Game Fest 2025, with a new teaser.",
+      "src": "vgc-title"
+    },
+    {
+      "date": "March 2026",
+      "text": "Xbox Partner Preview: five eras from 1915 to 1965 across five cities, and platforms confirmed as PS5, Xbox Series and PC.",
+      "src": "gematsu-0326"
+    },
+    {
+      "date": "6 May 2026",
+      "text": "A dedicated half-hour Xbox broadcast covers the story, cast, combat and show business. Release window: this winter.",
+      "src": "xbox-0506"
+    },
+    {
+      "date": "5 June 2026",
+      "text": "Summer Game Fest 2026: release date set for 15 January 2027, Tupac Shakur joins the cast, and pre-orders open.",
+      "src": "gematsu-0608"
+    },
+    {
+      "date": "August 2026",
+      "text": "Playable at Gamescom. SEGA publishes a 12-minute playthrough of the demo.",
+      "src": "gematsu-demo"
+    },
+    {
+      "date": "8 and 9 September 2026",
+      "text": "A 59-entry achievement list becomes public after achievement data for dozens of unreleased games proves readable through Steam.",
+      "src": "leak"
+    },
+    {
+      "date": "September 2026",
+      "text": "Passes 1 million wishlists across platforms, the most for any RGG Studio game before launch.",
+      "src": "inven"
+    },
+    {
+      "date": "25 September 2026",
+      "text": "SEGA names more characters and publishes a closer look at the show business system.",
+      "src": "sega-0925"
+    },
+    {
+      "date": "29 September 2026",
+      "text": "In an interview, the developers explain why the game is not sold as a Like a Dragon entry, and say its world is the same one.",
+      "src": "automaton"
+    },
+    {
+      "date": "16 October 2026",
+      "text": "RGG Studio releases the Act 1: Kokura story trailer.",
+      "src": "gi-1016"
+    },
+    {
+      "date": "14 November 2026",
+      "text": "A hands-on tour with a new demo begins in Japan.",
+      "src": "saiganak"
+    },
+    {
+      "date": "15 January 2027",
+      "text": "Release on PlayStation 5, Xbox Series X|S, Xbox on PC, Xbox Cloud Gaming and Steam, and on Game Pass from day one.",
+      "src": "sega-0608"
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-11-17",
+      "text": "First version: achievement tracker for all 59 entries, act-by-act pages, release and edition details, cast, gameplay systems, timeline and a launch checklist."
+    }
+  ]
+}

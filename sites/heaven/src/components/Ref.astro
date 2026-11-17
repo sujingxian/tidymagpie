@@ -1,0 +1,13 @@
+---
+import { source, sourceShort } from '../lib/site';
+
+interface Props {
+  ids: string | string[];
+}
+
+const ids = Array.isArray(Astro.props.ids) ? Astro.props.ids : [Astro.props.ids];
+---
+
+<span class="ref">({ids.map((id, i) => (
+  <>{i > 0 && '; '}{source(id) ? <a href={`/sources/#${id}`}>{sourceShort(id)}</a> : id}</>
+))})</span>

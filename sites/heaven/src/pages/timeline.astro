@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import Ref from '../components/Ref.astro';
+import { site } from '../lib/site';
+---
+
+<Base
+  title="Stranger Than Heaven Timeline: Every Reveal Since 2024"
+  description="From Project Century at The Game Awards 2024 to launch on 15 January 2027: every major Stranger Than Heaven announcement in order, with sources."
+  path="/timeline/"
+>
+  <h1>Timeline of reveals</h1>
+  <p class="lede">How Project Century became Stranger Than Heaven, in order.</p>
+
+  <ol class="timeline">
+    {site.timeline.map((entry) => (
+      <li>
+        <span class="date">{entry.date}</span>
+        {entry.text} <Ref ids={entry.src} />
+      </li>
+    ))}
+  </ol>
+
+  <p class="prose">
+    Dates are given as they were in the United States where an event was a live broadcast. Anything announced after
+    {site.updated} will be added here.
+  </p>
+</Base>

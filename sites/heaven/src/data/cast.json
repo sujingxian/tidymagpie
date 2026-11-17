@@ -1,0 +1,196 @@
+[
+  {
+    "id": "makoto-daito",
+    "name": "Makoto Daito",
+    "performer": "Yu Shirota",
+    "role": "Protagonist",
+    "act": null,
+    "about": "Born in America to an American father and a Japanese mother. Orphaned and treated as an outsider, he leaves for Japan in 1915. The game follows him for fifty years.",
+    "src": [
+      "sega-0925",
+      "sega-0507"
+    ]
+  },
+  {
+    "id": "yu-shinjo",
+    "name": "Yu Shinjo",
+    "performer": "Dean Fujioka",
+    "role": "Friend and rival",
+    "act": null,
+    "about": "Half-Japanese and half-British, and a little older than Makoto. The two meet on the ship to Japan and stay tied to each other for life.",
+    "src": [
+      "sega-0925",
+      "xbox-0506"
+    ]
+  },
+  {
+    "id": "orpheus",
+    "name": "Orpheus",
+    "performer": "Snoop Dogg",
+    "role": "Smuggler and mentor",
+    "act": null,
+    "about": "A globe-trotting merchant and smuggler who catches Makoto stowed away on his ship, takes him on, and is the first to notice his ear for music.",
+    "src": [
+      "sega-0925",
+      "xbox-0506"
+    ]
+  },
+  {
+    "id": "heigo-yashima",
+    "name": "Heigo Yashima",
+    "performer": "Akio Otsuka",
+    "role": "Boss in Kokura",
+    "act": 1,
+    "about": "A merchant and boss in Kokura who becomes Makoto's mentor.",
+    "src": [
+      "sega-0925"
+    ]
+  },
+  {
+    "id": "tae-matsumoto",
+    "name": "Tae Matsumoto",
+    "performer": "Moeka Hoshi",
+    "role": "Cafe waitress in Kokura",
+    "act": 1,
+    "about": "Works at a cafe in Kokura and is the mistress of a yakuza member.",
+    "src": [
+      "sega-0925"
+    ]
+  },
+  {
+    "id": "tadashi-hataoka",
+    "name": "Tadashi Hataoka",
+    "performer": "Takashi Ukaji",
+    "role": "Yakuza from Kokura",
+    "act": 1,
+    "about": "A swaggering, violent yakuza from Kokura.",
+    "src": [
+      "sega-0925"
+    ]
+  },
+  {
+    "id": "genzo-iwaki",
+    "name": "Genzo Iwaki",
+    "performer": "Bunta Sugawara (likeness), voiced by Takashi Ukaji",
+    "role": "Big boss of Kure",
+    "act": 2,
+    "about": "The most powerful figure in Kure. The character is built in CG from Toei archive footage of the late Bunta Sugawara, with his family's consent.",
+    "src": [
+      "sega-0925",
+      "sega-0507"
+    ]
+  },
+  {
+    "id": "tetsuya-hama",
+    "name": "Tetsuya Hama",
+    "performer": "Yasukaze Motomiya",
+    "role": "Iwaki's right-hand man",
+    "act": 2,
+    "about": "A young yakuza from Kure and Genzo Iwaki's right-hand man.",
+    "src": [
+      "sega-0925"
+    ]
+  },
+  {
+    "id": "keiko-shirai",
+    "name": "Keiko Shirai",
+    "performer": "Ado",
+    "role": "Singer in wartime Osaka",
+    "act": 3,
+    "about": "The diva of wartime Osaka.",
+    "src": [
+      "sega-0925"
+    ]
+  },
+  {
+    "id": "suzy-day",
+    "name": "Suzy Day",
+    "performer": "Tori Kelly",
+    "role": "Singer",
+    "act": 4,
+    "about": "A gifted singer whose rise in show business starts when she meets Makoto. She is introduced in the Atami part of the story.",
+    "src": [
+      "sega-0925",
+      "xbox-0506"
+    ]
+  },
+  {
+    "id": "kimura",
+    "name": "Kimura",
+    "performer": "Daisuke Shiba (Mogurider)",
+    "role": "Nightclub worker in Kamurocho",
+    "act": 5,
+    "about": "An easygoing nightclub worker in Kamurocho.",
+    "src": [
+      "sega-0925"
+    ]
+  },
+  {
+    "id": "takashi",
+    "name": "Takashi",
+    "performer": "Satoshi Fujihara (Official HIGE DANdism)",
+    "role": "Pianist and sworn brother",
+    "act": null,
+    "about": "Makoto's sworn brother and a gifted pianist who brings him back to music. He works alongside Makoto on the show business side.",
+    "src": [
+      "sega-0925",
+      "xbox-0506"
+    ]
+  },
+  {
+    "id": "suekichi",
+    "name": "Suekichi",
+    "performer": "Kouhei Tsuji (Nippon no Shachou)",
+    "role": "Sworn brother",
+    "act": null,
+    "about": "Another of Makoto's sworn brothers: carefree, but someone to rely on.",
+    "src": [
+      "sega-0925"
+    ]
+  },
+  {
+    "id": "kiyoshi-otsuru",
+    "name": "Kiyoshi Otsuru",
+    "performer": "Tokuma Nishioka",
+    "role": "Not yet explained",
+    "act": null,
+    "about": "A stylish older man who carries himself with authority. His part in the story has not been explained.",
+    "src": [
+      "sega-0925"
+    ]
+  },
+  {
+    "id": "takeo-godai",
+    "name": "Takeo Godai",
+    "performer": "Takaya Kuroda",
+    "role": "Craftsman",
+    "act": null,
+    "about": "A skilled craftsman of few words.",
+    "src": [
+      "sega-0925"
+    ]
+  },
+  {
+    "id": "veiled-stranger",
+    "name": "The Veiled Stranger",
+    "performer": "Cordell Broadus",
+    "role": "Not yet explained",
+    "act": null,
+    "about": "Stationed in postwar Japan. Little else has been said.",
+    "src": [
+      "sega-0925"
+    ]
+  },
+  {
+    "id": "amaru",
+    "name": "Amaru",
+    "performer": "Tupac Shakur (likeness); voice not announced",
+    "role": "A man in hiding",
+    "act": null,
+    "about": "A man lying low in Japan. The character is built in CG from archive footage and photographs, in collaboration with Amaru Entertainment, and SEGA says no AI is used.",
+    "src": [
+      "sega-0925",
+      "sega-0608"
+    ]
+  }
+]

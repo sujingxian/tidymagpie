@@ -1,0 +1,168 @@
+[
+  {
+    "n": 1,
+    "slug": "act-1-kokura-1915",
+    "year": 1915,
+    "city": "Kokura",
+    "region": "Fukuoka",
+    "label": "Kokura, Fukuoka",
+    "setting": [
+      {
+        "text": "An industrial city, home to one of the largest steelworks in the world and crowded with labourers.",
+        "src": "sega-0507"
+      },
+      {
+        "text": "Xbox's write-up describes it as a hub for crime and vice: drinking, gambling and prostitution.",
+        "src": "xbox-0506"
+      }
+    ],
+    "story": [
+      {
+        "text": "Orpheus's ship lands here, and Makoto and Yu Shinjo begin their lives in Japan.",
+        "src": "xbox-0506"
+      },
+      {
+        "text": "Makoto finds his work in the criminal underworld, while Yu takes an ordinary job.",
+        "src": "xbox-0506"
+      }
+    ],
+    "activities": [
+      {
+        "text": "Arm-wrestling, dice games and card games are the pastimes named for this era.",
+        "src": "xbox-0506"
+      },
+      {
+        "text": "The achievement list names warehouse security missions that belong to Act 1.",
+        "src": "list"
+      }
+    ]
+  },
+  {
+    "n": 2,
+    "slug": "act-2-kure-1929",
+    "year": 1929,
+    "city": "Kure",
+    "region": "Hiroshima",
+    "label": "Kure, Hiroshima",
+    "setting": [
+      {
+        "text": "Home to Japan's largest naval shipyard, and a city under the heavy influence of organised crime.",
+        "src": "sega-0507"
+      },
+      {
+        "text": "A place of shipbuilding and heavy industry with a mix of foreign visitors.",
+        "src": "xbox-0506"
+      }
+    ],
+    "story": [
+      {
+        "text": "Makoto is now established among the yakuza as a member of the Iwaki Family, the strongest organisation in Hiroshima.",
+        "src": "xbox-0506"
+      },
+      {
+        "text": "He is known here as the Red Oni.",
+        "src": "xbox-0506"
+      }
+    ],
+    "activities": [
+      {
+        "text": "The achievement list names street fighting against 10 opponents in Act 2.",
+        "src": "list"
+      }
+    ]
+  },
+  {
+    "n": 3,
+    "slug": "act-3-osaka-1943",
+    "year": 1943,
+    "city": "Osaka",
+    "region": "Osaka",
+    "label": "Minami, Osaka",
+    "setting": [
+      {
+        "text": "Minami is the largest entertainment district in western Japan, shown here against rising tension around the world.",
+        "src": "sega-0507"
+      },
+      {
+        "text": "The yakuza and the Italian Mafia compete for it out of sight.",
+        "src": "xbox-0506"
+      }
+    ],
+    "story": [
+      {
+        "text": "Makoto and Yu are reunited, and this is where their show business work takes place.",
+        "src": "xbox-0506"
+      }
+    ],
+    "activities": [
+      {
+        "text": "Target shooting is the pastime named for this era.",
+        "src": "xbox-0506"
+      },
+      {
+        "text": "The achievement list names three black markets to invest in during Act 3.",
+        "src": "list"
+      }
+    ]
+  },
+  {
+    "n": 4,
+    "slug": "act-4-atami-1951",
+    "year": 1951,
+    "city": "Atami",
+    "region": "Shizuoka",
+    "label": "Atami, Shizuoka",
+    "setting": [
+      {
+        "text": "A resort town that became a byword for tourism in postwar Japan.",
+        "src": "sega-0507"
+      },
+      {
+        "text": "Less urban than the other cities, known for cherry blossoms and views, with American influence showing in language, music and fashion.",
+        "src": "xbox-0506"
+      }
+    ],
+    "story": [
+      {
+        "text": "The singer Suzy Day is introduced in this part of the story.",
+        "src": "xbox-0506"
+      }
+    ],
+    "activities": [
+      {
+        "text": "The achievement list names underground fight matches in Act 4.",
+        "src": "list"
+      }
+    ]
+  },
+  {
+    "n": 5,
+    "slug": "act-5-shinjuku-1965",
+    "year": 1965,
+    "city": "Shinjuku",
+    "region": "Tokyo",
+    "label": "Kamurocho, Shinjuku, Tokyo",
+    "setting": [
+      {
+        "text": "One of the best-known entertainment districts in Japan, shown as a city alive with chaos and energy.",
+        "src": "sega-0507"
+      },
+      {
+        "text": "The district is Kamurocho, the fictional quarter of Shinjuku that Like a Dragon players already know.",
+        "src": "sega-0925"
+      }
+    ],
+    "story": [
+      {
+        "text": "The story ends here. Studio head Masayoshi Yokoyama has said a major secret is revealed in this act.",
+        "src": "xbox-0506"
+      }
+    ],
+    "activities": [
+      {
+        "text": "The achievement list has no act-specific job for Act 5, unlike the four acts before it.",
+        "src": "list"
+      }
+    ]
+  }
+]

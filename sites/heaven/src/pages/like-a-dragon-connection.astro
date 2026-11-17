@@ -1,0 +1,76 @@
+---
+import Base from '../layouts/Base.astro';
+import Ref from '../components/Ref.astro';
+import { actBy } from '../lib/site';
+
+const last = actBy(5);
+---
+
+<Base
+  title="Is Stranger Than Heaven a Yakuza Game? The Like a Dragon Link"
+  description="Stranger Than Heaven shares its world with Like a Dragon (Yakuza) but is a separate game. What the developers say about Kamurocho and the Tojo Clan."
+  path="/like-a-dragon-connection/"
+>
+  <h1>Is Stranger Than Heaven a Yakuza game?</h1>
+  <p class="lede">
+    Short answer: it is made by the same studio and set in the same fictional world as Like a Dragon, the series once
+    called Yakuza in the West. It is sold as its own game, not as an entry in that series
+    <Ref ids="automaton" />.
+  </p>
+
+  <h2>What ties the two together</h2>
+  <ul class="prose">
+    <li>
+      <strong>The studio.</strong> RGG Studio, the SEGA team behind Like a Dragon, develops it.
+    </li>
+    <li>
+      <strong>The world.</strong> Studio head Masayoshi Yokoyama has said the game takes place in the Like a Dragon
+      world, while calling it a separate title <Ref ids="automaton" />.
+    </li>
+    <li>
+      <strong>Kamurocho.</strong> The last act, in {last.year}, is set in Kamurocho, the fictional Shinjuku district
+      where most Like a Dragon games take place <Ref ids="sega-0925" />.
+      <a href={`/acts/${last.slug}/`}>More on Act 5</a>.
+    </li>
+    <li>
+      <strong>The Tojo Clan.</strong> According to Yokoyama, the place Makoto Daito sets out to build for himself
+      grows, in time, into the Tojo Clan, the yakuza organisation at the centre of the series
+      <Ref ids="automaton" />.
+    </li>
+    <li>
+      <strong>A familiar voice.</strong> Takaya Kuroda, the voice of Kazuma Kiryu, plays a craftsman called Takeo
+      Godai <Ref ids="sega-0925" />. <a href="/cast/">See the full cast</a>.
+    </li>
+  </ul>
+
+  <h2>Why it is not called Like a Dragon</h2>
+  <div class="prose">
+    <p>
+      Yokoyama's explanation is that it plays differently. There is no cabaret club and no karaoke, and the controls
+      and the way your character grows are not the ones series players know, so putting the Like a Dragon name on the
+      box would mislead people <Ref ids="automaton" />.
+    </p>
+    <p>
+      Fighting is one example: each of Makoto's arms has its own buttons. Show business is another: you write songs
+      and stage shows. Both are covered on the <a href="/gameplay/">gameplay page</a>.
+    </p>
+  </div>
+
+  <h2>Where it sits in the timeline</h2>
+  <div class="prose">
+    <p>
+      The story runs from 1915 to 1965. Yakuza 0, the earliest story in the main series, is set in 1988, so this one
+      ends more than twenty years before that one begins. The five eras are laid out on the
+      <a href="/acts/">acts page</a>.
+    </p>
+  </div>
+
+  <h2>How long is it?</h2>
+  <div class="prose">
+    <p>
+      No hour count has been given. In the same interview Yokoyama described the game as "frankly, long", with a
+      great deal in it <Ref ids="automaton" />. The <a href="/achievements/">achievement list</a> points the same way:
+      five acts, substories in every city and a show business story running alongside.
+    </p>
+  </div>
+</Base>

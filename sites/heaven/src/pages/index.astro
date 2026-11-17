@@ -1,0 +1,123 @@
+---
+import Base from '../layouts/Base.astro';
+import Countdown from '../components/Countdown.astro';
+import Ref from '../components/Ref.astro';
+import { acts, cast, listMeta, site } from '../lib/site';
+---
+
+<Base
+  title="Stranger Than Heaven Achievement Tracker and Launch Guide"
+  description="Unofficial Stranger Than Heaven companion: a tracker for all 59 achievements act by act, plus release date, editions, cast and the five cities."
+  path="/"
+>
+  <h1>Stranger Than Heaven: achievement tracker and launch guide</h1>
+  <p class="lede">
+    An unofficial companion for RGG Studio's next game. Tick off all {listMeta.total} achievements act by act, and see
+    what is confirmed about the release, the editions, the cast and the five cities, each with its source.
+  </p>
+
+  <Countdown />
+
+  <dl class="facts">
+    <dt>Release</dt>
+    <dd>{site.release.weekday} 15 January 2027 <Ref ids="sega-0608" /></dd>
+    <dt>Platforms</dt>
+    <dd>PlayStation 5, Xbox Series X|S, Xbox on PC, Xbox Cloud Gaming, Steam</dd>
+    <dt>Game Pass</dt>
+    <dd>Included from day one <Ref ids="xbox-0506" /></dd>
+    <dt>Price</dt>
+    <dd>69.99 US dollars for the Standard Edition <Ref ids="steam" /></dd>
+    <dt>Made by</dt>
+    <dd>RGG Studio, the Like a Dragon team. Published by SEGA</dd>
+    <dt>Setting</dt>
+    <dd>Japan from {acts[0].year} to {acts[acts.length - 1].year}, across five cities</dd>
+  </dl>
+
+  <h2>Start here</h2>
+  <ul class="grid">
+    <li>
+      <a class="card" href="/achievements/">
+        <h3>Achievement tracker</h3>
+        <p>All {listMeta.total}, grouped and filterable, with ticks saved on your device. Hidden names stay hidden unless you ask.</p>
+      </a>
+    </li>
+    <li>
+      <a class="card" href="/acts/">
+        <h3>Act by act</h3>
+        <p>Five acts, five cities. What is confirmed about each, and the short list to finish before you move on.</p>
+      </a>
+    </li>
+    <li>
+      <a class="card" href="/release/">
+        <h3>Release and platforms</h3>
+        <p>The date, Game Pass, the PC version, languages, and what has not been announced yet.</p>
+      </a>
+    </li>
+    <li>
+      <a class="card" href="/editions/">
+        <h3>Editions compared</h3>
+        <p>Standard, Deluxe and Collector's side by side, and what the pre-order weapon needs.</p>
+      </a>
+    </li>
+    <li>
+      <a class="card" href="/cast/">
+        <h3>Cast</h3>
+        <p>All {cast.length} named characters and who plays them, from Yu Shirota to Snoop Dogg.</p>
+      </a>
+    </li>
+    <li>
+      <a class="card" href="/gameplay/">
+        <h3>Gameplay systems</h3>
+        <p>Two-handed combat, the show business loop, and the systems only the achievement list has named.</p>
+      </a>
+    </li>
+    <li>
+      <a class="card" href="/timeline/">
+        <h3>Timeline</h3>
+        <p>Every reveal from Project Century in 2024 to launch.</p>
+      </a>
+    </li>
+    <li>
+      <a class="card" href="/checklist/">
+        <h3>Launch checklist</h3>
+        <p>The handful of decisions worth making before 15 January.</p>
+      </a>
+    </li>
+    <li>
+      <a class="card" href="/like-a-dragon-connection/">
+        <h3>Is it a Yakuza game?</h3>
+        <p>Same studio, same world, separate game. What the developers have said about Kamurocho and the Tojo Clan.</p>
+      </a>
+    </li>
+  </ul>
+
+  <h2>What is confirmed, and what is not</h2>
+  <div class="prose">
+    <ul>
+      <li>
+        <strong>Confirmed by SEGA:</strong> the release date, platforms, editions and their contents, the cast, and the
+        five eras and cities.
+      </li>
+      <li>
+        <strong>Reported, not confirmed:</strong> the achievement list. It surfaced on 8 and 9 September 2026, when
+        achievement data for unreleased games turned out to be readable through Steam. SEGA has not commented, and it
+        could change.
+      </li>
+      <li>
+        <strong>Not announced yet:</strong> unlock times by region, preload dates, PC system requirements, and the price
+        of the separate Deluxe Upgrade.
+      </li>
+    </ul>
+    <p>
+      When something on that last list is announced, the page for it will be updated and the change noted under
+      <a href="/sources/">Sources and updates</a>.
+    </p>
+  </div>
+
+  <h2>Latest changes</h2>
+  <ul>
+    {site.changelog.slice(0, 5).map((entry) => (
+      <li><strong>{entry.date}:</strong> {entry.text}</li>
+    ))}
+  </ul>
+</Base>

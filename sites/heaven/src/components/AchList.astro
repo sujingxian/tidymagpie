@@ -1,0 +1,90 @@
+---
+import { ACH_KEY, ALL_ID, actBy, groups, universe, type Achievement } from '../lib/site';
+
+interface Props {
+  items: Achievement[];
+  /** "full" shows every filter. "act" is the short list on an act page. */
+  mode?: 'full' | 'act';
+}
+
+const { items, mode = 'full' } = Astro.props;
+const sections = groups
+  .map((group) => ({ group, items: items.filter((a) => a.group === group.id) }))
+  .filter((section) => section.items.length > 0);
+const hasHidden = items.some((a) => a.hidden);
+---
+
+<section class="tracker" data-ticklist={ACH_KEY} data-all-id={ALL_ID} data-universe={JSON.stringify(universe)}>
+  <div class="tracker-progress">
+    <progress data-progress max={items.length} value="0" aria-label="Achievements ticked"></progress>
+    <span data-progress-text>0 of {items.length} done</span>
+    {mode === 'act' && <span class="muted">Whole game: <span data-overall-text>0 of {universe.length}</span></span>}
+  </div>
+  <div class="tracker-bar">
+    {mode === 'full' && (
+      <div class="chips" role="group" aria-label="Show a category">
+        <button class="chip" type="button" data-filter-group="all" aria-pressed="true">All</button>
+        {sections.map(({ group }) => (
+          <button class="chip" type="button" data-filter-group={group.id} aria-pressed="false">{group.name}</button>
+        ))}
+      </div>
+    )}
+    <div class="controls">
+      {mode === 'full' && (
+        <label>
+          Act
+          <select data-filter="act">
+            <option value="all">All</option>
+            {[1, 2, 3, 4, 5].map((n) => <option value={String(n)}>Act {n}: {actBy(n).city}, {actBy(n).year}</option>)}
+            <option value="any">Not tied to an act</option>
+          </select>
+        </label>
+      )}
+      {mode === 'full' && <label><input type="checkbox" data-pref="hideDone" /> Hide what I have done</label>}
+      {hasHidden && <label><input type="checkbox" data-pref="reveal" /> Show hidden achievement names</label>}
+      {mode === 'full' && <button class="btn" type="button" data-reset>Clear all ticks</button>}
+    </div>
+    <noscript><p class="small muted">Ticks are saved with JavaScript. Without it, this is a plain list.</p></noscript>
+  </div>
+
+  {sections.map(({ group, items: list }) => (
+    <div data-section>
+      <div class="group-head">
+        <h3>{group.name}</h3>
+        <span class="group-count" data-group-count={group.id}>0/{list.length}</span>
+      </div>
+      {mode === 'full' && <p class="muted small">{group.blurb}</p>}
+      <ul class="ach-list">
+        {list.map((a) => (
+          <li class="ach" data-item={a.id} data-group={a.group} data-act={a.act ?? undefined} data-hidden={a.hidden ? 'true' : undefined}>
+            <label>
+              <input type="checkbox" />
+              <span class="ach-text">
+                <span class="ach-name">
+                  {a.hidden ? (
+                    <>
+                      <span class="name-masked">Hidden story achievement</span>
+                      <span class="name-real">{a.name}</span>
+                    </>
+                  ) : (
+                    a.name
+                  )}
+                </span>
+                <span class="ach-req">{a.req}</span>
+              </span>
+            </label>
+            <span class="ach-tags">
+              {a.act && mode === 'full' && <a class="tag" href={`/acts/${actBy(a.act).slug}/`}>Act {a.act}</a>}
+              {!a.act && a.id !== ALL_ID && mode === 'full' && <span class="tag quiet">Any time</span>}
+              {a.hidden && <span class="tag quiet">Hidden on Steam</span>}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  ))}
+  <p class="muted" data-empty hidden>Nothing matches those filters.</p>
+</section>
+<script>
+  import '../lib/ticks.ts';
+</script>

@@ -1,0 +1,75 @@
+---
+import '../styles/global.css';
+import { site } from '../lib/site';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+}
+
+const { title, description, path } = Astro.props;
+const origin = (Astro.site?.href ?? '').replace(/\/$/, '');
+const canonical = `${origin}${path}`;
+
+const nav = [
+  { href: '/achievements/', label: 'Achievements' },
+  { href: '/acts/', label: 'Acts' },
+  { href: '/release/', label: 'Release' },
+  { href: '/editions/', label: 'Editions' },
+  { href: '/cast/', label: 'Cast' },
+  { href: '/gameplay/', label: 'Gameplay' },
+  { href: '/timeline/', label: 'Timeline' },
+  { href: '/checklist/', label: 'Checklist' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#8c2a1e" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="Tidy Magpie" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/">Tidy Magpie <span>· Stranger Than Heaven</span></a>
+        <nav class="site-nav" aria-label="Main">
+          {nav.map((item) => (
+            <a href={item.href} aria-current={path.startsWith(item.href) ? 'page' : undefined}>{item.label}</a>
+          ))}
+        </nav>
+      </div>
+    </header>
+    <main id="main">
+      <div class="wrap">
+        <slot />
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <nav aria-label="Footer">
+          <a href="/sources/">Sources and updates</a>
+          <a href="/about/">About</a>
+          <a href="/privacy/">Privacy</a>
+        </nav>
+        <p>
+          Unofficial fan site. Not affiliated with or endorsed by SEGA or RGG Studio. Stranger Than Heaven and all related
+          names belong to their owners. No game artwork is used here.
+        </p>
+        <p>Last updated {site.updated}. Pre-release details can change before launch on 15 January 2027.</p>
+      </div>
+    </footer>
+  </body>
+</html>

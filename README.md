@@ -6,6 +6,7 @@ Small reference sites under `tidymagpie.com`. Each site lives in its own folder 
 | --- | --- | --- |
 | `sites/petit` | `petit.tidymagpie.com` | Petit Planet companion: launch info, codes, neighbors, gift finder, birthdays, checklist |
 | `sites/aurora` | `aurora.tidymagpie.com` | Aurora australis go or no-go for Australia and New Zealand: live space weather, cloud and darkness for 36 places |
+| `sites/heaven` | `heaven.tidymagpie.com` | Stranger Than Heaven companion: tracker for all 59 achievements act by act, release, editions, cast, gameplay systems, timeline |
 
 ## Working on a site
 
@@ -24,8 +25,10 @@ Create a Pages project connected to this repository with:
 - Build command: `npm run build`
 - Build output directory: `dist`
 - Custom domain: `<name>.tidymagpie.com`
+- Build watch paths (Settings, Build): include `sites/<name>/*`
 
-After that, every push to `main` that touches the site's folder redeploys it.
+After that, every push to `main` that touches the site's folder redeploys it. Without the watch path, a push
+rebuilds every project, which uses up the monthly build allowance faster.
 
 ## Notes on `sites/aurora`
 
@@ -49,6 +52,25 @@ node scripts/smoke.mjs            # browser check; needs: npm install --no-save 
 
 `scripts/build_locations.py` regenerates the magnetic latitudes (`pip install aacgmv2`). They drift slowly;
 once a year is plenty.
+
+## Notes on `sites/heaven`
+
+Fully static. The tracker keeps its ticks in the visitor's browser (`localStorage`), and nothing is sent anywhere.
+
+- `src/data/achievements.json` is the list itself: 59 entries with group, act, hidden flag and a requirement
+  written in our own words. It comes from a pre-release list that SEGA has not confirmed, so check it against the
+  released game in launch week (15 January 2027) and note any change in `src/data/site.json`.
+- `src/lib/progress.ts` holds the counting and filter rules, `src/lib/ticks.ts` wires them to any list marked
+  with `data-ticklist`. The launch checklist reuses the same script with its own storage key.
+- Hidden story achievement names are masked until the visitor asks to see them.
+
+```bash
+cd sites/heaven
+npm install
+npm test                          # data integrity and the tick-list rules
+npm run build
+node scripts/smoke.mjs            # browser check; needs: npm install --no-save puppeteer-core
+```
 
 ## Data rules
 

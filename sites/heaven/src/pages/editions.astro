@@ -1,0 +1,113 @@
+---
+import Base from '../layouts/Base.astro';
+import Ref from '../components/Ref.astro';
+
+const upgrade = [
+  'An original outfit for Makoto Daito',
+  'A set of 4 weapons',
+  'A set of 4 Skilled Performers, for the show business side of the game',
+  'A set of 3 Stage Production Items',
+  'A Special Promotional Poster',
+  'A Record Player that plays the soundtrack in game',
+  'An Electronic Camera',
+];
+const rows = [
+  { label: 'Format', values: ['Digital and physical', 'Digital', 'Physical only'] },
+  { label: 'Platforms', values: ['PS5, Xbox Series X|S, PC', 'PS5, Xbox Series X|S, PC', 'PS5 and Xbox Series X|S'] },
+  { label: 'US price', values: ['$69.99', '$89.99', '$129.99'] },
+  { label: 'The game', values: [true, true, true] },
+  { label: 'Pre-order weapon, if you pre-order', values: [true, true, true] },
+  { label: 'Deluxe Upgrade items', values: [false, true, 'As a download code'] },
+  { label: 'SteelBook case', values: [false, false, true] },
+  { label: '12-inch vinyl record', values: [false, false, true] },
+  { label: "Collector's box", values: [false, false, true] },
+];
+---
+
+<Base
+  title="Stranger Than Heaven Editions Compared: Standard vs Deluxe"
+  description="Stranger Than Heaven Standard, Deluxe and Collector's editions side by side: prices, Deluxe Upgrade contents, and how the pre-order weapon works."
+  path="/editions/"
+>
+  <h1>Editions compared</h1>
+  <p class="lede">
+    Three editions: Standard at $69.99, Deluxe at $89.99 and a physical Collector's Edition at $129.99. Every one of
+    them includes the same game.
+  </p>
+
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th scope="col"></th><th scope="col">Standard</th><th scope="col">Deluxe</th><th scope="col">Collector's</th></tr>
+      </thead>
+      <tbody>
+        {rows.map((row) => (
+          <tr>
+            <th scope="row">{row.label}</th>
+            {row.values.map((value) => (
+              <td>{value === true ? <span class="yes">Yes</span> : value === false ? <span class="no">No</span> : value}</td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p class="small muted">
+    Prices are US store prices <Ref ids={['steam', 'rpgsite', 'gamestop']} />. Contents are from SEGA's announcement
+    and the US store listings <Ref ids={['sega-0608', 'rpgsite']} />. Checked 17 November 2026.
+  </p>
+
+  <h2>What the Deluxe Upgrade adds</h2>
+  <ul class="prose">
+    {upgrade.map((item) => <li>{item}</li>)}
+  </ul>
+  <div class="prose">
+    <p>
+      All seven are in-game items. None is described as extra story. SEGA also says the Deluxe Upgrade can be bought
+      on its own at any time by anyone who owns the Standard Edition <Ref ids="sega-0608" />, so starting with
+      Standard and upgrading later is an option. Its separate price has not been announced.
+    </p>
+  </div>
+
+  <h2>The pre-order bonus</h2>
+  <div class="prose">
+    <p>
+      Pre-ordering a copy, digital or physical, comes with one weapon: Dosu: Kagekiri. The Collector's Edition
+      carries it as a download code. SEGA's small print matters here <Ref ids="sega-0608" />:
+    </p>
+    <ul>
+      <li>It is not in your hands from the first minute. It unlocks as you advance through the game.</li>
+      <li>You need the latest update installed to use it.</li>
+      <li>SEGA advises confirming that the bonus is available where you pre-order, so check the listing first.</li>
+      <li>SEGA says the contents and timing of the bonus can change without notice.</li>
+    </ul>
+  </div>
+
+  <h2>The Collector's Edition</h2>
+  <div class="prose">
+    <p>
+      A boxed edition with a physical copy of the game, a SteelBook case, a 12-inch vinyl record that includes the
+      main theme, a collector's box, and download codes for the Deluxe Upgrade and the pre-order weapon. In the US it
+      is listed at $129.99 for PlayStation 5 and Xbox Series X <Ref ids="gamestop" />. SEGA says supplies are limited
+      <Ref ids="sega-0608" />.
+    </p>
+    <p>
+      In Japan the boxed edition is for PS5 and costs 18,000 yen. The standard physical edition is 9,900 yen and the
+      standard download 8,990 yen. All three prices include tax <Ref ids="sega-0608" />.
+    </p>
+  </div>
+
+  <h2>Which one?</h2>
+  <div class="prose">
+    <ul>
+      <li><strong>You just want to play:</strong> Standard, or Game Pass if you have it.</li>
+      <li><strong>You want the extras but are not sure:</strong> Standard now. The upgrade is sold separately.</li>
+      <li><strong>You know you want everything digital:</strong> Deluxe.</li>
+      <li><strong>You want the record and the SteelBook:</strong> Collector's, and do not wait, since stock is limited.</li>
+    </ul>
+    <p>
+      Shops sometimes add extras of their own. Prima Games reported a poster with Amazon pre-orders
+      <Ref ids="prima" />. Offers like that vary by country and can end early, so check the listing itself.
+    </p>
+  </div>
+</Base>

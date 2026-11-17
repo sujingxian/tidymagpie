@@ -1,0 +1,645 @@
+{
+ "surfaced": "2026-09-09",
+ "checked": "2026-11-17",
+ "total": 59,
+ "hiddenCount": 13,
+ "groups": [
+  {
+   "id": "completion",
+   "name": "Completion",
+   "blurb": "The one that needs all the others."
+  },
+  {
+   "id": "story",
+   "name": "Main story",
+   "blurb": "One for each chapter and act. Thirteen of these are hidden on Steam until you earn them."
+  },
+  {
+   "id": "substories",
+   "name": "Substories",
+   "blurb": "One per act for finishing every substory in that city."
+  },
+  {
+   "id": "livelihood",
+   "name": "Livelihood missions",
+   "blurb": "Three steps for the number of livelihood missions completed."
+  },
+  {
+   "id": "showbiz",
+   "name": "Show business",
+   "blurb": "A Showbiz story in every act, plus totals for shows, singers and song ideas."
+  },
+  {
+   "id": "combat",
+   "name": "Combat and growth",
+   "blurb": "Enemies defeated, Arts abilities learned, and Health and Willpower levels."
+  },
+  {
+   "id": "weapons",
+   "name": "Weapons and forging",
+   "blurb": "Proficiency, the number of weapon kinds owned, and forging and awakening."
+  },
+  {
+   "id": "underworld",
+   "name": "Act-specific jobs",
+   "blurb": "One activity in each of the first four acts. Each names its act, so each belongs to one city."
+  },
+  {
+   "id": "leisure",
+   "name": "Leisure and collecting",
+   "blurb": "Photos, hand-rolled cigarettes, menko cards and beigoma tops, and minigames."
+  }
+ ],
+ "items": [
+  {
+   "id": "all",
+   "name": "STRANGER THAN HEAVEN",
+   "group": "completion",
+   "act": null,
+   "hidden": false,
+   "req": "Unlock every other achievement.",
+   "target": null,
+   "series": null
+  },
+  {
+   "id": "story-1-1",
+   "name": "Song of the Resurrection",
+   "group": "story",
+   "act": 1,
+   "hidden": true,
+   "req": "Finish Act 1, Chapter 1.",
+   "target": null,
+   "series": null
+  },
+  {
+   "id": "story-1-2",
+   "name": "Man's Heaven",
+   "group": "story",
+   "act": 1,
+   "hidden": true,
+   "req": "Finish Act 1, Chapter 2.",
+   "target": null,
+   "series": null
+  },
+  {
+   "id": "story-1",
+   "name": "Dreamers",
+   "group": "story",
+   "act": 1,
+   "hidden": true,
+   "req": "Finish Act 1.",
+   "target": null,
+   "series": null
+  },
+  {
+   "id": "story-2-1",
+   "name": "The Way of Evil",
+   "group": "story",
+   "act": 2,
+   "hidden": true,
+   "req": "Finish Act 2, Chapter 1.",
+   "target": null,
+   "series": null
+  },
+  {
+   "id": "story-2-2",
+   "name": "The Clown",
+   "group": "story",
+   "act": 2,
+   "hidden": true,
+   "req": "Finish Act 2, Chapter 2.",
+   "target": null,
+   "series": null
+  },
+  {
+   "id": "story-2",
+   "name": "The Road to the Churchyard",
+   "group": "story",
+   "act": 2,
+   "hidden": true,
+   "req": "Finish Act 2.",
+   "target": null,
+   "series": null
+  },
+  {
+   "id": "story-3-1",
+   "name": "The Patriot",
+   "group": "story",
+   "act": 3,
+   "hidden": true,
+   "req": "Finish Act 3, Chapter 1.",
+   "target": null,
+   "series": null
+  },
+  {
+   "id": "story-3-2",
+   "name": "Long Day's Journey into Night",
+   "group": "story",
+   "act": 3,
+   "hidden": true,
+   "req": "Finish Act 3, Chapter 2.",
+   "target": null,
+   "series": null
+  },
+  {
+   "id": "story-3",
+   "name": "A Moon for the Misbegotten",
+   "group": "story",
+   "act": 3,
+   "hidden": true,
+   "req": "Finish Act 3.",
+   "target": null,
+   "series": null
+  },
+  {
+   "id": "story-4-1",
+   "name": "Soldiers' Pay",
+   "group": "story",
+   "act": 4,
+   "hidden": true,
+   "req": "Finish Act 4, Chapter 1.",
+   "target": null,
+   "series": null
+  },
+  {
+   "id": "story-4-2",
+   "name": "Ballads of Spring",
+   "group": "story",
+   "act": 4,
+   "hidden": true,
+   "req": "Finish Act 4, Chapter 2.",
+   "target": null,
+   "series": null
+  },
+  {
+   "id": "story-4",
+   "name": "Sanctuary",
+   "group": "story",
+   "act": 4,
+   "hidden": true,
+   "req": "Finish Act 4.",
+   "target": null,
+   "series": null
+  },
+  {
+   "id": "story-5-1",
+   "name": "A Happy Death",
+   "group": "story",
+   "act": 5,
+   "hidden": true,
+   "req": "Finish Act 5, Chapter 1.",
+   "target": null,
+   "series": null
+  },
+  {
+   "id": "story-final",
+   "name": "Our Time",
+   "group": "story",
+   "act": 5,
+   "hidden": false,
+   "req": "Finish the final chapter.",
+   "target": null,
+   "series": null
+  },
+  {
+   "id": "sub-1",
+   "name": "Fate (Kokura)",
+   "group": "substories",
+   "act": 1,
+   "hidden": false,
+   "req": "Finish every substory in Act 1.",
+   "target": null,
+   "series": null
+  },
+  {
+   "id": "sub-2",
+   "name": "Fate (Kure)",
+   "group": "substories",
+   "act": 2,
+   "hidden": false,
+   "req": "Finish every substory in Act 2.",
+   "target": null,
+   "series": null
+  },
+  {
+   "id": "sub-3",
+   "name": "Fate (Osaka)",
+   "group": "substories",
+   "act": 3,
+   "hidden": false,
+   "req": "Finish every substory in Act 3.",
+   "target": null,
+   "series": null
+  },
+  {
+   "id": "sub-4",
+   "name": "Fate (Atami)",
+   "group": "substories",
+   "act": 4,
+   "hidden": false,
+   "req": "Finish every substory in Act 4.",
+   "target": null,
+   "series": null
+  },
+  {
+   "id": "sub-5",
+   "name": "Fate (Shinjuku)",
+   "group": "substories",
+   "act": 5,
+   "hidden": false,
+   "req": "Finish every substory in Act 5.",
+   "target": null,
+   "series": null
+  },
+  {
+   "id": "live-10",
+   "name": "A Start in Life",
+   "group": "livelihood",
+   "act": null,
+   "hidden": false,
+   "req": "Complete 10 livelihood missions.",
+   "target": 10,
+   "series": "livelihood"
+  },
+  {
+   "id": "live-20",
+   "name": "The Strife of Midlife",
+   "group": "livelihood",
+   "act": null,
+   "hidden": false,
+   "req": "Complete 20 livelihood missions.",
+   "target": 20,
+   "series": "livelihood"
+  },
+  {
+   "id": "live-30",
+   "name": "A Full Life",
+   "group": "livelihood",
+   "act": null,
+   "hidden": false,
+   "req": "Complete 30 livelihood missions.",
+   "target": 30,
+   "series": "livelihood"
+  },
+  {
+   "id": "show-1",
+   "name": "And Should I Sing of Love",
+   "group": "showbiz",
+   "act": 1,
+   "hidden": false,
+   "req": "Finish the Showbiz story in Act 1.",
+   "target": null,
+   "series": null
+  },
+  {
+   "id": "show-2",
+   "name": "A Glimmer of You",
+   "group": "showbiz",
+   "act": 2,
+   "hidden": false,
+   "req": "Finish the Showbiz story in Act 2.",
+   "target": null,
+   "series": null
+  },
+  {
+   "id": "show-3",
+   "name": "Bravely We Go",
+   "group": "showbiz",
+   "act": 3,
+   "hidden": false,
+   "req": "Finish the Showbiz story in Act 3.",
+   "target": null,
+   "series": null
+  },
+  {
+   "id": "show-4",
+   "name": "All Too Soon",
+   "group": "showbiz",
+   "act": 4,
+   "hidden": false,
+   "req": "Finish the Showbiz story in Act 4.",
+   "target": null,
+   "series": null
+  },
+  {
+   "id": "show-5",
+   "name": "Breakin' Loose Boogie",
+   "group": "showbiz",
+   "act": 5,
+   "hidden": false,
+   "req": "Finish the Showbiz story in Act 5.",
+   "target": null,
+   "series": null
+  },
+  {
+   "id": "shows-10",
+   "name": "A Rookie Showman",
+   "group": "showbiz",
+   "act": null,
+   "hidden": false,
+   "req": "Put on 10 shows.",
+   "target": 10,
+   "series": "shows"
+  },
+  {
+   "id": "shows-30",
+   "name": "A Professional Showman",
+   "group": "showbiz",
+   "act": null,
+   "hidden": false,
+   "req": "Put on 30 shows.",
+   "target": 30,
+   "series": "shows"
+  },
+  {
+   "id": "shows-50",
+   "name": "A Legendary Showman",
+   "group": "showbiz",
+   "act": null,
+   "hidden": false,
+   "req": "Put on 50 shows.",
+   "target": 50,
+   "series": "shows"
+  },
+  {
+   "id": "singers-10",
+   "name": "All the Rage",
+   "group": "showbiz",
+   "act": null,
+   "hidden": false,
+   "req": "Put on shows with 10 different singers.",
+   "target": 10,
+   "series": null
+  },
+  {
+   "id": "ideas-50",
+   "name": "Listen Closely",
+   "group": "showbiz",
+   "act": null,
+   "hidden": false,
+   "req": "Collect 50 ideas.",
+   "target": 50,
+   "series": null
+  },
+  {
+   "id": "kills-100",
+   "name": "Killer",
+   "group": "combat",
+   "act": null,
+   "hidden": false,
+   "req": "Defeat 100 enemies.",
+   "target": 100,
+   "series": "kills"
+  },
+  {
+   "id": "kills-300",
+   "name": "Slayer",
+   "group": "combat",
+   "act": null,
+   "hidden": false,
+   "req": "Defeat 300 enemies.",
+   "target": 300,
+   "series": "kills"
+  },
+  {
+   "id": "kills-1000",
+   "name": "Makoto the Knife",
+   "group": "combat",
+   "act": null,
+   "hidden": false,
+   "req": "Defeat 1,000 enemies.",
+   "target": 1000,
+   "series": "kills"
+  },
+  {
+   "id": "arts-10",
+   "name": "Jack of All Trades",
+   "group": "combat",
+   "act": null,
+   "hidden": false,
+   "req": "Learn 10 Arts abilities.",
+   "target": 10,
+   "series": "arts"
+  },
+  {
+   "id": "arts-30",
+   "name": "A Master of Some",
+   "group": "combat",
+   "act": null,
+   "hidden": false,
+   "req": "Learn 30 Arts abilities.",
+   "target": 30,
+   "series": "arts"
+  },
+  {
+   "id": "arts-70",
+   "name": "A Master of All",
+   "group": "combat",
+   "act": null,
+   "hidden": false,
+   "req": "Learn 70 Arts abilities.",
+   "target": 70,
+   "series": "arts"
+  },
+  {
+   "id": "stats-10",
+   "name": "The Path to Strength",
+   "group": "combat",
+   "act": null,
+   "hidden": false,
+   "req": "Raise both Health and Willpower to level 10.",
+   "target": 10,
+   "series": "stats"
+  },
+  {
+   "id": "stats-30",
+   "name": "A Man to Be Feared",
+   "group": "combat",
+   "act": null,
+   "hidden": false,
+   "req": "Raise both Health and Willpower to level 30.",
+   "target": 30,
+   "series": "stats"
+  },
+  {
+   "id": "stats-50",
+   "name": "Peerless Strength",
+   "group": "combat",
+   "act": null,
+   "hidden": false,
+   "req": "Raise both Health and Willpower to level 50.",
+   "target": 50,
+   "series": "stats"
+  },
+  {
+   "id": "prof-weapon",
+   "name": "Master of Techniques",
+   "group": "weapons",
+   "act": null,
+   "hidden": false,
+   "req": "Raise proficiency with any one weapon to level 10.",
+   "target": 10,
+   "series": null
+  },
+  {
+   "id": "prof-fists",
+   "name": "Fists Reign Supreme",
+   "group": "weapons",
+   "act": null,
+   "hidden": false,
+   "req": "Raise barehanded proficiency to level 10.",
+   "target": 10,
+   "series": null
+  },
+  {
+   "id": "kinds-50",
+   "name": "Weapon Fixation",
+   "group": "weapons",
+   "act": null,
+   "hidden": false,
+   "req": "Own 50 kinds of weapon.",
+   "target": 50,
+   "series": "kinds"
+  },
+  {
+   "id": "kinds-100",
+   "name": "Basically an Arms Dealer",
+   "group": "weapons",
+   "act": null,
+   "hidden": false,
+   "req": "Own 100 kinds of weapon.",
+   "target": 100,
+   "series": "kinds"
+  },
+  {
+   "id": "forge-10",
+   "name": "Art of the Forge",
+   "group": "weapons",
+   "act": null,
+   "hidden": false,
+   "req": "Forge weapons 10 times.",
+   "target": 10,
+   "series": "forge"
+  },
+  {
+   "id": "forge-30",
+   "name": "Master of the Craft",
+   "group": "weapons",
+   "act": null,
+   "hidden": false,
+   "req": "Forge weapons 30 times.",
+   "target": 30,
+   "series": "forge"
+  },
+  {
+   "id": "awaken-1",
+   "name": "Rise & Shine",
+   "group": "weapons",
+   "act": null,
+   "hidden": false,
+   "req": "Awaken a weapon for the first time.",
+   "target": null,
+   "series": null
+  },
+  {
+   "id": "awaken-max",
+   "name": "Beloved Masterpiece",
+   "group": "weapons",
+   "act": null,
+   "hidden": false,
+   "req": "Forge and awaken one weapon as far as it will go.",
+   "target": null,
+   "series": null
+  },
+  {
+   "id": "job-1",
+   "name": "Warehouse Warrior",
+   "group": "underworld",
+   "act": 1,
+   "hidden": false,
+   "req": "Clear every warehouse security mission in Act 1.",
+   "target": null,
+   "series": null
+  },
+  {
+   "id": "job-2",
+   "name": "Boisterous Brawler",
+   "group": "underworld",
+   "act": 2,
+   "hidden": false,
+   "req": "Beat all 10 street-fighting opponents in Act 2.",
+   "target": 10,
+   "series": null
+  },
+  {
+   "id": "job-3",
+   "name": "Sovereign of the Shadows",
+   "group": "underworld",
+   "act": 3,
+   "hidden": false,
+   "req": "Invest fully in all 3 black markets in Act 3.",
+   "target": 3,
+   "series": null
+  },
+  {
+   "id": "job-4",
+   "name": "King of the Ring",
+   "group": "underworld",
+   "act": 4,
+   "hidden": false,
+   "req": "Win every underground fight match in Act 4.",
+   "target": null,
+   "series": null
+  },
+  {
+   "id": "photos-20",
+   "name": "Leisure Lover",
+   "group": "leisure",
+   "act": null,
+   "hidden": false,
+   "req": "Develop 20 photos taken with your camera.",
+   "target": 20,
+   "series": null
+  },
+  {
+   "id": "smokes-20",
+   "name": "…If You Got 'Em",
+   "group": "leisure",
+   "act": null,
+   "hidden": false,
+   "req": "Smoke 20 cigarettes you rolled yourself.",
+   "target": 20,
+   "series": null
+  },
+  {
+   "id": "collect-30",
+   "name": "A Knick-Knack for Collecting",
+   "group": "leisure",
+   "act": null,
+   "hidden": false,
+   "req": "Collect 30 menko cards and beigoma tops in total.",
+   "target": 30,
+   "series": "collect"
+  },
+  {
+   "id": "collect-70",
+   "name": "Top-Shelf Collector",
+   "group": "leisure",
+   "act": null,
+   "hidden": false,
+   "req": "Collect 70 menko cards and beigoma tops in total.",
+   "target": 70,
+   "series": "collect"
+  },
+  {
+   "id": "minigames-10",
+   "name": "Adult Entertainment",
+   "group": "leisure",
+   "act": null,
+   "hidden": false,
+   "req": "Play 10 different minigames.",
+   "target": 10,
+   "series": null
+  }
+ ]
+}
