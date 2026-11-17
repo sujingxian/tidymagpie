@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { BRAND, REPO, sites } from '../lib/site';
+import { BRAND, sites } from '../lib/site';
 ---
 
 <Base
@@ -42,7 +42,6 @@ import { BRAND, REPO, sites } from '../lib/site';
           and what gets published.
         </li>
         <li>They are plain static pages. There are no accounts, and progress you save stays in your browser.</li>
-        <li>The code and data are public on <a href={REPO}>GitHub</a>.</li>
       </ul>
       <p>The rules for sourcing and checking are set out in <a href="/how-we-work/">How we work</a>.</p>
 
@@ -51,9 +50,6 @@ import { BRAND, REPO, sites } from '../lib/site';
         {BRAND} is not affiliated with, sponsored by or endorsed by the companies and agencies whose games and data its
         sites cover. Game names and other trademarks belong to their owners.
       </p>
-
-      <h2>Get in touch</h2>
-      <p>Corrections and questions are welcome. The <a href="/contact/">contact page</a> says how.</p>
     </div>
   </section>
 </Base>
