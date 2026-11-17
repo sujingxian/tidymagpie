@@ -27,10 +27,11 @@ Create a Pages project connected to this repository with:
 - Build command: `npm run build`
 - Build output directory: `dist`
 - Custom domain: `<name>.tidymagpie.com` (for `sites/home`: `tidymagpie.com` and `www.tidymagpie.com`)
-- Build watch paths (Settings, Build): include `sites/<name>/*`
+- Build watch paths (Settings, Build): leave the include path at `*`
 
-After that, every push to `main` that touches the site's folder redeploys it. Without the watch path, a push
-rebuilds every project, which uses up the monthly build allowance faster.
+Every push to `main` then rebuilds every project. The projects share one monthly build allowance, so group
+changes into one push. Each build reports to GitHub as a check run named `Cloudflare Pages: <project>`; a commit
+with fewer check runs than projects means a build was skipped, and an empty commit starts it again.
 
 ## Opening a new site
 
@@ -100,6 +101,18 @@ node scripts/smoke.mjs            # browser check; needs: npm install --no-save 
 
 Every site gives the same public mailbox, `hello@tidymagpie.com`, and nothing else: no other email address and no
 link to this repository. `npm test` in `sites/home` scans all site folders and fails if either appears.
+
+## AdSense account
+
+The domain is registered with Google AdSense, which treats `tidymagpie.com` and its subdomains as one site. Two
+things identify the account, both in `sites/home`:
+
+- the `google-adsense-account` meta tag in the page head (`ADSENSE_ACCOUNT` in `src/lib/site.ts`)
+- `public/ads.txt`, served at `tidymagpie.com/ads.txt`
+
+`npm test` in `sites/home` fails if the two disagree. Neither loads a script, so no page carries ad code. Ad code
+changes what a page does in the visitor's browser, so the privacy page of any site that gets it has to be
+rewritten in the same commit.
 
 ## Privacy pages
 

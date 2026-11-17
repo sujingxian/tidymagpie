@@ -2,7 +2,7 @@
 import '@fontsource-variable/archivo/wdth.css';
 import archivoLatin from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url';
 import '../styles/global.css';
-import { BRAND, ORIGIN, sites, updated, longDate } from '../lib/site';
+import { ADSENSE_ACCOUNT, BRAND, ORIGIN, sites, updated, longDate } from '../lib/site';
 
 interface Props {
   title: string;
@@ -29,6 +29,7 @@ const nav = [
     <meta name="theme-color" content="#edf2ee" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="google-adsense-account" content={ADSENSE_ACCOUNT} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preload" href={archivoLatin} as="font" type="font/woff2" crossorigin />

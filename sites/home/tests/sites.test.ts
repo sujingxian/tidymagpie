@@ -51,6 +51,15 @@ test('helpers', () => {
   assert.equal(host('https://petit.tidymagpie.com/'), 'petit.tidymagpie.com');
 });
 
+test('the AdSense account in the page head is the one ads.txt authorises', () => {
+  const account = readFileSync(here('../src/lib/site.ts'), 'utf8').match(/ADSENSE_ACCOUNT = '(ca-pub-\d{16})'/)?.[1];
+  assert.ok(account, 'ADSENSE_ACCOUNT should be ca-pub- followed by 16 digits');
+  const layout = readFileSync(here('../src/layouts/Base.astro'), 'utf8');
+  assert.ok(layout.includes('<meta name="google-adsense-account" content={ADSENSE_ACCOUNT} />'), 'the layout lost the account tag');
+  const entries = readFileSync(here('../public/ads.txt'), 'utf8').split('\n').filter((line) => line.trim() !== '');
+  assert.deepEqual(entries, [`google.com, ${account.slice('ca-'.length)}, DIRECT, f08c47fec0942fa0`]);
+});
+
 // Every site shares one public mailbox. Nothing else that identifies a person or an account belongs in the pages:
 // no other email address, and no link to a code repository apart from the open-source projects the sites credit.
 const MAILBOX = 'hello@tidymagpie.com';
