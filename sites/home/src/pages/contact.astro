@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+import { CONTACT, sites } from '../lib/site';
+---
+
+<Base
+  title="Contact Tidy Magpie"
+  description="How to report a mistake on a Tidy Magpie site or ask a question, and what to include so it can be fixed quickly."
+  path="/contact/"
+>
+  <section class="page">
+    <h1>Contact</h1>
+    <p class="lede">The most useful message is a correction. If something on one of the sites is wrong, we want to know.</p>
+
+    <div class="prose">
+      <h2>Report a mistake or ask a question</h2>
+      <p>Email <a href={`mailto:${CONTACT}`}>{CONTACT}</a>.</p>
+      <p>It helps to include:</p>
+      <ul>
+        <li>which site and which page;</li>
+        <li>what is wrong, or what you expected to see;</li>
+        <li>a link to a source, if you have one.</li>
+      </ul>
+      <p>
+        A correction is checked against its source. If it holds up, it is fixed in the site's data and noted in the
+        update log on that site's Sources page. Not every message gets a personal reply.
+      </p>
+
+      <h2>Which site is it about?</h2>
+      <ul>
+        {sites.map((s) => (
+          <li><a href={s.url}>{s.name}</a></li>
+        ))}
+      </ul>
+      <p>For how facts are sourced and checked in the first place, see <a href="/how-we-work/">How we work</a>.</p>
+    </div>
+  </section>
+</Base>

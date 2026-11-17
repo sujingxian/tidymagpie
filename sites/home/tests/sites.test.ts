@@ -1,6 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { extname, join, relative } from 'node:path';
 import { host, longDate } from '../src/lib/format.ts';
 
 const here = (path: string) => new URL(path, import.meta.url);
@@ -47,4 +49,41 @@ test('helpers', () => {
   assert.equal(longDate('2026-11-17'), '17 November 2026');
   assert.equal(longDate('2027-01-05'), '5 January 2027');
   assert.equal(host('https://petit.tidymagpie.com/'), 'petit.tidymagpie.com');
+});
+
+// Every site shares one public mailbox. Nothing else that identifies a person or an account belongs in the pages:
+// no other email address, and no link to a code repository apart from the open-source projects the sites credit.
+const MAILBOX = 'hello@tidymagpie.com';
+const CREDITED_REPOSITORIES = ['aburrell/aacgmv2', 'mourner/suncalc'];
+const SKIP_DIRS = new Set(['node_modules', 'dist', '.astro', '.wrangler']);
+const TEXT = new Set(['.astro', '.ts', '.js', '.mjs', '.json', '.css', '.md', '.txt', '.svg', '.py', '.html']);
+
+function textFiles(dir: string): string[] {
+  return readdirSync(dir).flatMap((name) => {
+    const full = join(dir, name);
+    if (statSync(full).isDirectory()) return SKIP_DIRS.has(name) ? [] : textFiles(full);
+    return TEXT.has(extname(name)) && name !== 'package-lock.json' ? [full] : [];
+  });
+}
+
+test('one shared mailbox, and no other address or repository link anywhere on the sites', () => {
+  const root = fileURLToPath(here('../../'));
+  const files = textFiles(root);
+  assert.ok(files.length > 100, 'expected to scan every site folder');
+  let mailboxSeen = 0;
+  for (const file of files) {
+    const text = readFileSync(file, 'utf8');
+    const where = relative(root, file);
+    for (const [address] of text.matchAll(/[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,}/g)) {
+      // Calendar entries carry ids shaped like addresses on a site's own subdomain. No mailbox exists there.
+      if (/@[a-z]+\.tidymagpie\.com$/.test(address)) continue;
+      assert.equal(address, MAILBOX, `${where} contains the address ${address}`);
+      mailboxSeen++;
+    }
+    for (const [, repository] of text.matchAll(/github\.com\/([\w.-]+\/[\w.-]+)/g)) {
+      assert.ok(CREDITED_REPOSITORIES.includes(repository), `${where} links to github.com/${repository}`);
+    }
+  }
+  assert.ok(mailboxSeen >= sites.length + 1, 'each site and the homepage should give the mailbox');
+  assert.ok(readFileSync(here('../src/lib/site.ts'), 'utf8').includes(`'${MAILBOX}'`));
 });

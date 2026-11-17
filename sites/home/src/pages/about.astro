@@ -1,6 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
-import { BRAND, sites } from '../lib/site';
+import { BRAND, CONTACT, sites } from '../lib/site';
 ---
 
 <Base
@@ -49,6 +49,12 @@ import { BRAND, sites } from '../lib/site';
       <p>
         {BRAND} is not affiliated with, sponsored by or endorsed by the companies and agencies whose games and data its
         sites cover. Game names and other trademarks belong to their owners.
+      </p>
+
+      <h2>Get in touch</h2>
+      <p>
+        Corrections and questions are welcome at <a href={`mailto:${CONTACT}`}>{CONTACT}</a>. The
+        <a href="/contact/">contact page</a> says what helps.
       </p>
     </div>
   </section>

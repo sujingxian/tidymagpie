@@ -5,7 +5,7 @@ The brand homepage at the root domain lists them.
 
 | Folder | Address | What it is |
 | --- | --- | --- |
-| `sites/home` | `tidymagpie.com` | Brand homepage: the directory of sites, how we work, about, privacy |
+| `sites/home` | `tidymagpie.com` | Brand homepage: the directory of sites, how we work, about, contact, privacy |
 | `sites/petit` | `petit.tidymagpie.com` | Petit Planet companion: launch info, codes, neighbors, gift finder, birthdays, checklist |
 | `sites/aurora` | `aurora.tidymagpie.com` | Aurora australis go or no-go for Australia and New Zealand: live space weather, cloud and darkness for 36 places |
 | `sites/heaven` | `heaven.tidymagpie.com` | Stranger Than Heaven companion: tracker for all 59 achievements act by act, release, editions, cast, gameplay systems, timeline |
@@ -95,6 +95,11 @@ npm test                          # data integrity and the tick-list rules
 npm run build
 node scripts/smoke.mjs            # browser check; needs: npm install --no-save puppeteer-core
 ```
+
+## Contact address
+
+Every site gives the same public mailbox, `hello@tidymagpie.com`, and nothing else: no other email address and no
+link to this repository. `npm test` in `sites/home` scans all site folders and fails if either appears.
 
 ## Data rules
 
