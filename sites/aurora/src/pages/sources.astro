@@ -1,0 +1,90 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../lib/site';
+---
+
+<Base
+  title="Sources and Updates: Aurora Go/No-Go"
+  description="Every data source behind the aurora go or no-go, what each one is used for, the licences they come under, and a log of changes to the site."
+  path="/sources/"
+>
+  <h1>Sources and updates</h1>
+  <p class="lede">Where each number comes from, what it is used for, and what has changed on the site.</p>
+
+  <h2>Sources</h2>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th scope="col">Source</th><th scope="col">Used for</th><th scope="col">Checked</th></tr>
+      </thead>
+      <tbody>
+        {site.sources.map((source) => (
+          <tr>
+            <td><a href={source.url}>{source.name}</a></td>
+            <td>{source.use}</td>
+            <td style="white-space:nowrap">{source.checked}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Licences and credit</h2>
+  <div class="prose">
+    <ul>
+      <li>
+        Space weather data is from the NOAA Space Weather Prediction Center, a United States government service. This
+        site is not affiliated with or endorsed by NOAA.
+      </li>
+      <li>
+        Cloud forecasts are from MET Norway's Locationforecast service, licensed under
+        <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0</a>. The cloud
+        percentages are shown as supplied, rounded to whole numbers. The go or no-go built on them is this site's own
+        work and is not endorsed by MET Norway.
+      </li>
+      <li>
+        The Bureau of Meteorology's visibility table is quoted as an independent check. This site is not affiliated
+        with the Bureau.
+      </li>
+      <li>
+        Sun and moon calculations use SunCalc, copyright © 2014 Vladimir Agafonkin, under the BSD 2-Clause licence.
+      </li>
+    </ul>
+    <details>
+      <summary>SunCalc licence text</summary>
+      <p class="small">
+        Copyright (c) 2014, Vladimir Agafonkin. All rights reserved. Redistribution and use in source and binary forms,
+        with or without modification, are permitted provided that the following conditions are met: 1. Redistributions
+        of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+        2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
+        following disclaimer in the documentation and/or other materials provided with the distribution.
+      </p>
+      <p class="small">
+        THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED
+        WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+        PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY
+        DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+        PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+        CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+        OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+        DAMAGE.
+      </p>
+    </details>
+  </div>
+
+  <h2>What is this site's own work</h2>
+  <div class="prose">
+    <p>
+      The rule that turns those inputs into go, maybe or no-go, the cloud cut-offs, the choice of which Kp counts as
+      "enough" for each place, and the magnetic latitudes computed for each place. They are explained on
+      <a href="/how-it-works/">How it works</a> so you can judge them for yourself.
+    </p>
+  </div>
+
+  <h2>Updates</h2>
+  <ul>
+    {site.changelog.map((entry) => (
+      <li><strong>{entry.date}:</strong> {entry.text}</li>
+    ))}
+  </ul>
+</Base>

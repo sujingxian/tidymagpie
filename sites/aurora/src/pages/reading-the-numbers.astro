@@ -1,0 +1,92 @@
+---
+import Base from '../layouts/Base.astro';
+import SpacePanel from '../components/SpacePanel.astro';
+---
+
+<Base
+  title="Kp, Bz, Solar Wind and Aurora Power: Reading the Numbers"
+  description="What Kp, Bz, solar wind speed and hemispheric power mean for seeing the aurora australis, which ones matter most, and how to read them in a minute."
+  path="/reading-the-numbers/"
+>
+  <h1>Reading the numbers</h1>
+  <p class="lede">
+    Four readings do most of the work. Here is what each one is, which way is good, and how much weight to give it.
+  </p>
+
+  <SpacePanel />
+
+  <h2>Kp: how big is the storm?</h2>
+  <div class="prose">
+    <p>
+      Kp is a planet-wide index of geomagnetic activity that runs from 0 to 9. The higher it goes, the wider the ring
+      of aurora around each magnetic pole becomes, and the further north the southern lights reach. NOAA names the top
+      levels on its G scale: Kp 5 is a G1 minor storm, Kp 7 a G3 strong storm, and Kp 9 a G5 extreme storm. Below
+      that, NOAA calls Kp 0 to 2 quiet, Kp 3 unsettled and Kp 4 active.
+    </p>
+    <p>
+      Kp is the number to compare against <a href="/kp-needed/">what your place needs</a>. Two cautions. It is an
+      average over three hours, so it lags a sudden burst. And the forecast Kp is NOAA's best estimate: storms can
+      arrive early, late, stronger or weaker than expected.
+    </p>
+  </div>
+
+  <h2>Bz: is the door open?</h2>
+  <div class="prose">
+    <p>
+      The solar wind carries a magnetic field. Bz is its north-south part, measured in nanotesla (nT). When Bz is
+      negative, the field points south, opposite to Earth's own field, and energy from the solar wind gets in. When it
+      is positive, most of that energy is turned away.
+    </p>
+    <p>
+      So negative is good, and what matters is how far and for how long. A dip to minus 3 for five minutes changes
+      little. Minus 10 held for half an hour is what aurora chasers wait for. The small chart shows the last hour, and
+      the note beside the reading counts how many of the last 30 minutes were southward.
+    </p>
+  </div>
+
+  <h2>Solar wind speed: how hard is it blowing?</h2>
+  <div class="prose">
+    <p>
+      Speed is how fast the solar wind is passing the measuring spacecraft, in kilometres per second. This site labels
+      under 400 slow, 400 to 500 average, 500 to 700 fast and above 700 very fast. Faster wind delivers more energy
+      when Bz is south.
+    </p>
+    <p>
+      The spacecraft sit about 1.5 million km towards the Sun, so what they measure has not reached Earth yet. NOAA
+      puts the delay at under 30 minutes for a very fast wind near 800 km/s, and around an hour for an average one.
+      The panel shows NOAA's own arrival estimate for the latest reading. That delay is your warning time.
+    </p>
+    <p>Density, the number of particles per cubic centimetre, is shown beside the speed for reference. The verdict does not use it.</p>
+  </div>
+
+  <h2>Aurora power: how much is arriving?</h2>
+  <div class="prose">
+    <p>
+      NOAA's OVATION model turns the solar wind readings into an estimate of the total energy pouring into the aurora
+      over each hemisphere, in gigawatts (GW), for a time 30 to 90 minutes ahead. The figure here is for the southern
+      hemisphere.
+    </p>
+    <p>
+      A widely used guide to the scale: below about 20 GW there is little or nothing to see, from 20 to 50 GW you need
+      to be close to the aurora, and above 50 GW there is plenty of activity. Readings of 100 GW or more go with major
+      storms. It measures the whole ring, not your patch of sky, so it tells you the aurora is strong, not that it has
+      reached you.
+    </p>
+  </div>
+
+  <h2>Which to trust when they disagree</h2>
+  <div class="prose">
+    <ul>
+      <li><strong>Planning tonight:</strong> the forecast Kp for the dark hours, against what your place needs.</li>
+      <li><strong>About to leave:</strong> the live Kp. If it is short of the forecast, believe the live value.</li>
+      <li>
+        <strong>Standing in the dark:</strong> Bz and speed. A strongly southward Bz with fast wind means things are
+        likely to pick up within the hour, even if Kp has not moved yet. Bz swinging north means a lull.
+      </li>
+    </ul>
+    <p>
+      Then there is the part that has nothing to do with space: cloud, darkness and the moon. Each place page checks
+      those hour by hour. <a href="/how-it-works/">How the go or no-go is put together</a>.
+    </p>
+  </div>
+</Base>

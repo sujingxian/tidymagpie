@@ -1,0 +1,116 @@
+---
+import Base from '../layouts/Base.astro';
+import LiveScript from '../components/LiveScript.astro';
+import NightTable from '../components/NightTable.astro';
+import SpacePanel from '../components/SpacePanel.astro';
+import { featured, inRegion, kpOrBeyond, kpSpread, regions, site } from '../lib/site';
+
+const regionCards = regions.map((region) => {
+  const places = inRegion(region.slug);
+  const spread = kpSpread(places);
+  const needs =
+    spread.min === null
+      ? 'Beyond Kp 9'
+      : spread.min === spread.max && spread.beyond === 0
+        ? `Needs about Kp ${spread.min}`
+        : `Needs Kp ${spread.min} to ${spread.beyond ? 'beyond 9' : spread.max}`;
+  return { region, places, needs };
+});
+---
+
+<Base
+  title="Aurora Australis Tonight: Go or No-Go for Australia and NZ"
+  description="Live southern lights check for Australia and New Zealand. NOAA space weather plus tonight's cloud and darkness at your place, turned into a plain go or no-go."
+  path="/"
+>
+  <h1>Aurora australis tonight: go or no-go?</h1>
+  <p class="lede">
+    A live southern lights check for Australia and New Zealand. It weighs NOAA's space weather against tonight's cloud
+    and darkness at each place, then gives a plain answer: go, maybe, or no-go.
+  </p>
+
+  <div class="jump">
+    <label for="jump">Your place</label>
+    <select id="jump" data-aurora="jump">
+      <option value="">Choose a place…</option>
+      {regionCards.map(({ region, places }) => (
+        <optgroup label={region.name}>
+          {places.map((l) => (
+            <option value={`/forecast/${l.slug}/`}>{l.name}</option>
+          ))}
+        </optgroup>
+      ))}
+    </select>
+    <a class="btn quiet" href="/my-location/">Use my location</a>
+  </div>
+
+  <h2>Tonight at a glance</h2>
+  <NightTable places={featured} showArea />
+
+  <h2>Space weather right now</h2>
+  <SpacePanel />
+  <p class="small muted">
+    New to these? <a href="/reading-the-numbers/">What Kp, Bz, solar wind speed and aurora power mean</a>.
+  </p>
+
+  <h2>How the answer is worked out</h2>
+  <ul class="grid">
+    <li class="card">
+      <h3>1. Is there enough activity?</h3>
+      <p>
+        Every place needs a certain Kp before the aurora comes within range. Hobart needs about Kp {featured.find((l) => l.slug === 'hobart')?.kpVisible};
+        Melbourne needs about Kp {featured.find((l) => l.slug === 'melbourne')?.kpVisible}.
+      </p>
+    </li>
+    <li class="card">
+      <h3>2. Is the sky clear?</h3>
+      <p>Hourly cloud cover for the place itself. Up to 30% counts as clear. Over 70% hides the show.</p>
+    </li>
+    <li class="card">
+      <h3>3. Is it dark?</h3>
+      <p>Only the hours when the sun is at least 18 degrees below the horizon are judged. The moon is noted too.</p>
+    </li>
+  </ul>
+  <p>
+    All three have to line up for a go. The full rules, the sources behind each number and the limits of the method are
+    on <a href="/how-it-works/">How it works</a>.
+  </p>
+
+  <h2>The next 27 days</h2>
+  <p class="muted">
+    The largest Kp NOAA expects on each day. Green outline is Kp 5 or more, which is storm level. Amber is Kp 4. Open a
+    place to see the same days judged against what that place needs.
+  </p>
+  <div data-aurora="outlook">
+    <ol class="outlook" data-slot="outlook">
+      <li class="muted">Loading…</li>
+    </ol>
+    <p class="small muted" data-slot="outlook-note"></p>
+  </div>
+
+  <h2>Browse by region</h2>
+  <ul class="grid">
+    {regionCards.map(({ region, places, needs }) => (
+      <li>
+        <a class="card" href={`/forecast/${region.slug}/`}>
+          <h3>{region.name}</h3>
+          <p>{places.length} places. {needs}.</p>
+        </a>
+      </li>
+    ))}
+  </ul>
+  <p>
+    Not on the list? <a href="/my-location/">Check your own coordinates</a>, or see
+    <a href="/kp-needed/">the Kp every place needs</a> ({kpOrBeyond(featured.find((l) => l.slug === 'brisbane')?.kpVisible ?? null)} for
+    Brisbane, for the curious).
+  </p>
+
+  <h2>Official alerts</h2>
+  <p class="prose">
+    This site is a rule-of-thumb guide. In Australia, the Bureau of Meteorology issues the official
+    <a href="https://www.sws.bom.gov.au/Aurora">Aurora Watch and Aurora Alert notices</a>: a Watch when conditions look
+    favourable in the next one to three days, an Alert when an aurora is likely to be visible now.
+  </p>
+  <p class="small muted">Site last updated {site.updated}.</p>
+  <LiveScript />
+</Base>

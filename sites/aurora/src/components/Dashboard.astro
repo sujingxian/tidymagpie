@@ -1,0 +1,94 @@
+---
+import LiveScript from './LiveScript.astro';
+
+interface Props {
+  place?: Record<string, unknown>;
+  hidden?: boolean;
+}
+
+const { place, hidden = false } = Astro.props;
+---
+
+<section class="dash" data-aurora="place" data-place={place ? JSON.stringify(place) : undefined} hidden={hidden}>
+  <div class="verdict" data-slot="verdict" data-verdict="loading" role="status" aria-live="polite">
+    <p class="verdict-kicker" data-slot="kicker">Checking live data</p>
+    <p class="verdict-word" data-slot="word">Loading…</p>
+    <p class="verdict-why" data-slot="why">Fetching space weather from NOAA and tonight's cloud forecast.</p>
+    <p class="verdict-next" data-slot="next" hidden></p>
+    <ul class="verdict-notes" data-slot="notes" hidden></ul>
+  </div>
+
+  <div class="checks">
+    <div class="check">
+      <h3>Activity</h3>
+      <p class="check-main" data-slot="activity-main">…</p>
+      <p class="check-sub" data-slot="activity-sub"></p>
+    </div>
+    <div class="check">
+      <h3>Sky</h3>
+      <p class="check-main" data-slot="sky-main">…</p>
+      <p class="check-sub" data-slot="sky-sub"></p>
+    </div>
+    <div class="check">
+      <h3>Darkness and moon</h3>
+      <p class="check-main" data-slot="dark-main">…</p>
+      <p class="check-sub" data-slot="dark-sub"></p>
+    </div>
+  </div>
+  <p class="small muted stamp" data-slot="stamp"></p>
+  <noscript>
+    <p class="notice">
+      The live check needs JavaScript, because it loads NOAA's readings as you open the page. The facts further down
+      the page work without it.
+    </p>
+  </noscript>
+
+  <h2>Tonight, hour by hour</h2>
+  <p class="muted">
+    Dark hours only. Kp is NOAA's forecast for each three-hour block, except the present hour, which uses the live
+    value.
+  </p>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th scope="col">Time</th><th scope="col">Kp</th><th scope="col">Cloud</th><th scope="col">Moon</th><th scope="col">Verdict</th></tr>
+      </thead>
+      <tbody data-slot="hours">
+        <tr><td colspan="5" class="muted">Loading…</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Next nights</h2>
+  <div class="table-scroll">
+    <table class="night-table" role="table">
+      <thead role="rowgroup">
+        <tr role="row">
+          <th scope="col" role="columnheader">Night</th>
+          <th scope="col" role="columnheader">Peak Kp</th>
+          <th scope="col" role="columnheader">Cloud</th>
+          <th scope="col" role="columnheader">Verdict</th>
+        </tr>
+      </thead>
+      <tbody role="rowgroup" data-slot="nights">
+        <tr><td colspan="4" class="muted">Loading…</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="small muted">
+    NOAA forecasts Kp in three-hour blocks for about three days. A night marked "daily" is past that and uses the
+    27-day outlook's peak for the whole day, which is a much rougher guide.
+  </p>
+
+  <h2>27-day outlook</h2>
+  <p class="muted">
+    The largest Kp NOAA expects on each UTC day. In Australia and New Zealand the night hours fall on the same UTC date
+    as the evening they begin. Green outline: enough for a display here. Amber: one step short. It says nothing about
+    cloud, or about which hour.
+  </p>
+  <ol class="outlook" data-slot="outlook">
+    <li class="muted">Loading…</li>
+  </ol>
+  <p class="small muted" data-slot="outlook-note"></p>
+</section>
+<LiveScript />

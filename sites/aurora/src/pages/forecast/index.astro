@@ -1,0 +1,53 @@
+---
+import Base from '../../layouts/Base.astro';
+import { compass, inRegion, kpOrBeyond, locations, model, regions } from '../../lib/site';
+---
+
+<Base
+  title="Aurora Forecast by Place: Australia and New Zealand"
+  description={`Live aurora australis go or no-go for ${locations.length} places across Tasmania, Victoria, South Australia, Western Australia, NSW, Queensland and New Zealand.`}
+  path="/forecast/"
+>
+  <h1>Aurora forecast by place</h1>
+  <p class="lede">
+    {locations.length} places across Australia and New Zealand. Each has its own live answer, built from that place's
+    cloud forecast, darkness and distance from the aurora.
+  </p>
+  <p>
+    Somewhere else? <a href="/my-location/">Check your own coordinates</a>.
+  </p>
+
+  {regions.map((region) => (
+    <section>
+      <h2><a href={`/forecast/${region.slug}/`}>{region.name}</a></h2>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Place</th>
+              <th scope="col">Magnetic latitude</th>
+              <th scope="col">Needs</th>
+              <th scope="col">Look</th>
+            </tr>
+          </thead>
+          <tbody>
+            {inRegion(region.slug).map((l) => (
+              <tr>
+                <th scope="row"><a href={`/forecast/${l.slug}/`}>{l.name}</a></th>
+                <td>{Math.abs(l.mlat).toFixed(1)}°S</td>
+                <td>{kpOrBeyond(l.kpVisible)}</td>
+                <td>{compass(l.bearing)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p><a href={`/forecast/${region.slug}/`}>Tonight in {region.name}, place by place</a></p>
+    </section>
+  ))}
+
+  <p class="small muted">
+    Magnetic latitude is AACGM-v2, worked out for {model.epoch}. "Needs" is the Kp at which the aurora's edge comes
+    within {model.easyMarginDeg} degrees of the place. See <a href="/kp-needed/">the Kp you need</a> for all three levels.
+  </p>
+</Base>

@@ -1,0 +1,149 @@
+---
+import Base from '../layouts/Base.astro';
+import { kpOrBeyond, locations, model, regionOf } from '../lib/site';
+
+const sorted = [...locations].sort((a, b) => Math.abs(b.mlat) - Math.abs(a.mlat));
+const steps = model.kpBoundary.map((edge, kp) => ({ kp, edge }));
+const bom = [
+  { kp: 3, limit: 'Southern Tasmania' },
+  { kp: 4, limit: 'All of Tasmania' },
+  { kp: 5, limit: 'Coastline of Victoria' },
+  { kp: 6, limit: 'Southwest coast of Western Australia' },
+  { kp: 7, limit: 'Southern New South Wales' },
+  { kp: 8, limit: 'Southern Queensland' },
+  { kp: 9, limit: 'The tropics' },
+];
+---
+
+<Base
+  title="What Kp Do You Need to See the Aurora in Australia and NZ?"
+  description={`The Kp index needed to see the aurora australis from ${locations.length} places, from Kp 4 in southern Tasmania and Southland to Kp 9 in Sydney, with the working shown.`}
+  path="/kp-needed/"
+>
+  <h1>What Kp do you need to see the aurora?</h1>
+  <p class="lede">
+    It depends on how far you are from the magnetic pole. Southern Tasmania and the far south of New Zealand need about
+    Kp 4. Melbourne needs about Kp 7. Sydney needs Kp 9.
+  </p>
+
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Place</th>
+          <th scope="col">Magnetic latitude</th>
+          <th scope="col">Faint, on camera</th>
+          <th scope="col">Visible</th>
+          <th scope="col">Overhead</th>
+        </tr>
+      </thead>
+      <tbody>
+        {sorted.map((l) => (
+          <tr>
+            <th scope="row">
+              <a href={`/forecast/${l.slug}/`}>{l.name}</a>
+              <span class="sub">{l.area === regionOf(l).name ? l.area : `${l.area}, ${l.country === 'NZ' ? 'New Zealand' : 'Australia'}`}</span>
+            </th>
+            <td>{Math.abs(l.mlat).toFixed(1)}°S</td>
+            <td>{kpOrBeyond(l.kpFaint)}</td>
+            <td>{kpOrBeyond(l.kpVisible)}</td>
+            <td>{kpOrBeyond(l.kpOverhead)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p class="small muted">
+    Sorted from closest to the aurora to furthest. Magnetic latitude is AACGM-v2 for {model.epoch}. "Beyond Kp 9" means
+    the rule of thumb below never brings the aurora within range, however strong the storm.
+  </p>
+
+  <h2>What the three columns mean</h2>
+  <div class="prose">
+    <ul>
+      <li>
+        <strong>Faint, on camera.</strong> The aurora's edge is within about 1000 km. NOAA says a bright aurora can be seen
+        from that far when conditions are right. In practice this is a glow low on the horizon that a long exposure
+        catches and the eye usually misses.
+      </li>
+      <li>
+        <strong>Visible.</strong> The edge is within {model.easyMarginDeg} degrees of magnetic latitude, the range in which
+        NOAA says the aurora is easily seen. This is the level the go or no-go on this site treats as enough.
+      </li>
+      <li><strong>Overhead.</strong> The edge has reached the place itself. The aurora can fill much of the sky.</li>
+    </ul>
+  </div>
+
+  <h2>The working</h2>
+  <div class="prose">
+    <p>
+      NOAA describes the aurora as a ring around the magnetic pole whose outer edge sits near 66 degrees of magnetic
+      latitude when Kp is 0 and moves about 2 degrees towards the equator with each step, reaching 48 degrees at Kp 9.
+      The step-by-step values used here are:
+    </p>
+  </div>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th scope="col">Kp</th>{steps.map((s) => <th scope="col">{s.kp}</th>)}</tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">Edge of the aurora</th>{steps.map((s) => <td>{s.edge}°</td>)}</tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="prose">
+    <p>
+      Take a place's magnetic latitude, add {model.easyMarginDeg} degrees, and find the first Kp whose edge is at or inside
+      that. Hobart is at 53.4°S. Add 5 and you get 58.4. The edge is at 58.3 for Kp 4, so Hobart needs about Kp 4.
+      The camera column adds {model.farMarginDeg} degrees instead, which is 1000 km expressed as latitude.
+    </p>
+    <p>
+      NOAA reports Kp in thirds: 3.67 is "4 minus" and 4.33 is "4 plus". This site rounds to the nearest whole number,
+      the same way NOAA counts 4.67 as Kp 5 for its G1 storm level.
+    </p>
+  </div>
+
+  <h2>A second opinion from the Bureau of Meteorology</h2>
+  <div class="prose">
+    <p>
+      The Bureau's Space Weather Services publishes its own table of the northern limit of aurora visibility for each
+      Kp. It is the outer limit in good conditions, so it lines up with the "faint, on camera" column here, not the
+      "visible" one.
+    </p>
+  </div>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th scope="col">Kp</th><th scope="col">Bureau's northern limit of visibility</th></tr>
+      </thead>
+      <tbody>
+        {bom.map((row) => (
+          <tr><th scope="row">{row.kp}</th><td>{row.limit}</td></tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <div class="prose">
+    <p>
+      From Tasmania to southern New South Wales the two agree to within one Kp step. For Queensland the Bureau's table
+      is more generous than the rule used here, which keeps Brisbane out of range. Source:
+      <a href="https://www.sws.bom.gov.au/Aurora/1/1">Bureau of Meteorology, Space Weather Services</a>.
+    </p>
+  </div>
+
+  <h2>How often does each level happen?</h2>
+  <div class="prose">
+    <p>
+      NOAA's storm scale gives a feel for it over an 11-year solar cycle: G1 conditions (Kp 5) on about 900 days, G3
+      (Kp 7) on about 130 days and G5 (Kp 9) on about 4 days. They are not spread evenly: storms rise and fall with the
+      Sun's cycle, and both NOAA and the Bureau of Meteorology point to the weeks around the March and September
+      equinoxes as the likeliest time of year.
+    </p>
+    <p>
+      Kp is also a three-hour average for the whole planet. A short, sharp burst can light the sky while Kp is still
+      catching up, and a high Kp in daylight is no use to anyone. That is why the pages for each place look at the
+      dark hours only and show the live readings alongside. See <a href="/reading-the-numbers/">reading the numbers</a>.
+    </p>
+  </div>
+</Base>

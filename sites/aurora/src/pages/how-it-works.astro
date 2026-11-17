@@ -1,0 +1,161 @@
+---
+import Base from '../layouts/Base.astro';
+import { locations, model } from '../lib/site';
+
+const hobart = locations.find((l) => l.slug === 'hobart');
+---
+
+<Base
+  title="How the Aurora Go or No-Go Is Worked Out"
+  description="The exact rules behind the verdict: the Kp each place needs, the cloud and darkness cut-offs, how fresh the data is, and where the method breaks."
+  path="/how-it-works/"
+>
+  <h1>How the go or no-go is worked out</h1>
+  <p class="lede">
+    Three checks for each dark hour: is there enough activity for this place, is the sky clear, and is it dark. The
+    rules are simple on purpose, and all of them are on this page.
+  </p>
+
+  <h2>1. Activity</h2>
+  <div class="prose">
+    <p>
+      Each place has a magnetic latitude, and from it a Kp level at which the aurora's edge comes within
+      {model.easyMarginDeg} degrees. NOAA says the aurora is easily seen at that range. That level is the place's
+      "needs" figure: Kp {hobart?.kpVisible} for Hobart, for example. <a href="/kp-needed/">The full table and the working</a>.
+    </p>
+    <ul>
+      <li><strong>Enough:</strong> Kp is at or above what the place needs.</li>
+      <li><strong>Borderline:</strong> Kp is one step short.</li>
+      <li><strong>Camera range:</strong> lower still, but the edge is within about 1000 km. Counted as a no for the eye.</li>
+      <li><strong>Quiet:</strong> anything less.</li>
+    </ul>
+    <p>
+      For the present hour the Kp is NOAA's live one-minute estimate. For later hours it is NOAA's forecast for that
+      three-hour block. Past the three-day forecast, the daily peak from the 27-day outlook stands in, marked "daily".
+    </p>
+  </div>
+
+  <h2>2. Sky</h2>
+  <div class="prose">
+    <p>
+      Total cloud cover for the place and hour, from MET Norway's global forecast. Up to 30% counts as clear, 31 to 70%
+      as partly cloudy, and above 70% as cloudy. Those cut-offs are this site's own choice, not an official standard.
+    </p>
+  </div>
+
+  <h2>3. Darkness</h2>
+  <div class="prose">
+    <p>
+      Only hours when the sun is at least 18 degrees below the horizon are judged. Where the sky never gets that dark,
+      as in the far south in midsummer, the hours with the sun 12 degrees down are used and the page says so. The moon
+      does not change the verdict, but a moon more than 60% lit that is up for a good part of the night gets a
+      warning, because it washes out faint aurora.
+    </p>
+  </div>
+
+  <h2>Putting them together</h2>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th scope="col">Activity</th><th scope="col">Clear sky</th><th scope="col">Partly cloudy</th><th scope="col">Cloudy</th><th scope="col">No cloud data</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Enough</th>
+          <td><span class="pill" data-verdict="go">Go</span></td>
+          <td><span class="pill" data-verdict="maybe">Maybe</span></td>
+          <td><span class="pill" data-verdict="no">No-go</span></td>
+          <td><span class="pill" data-verdict="maybe">Maybe</span></td>
+        </tr>
+        <tr>
+          <th scope="row">Borderline</th>
+          <td><span class="pill" data-verdict="maybe">Maybe</span></td>
+          <td><span class="pill" data-verdict="no">No-go</span></td>
+          <td><span class="pill" data-verdict="no">No-go</span></td>
+          <td><span class="pill" data-verdict="maybe">Maybe</span></td>
+        </tr>
+        <tr>
+          <th scope="row">Camera range or quiet</th>
+          <td><span class="pill" data-verdict="no">No-go</span></td>
+          <td><span class="pill" data-verdict="no">No-go</span></td>
+          <td><span class="pill" data-verdict="no">No-go</span></td>
+          <td><span class="pill" data-verdict="no">No-go</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="prose">
+    <p>
+      "Tonight" takes the best hour of the night. After dark, the headline switches to the present hour, with the rest
+      of the night underneath.
+    </p>
+  </div>
+
+  <h2>What go, maybe and no-go mean</h2>
+  <div class="prose">
+    <ul>
+      <li><strong>Go:</strong> the conditions for a display you can see are forecast or present. It is not a promise.</li>
+      <li><strong>Maybe:</strong> one thing is short. Worth it if you are keen, close to a dark spot, or carrying a camera.</li>
+      <li><strong>No-go:</strong> activity is too low, or cloud is in the way.</li>
+    </ul>
+  </div>
+
+  <h2>How fresh the data is</h2>
+  <div class="prose">
+    <ul>
+      <li>Space weather is fetched from NOAA when you open a page and every 5 minutes while it stays open.</li>
+      <li>NOAA updates the live Kp each minute and reissues the 3-day forecast twice a day.</li>
+      <li>
+        The cloud forecast is kept for 20 minutes in your browser, and on this site's server until MET Norway says a
+        newer one may be ready, usually about half an hour.
+      </li>
+      <li>Darkness and the moon are calculated on your device and need no connection.</li>
+      <li>If NOAA's live reading is more than 45 minutes old, the page falls back to the forecast and tells you.</li>
+    </ul>
+  </div>
+
+  <h2>Where it breaks</h2>
+  <div class="prose">
+    <ul>
+      <li>
+        <strong>Bursts.</strong> Aurora brightens and fades over minutes. Kp is a three-hour, planet-wide average and
+        cannot see that. People sometimes catch a display on a "maybe", and stand under a quiet sky on a "go".
+      </li>
+      <li><strong>Forecast error.</strong> The Kp forecast is NOAA's best estimate. Storms arrive early, late, or not at all.</li>
+      <li>
+        <strong>Local sky.</strong> The cloud figure is a model value for the area, not a look out of your window. Sea
+        fog, low cloud on a ridge and smoke are not in it.
+      </li>
+      <li><strong>Light and horizon.</strong> Town lights and hills to the south are not measured. Both matter a great deal.</li>
+      <li>
+        <strong>Extreme storms.</strong> Kp stops at 9. The strongest storms push the aurora further than the table
+        allows, which is why the far-north pages only ever say "maybe".
+      </li>
+      <li><strong>Averages.</strong> The Kp each place needs is a rule of thumb for the middle of the night, accurate to about one step.</li>
+    </ul>
+    <p>
+      For official notices in Australia, use the Bureau of Meteorology's
+      <a href="https://www.sws.bom.gov.au/Aurora">Aurora Watch and Aurora Alert</a> service. Every source behind this
+      site is listed under <a href="/sources/">Sources and updates</a>.
+    </p>
+  </div>
+
+  <h2>Common questions</h2>
+  <div class="prose">
+    <h3>Kp is high. Why does it say no-go?</h3>
+    <p>
+      One of three reasons: cloud is forecast over the place, the high Kp falls in daylight hours, or the place is too
+      far north for that Kp. The sentence under the verdict says which.
+    </p>
+    <h3>It said no-go and people still posted photos.</h3>
+    <p>
+      Cameras gather light for seconds at a time and record aurora the eye cannot see. A photo from a dark beach at
+      "camera range" is consistent with a no-go for the eye. The other cause is a short burst that Kp did not catch.
+    </p>
+    <h3>Why is my town not listed?</h3>
+    <p>
+      The list covers {locations.length} places to start with. <a href="/my-location/">Check your own coordinates</a> and
+      you get the same answer for any spot in Australia or New Zealand.
+    </p>
+  </div>
+</Base>

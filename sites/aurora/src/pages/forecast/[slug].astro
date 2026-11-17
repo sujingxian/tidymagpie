@@ -1,0 +1,311 @@
+---
+import Base from '../../layouts/Base.astro';
+import Dashboard from '../../components/Dashboard.astro';
+import NightTable from '../../components/NightTable.astro';
+import SpacePanel from '../../components/SpacePanel.astro';
+import {
+  compass,
+  inRegion,
+  kpOrBeyond,
+  locations,
+  model,
+  placeFor,
+  regionOf,
+  regions,
+  zoneName,
+  type LocationRecord,
+  type RegionRecord,
+} from '../../lib/site';
+import { fullDarkHours } from '../../lib/sky.ts';
+import { durationText } from '../../lib/words.ts';
+
+export function getStaticPaths() {
+  return [
+    ...regions.map((region) => ({ params: { slug: region.slug }, props: { region } })),
+    ...locations.map((location) => ({ params: { slug: location.slug }, props: { location } })),
+  ];
+}
+
+interface Props {
+  region?: RegionRecord;
+  location?: LocationRecord;
+}
+
+const { region, location } = Astro.props;
+
+const REGION_TEXT: Record<string, { short: string; intro: string; bom?: string }> = {
+  tasmania: {
+    short: 'Tasmania',
+    intro:
+      'Tasmania is the part of Australia closest to the southern auroral zone, so it needs less activity than any other state. The south of the island is better placed than the north coast.',
+    bom: "The Bureau of Meteorology's own table puts the northern limit of visibility at southern Tasmania for Kp 3 and at all of Tasmania for Kp 4.",
+  },
+  victoria: {
+    short: 'Victoria',
+    intro:
+      'Victoria sits further from the aurora than Tasmania, so it takes a real geomagnetic storm. The coast helps: looking south there is only dark water on the horizon.',
+    bom: "The Bureau of Meteorology's own table puts the northern limit of visibility at the coastline of Victoria for Kp 5.",
+  },
+  'south-australia': {
+    short: 'South Australia',
+    intro:
+      'South Australia needs a strong storm. The far south-east around Mount Gambier is the best placed. Adelaide, the Fleurieu Peninsula and Kangaroo Island need more.',
+    bom: "South Australia is not named in the Bureau of Meteorology's visibility table. Its neighbours are: the coastline of Victoria at Kp 5 and the southwest coast of Western Australia at Kp 6.",
+  },
+  'western-australia': {
+    short: 'Western Australia',
+    intro:
+      "Western Australia's south coast faces the Southern Ocean, with nothing but water to the south. It still needs a strong storm, and Perth, further north, needs more than the Kp scale can promise.",
+    bom: "The Bureau of Meteorology's own table puts the northern limit of visibility at the southwest coast of Western Australia for Kp 6.",
+  },
+  'nsw-act-queensland': {
+    short: 'NSW, ACT and Queensland',
+    intro:
+      'This far north the aurora is a rare event that takes a severe or extreme storm. When it does show, it sits low on the southern horizon.',
+    bom: "The Bureau of Meteorology's own table puts the northern limit of visibility at southern New South Wales for Kp 7 and southern Queensland for Kp 8. That is the outer limit in good conditions, and it is more generous for Queensland than the rule used here.",
+  },
+  'new-zealand': {
+    short: 'New Zealand',
+    intro:
+      "New Zealand's far south is its best-placed corner. Stewart Island and Invercargill need the least activity, with Dunedin and the southern lakes one step behind. Needs rise going north, and Auckland is beyond what the Kp scale can promise.",
+  },
+};
+
+// ---------- region page ----------
+const regionPlaces = region ? inRegion(region.slug) : [];
+const regionText = region ? REGION_TEXT[region.slug] : null;
+
+function namesAt(list: LocationRecord[], kp: number | null): string {
+  const names = list.filter((l) => l.kpVisible === kp).map((l) => l.name);
+  if (names.length <= 1) return names.join('');
+  return `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}`;
+}
+const visibleLevels = [...new Set(regionPlaces.map((l) => l.kpVisible))].sort((a, b) => (a ?? 10) - (b ?? 10));
+
+// ---------- place page ----------
+const edgeAt = (kp: number) => model.kpBoundary[kp];
+const absM = location ? Math.abs(location.mlat) : 0;
+const look = location ? compass(location.bearing) : 'south';
+const neighbours = location ? inRegion(location.region).filter((l) => l.slug !== location.slug) : [];
+const home = location ? regionOf(location) : null;
+
+const seasons = location
+  ? [
+      { label: 'Late June', note: 'midwinter', date: new Date(Date.UTC(2026, 5, 21)) },
+      { label: 'Late September', note: 'spring equinox', date: new Date(Date.UTC(2026, 8, 23)) },
+      { label: 'Late December', note: 'midsummer', date: new Date(Date.UTC(2026, 11, 21)) },
+      { label: 'Late March', note: 'autumn equinox', date: new Date(Date.UTC(2027, 2, 20)) },
+    ].map((s) => ({ ...s, hours: fullDarkHours(s.date, location.lat, location.lon) }))
+  : [];
+const darkText = (hours: number) => (hours < 0.05 ? 'none: twilight all night' : durationText(hours * 3600000));
+
+function frequency(kp: number | null): string {
+  switch (kp) {
+    case 4:
+      return 'Kp 4 is below storm level and comes round far more often than Kp 5, which NOAA lists on about 900 days in an 11-year solar cycle.';
+    case 5:
+      return 'NOAA lists Kp 5, a G1 storm, on about 900 days in an 11-year solar cycle.';
+    case 6:
+      return 'Kp 6 sits between G1, which NOAA lists on about 900 days in an 11-year solar cycle, and G3, on about 130 days.';
+    case 7:
+      return 'NOAA lists Kp 7, a G3 storm, on about 130 days in an 11-year solar cycle.';
+    case 8:
+      return 'Kp 8 sits between G3, which NOAA lists on about 130 days in an 11-year solar cycle, and G5, on about 4 days.';
+    default:
+      return 'Kp 9, the top of the scale, comes on about 4 days in an 11-year solar cycle by NOAA\'s count.';
+  }
+}
+
+const title = location
+  ? `Aurora Forecast ${location.name} Tonight: Go or No-Go`
+  : `Aurora Forecast ${regionText?.short} Tonight, Place by Place`;
+const description = location
+  ? `Can you see the aurora australis from ${location.name} tonight? Live go or no-go from NOAA space weather, cloud and darkness. ${location.name} needs ${location.kpVisible === null ? 'more than Kp 9' : `about Kp ${location.kpVisible}`}.`
+  : `Tonight's aurora australis outlook for ${regionPlaces.length} places in ${region?.name}: forecast Kp, cloud cover and a go or no-go for each.`;
+const path = `/forecast/${location ? location.slug : region?.slug}/`;
+---
+
+<Base title={title} description={description} path={path}>
+  {region && regionText && (
+    <>
+      <p class="small muted"><a href="/forecast/">All places</a> › {region.name}</p>
+      <h1>Aurora forecast for {region.name} tonight</h1>
+      <p class="lede">{regionText.intro}</p>
+
+      <h2>Tonight, place by place</h2>
+      <NightTable places={regionPlaces} showArea={['nsw-act-queensland', 'new-zealand'].includes(region.slug)} />
+
+      <h2>Space weather right now</h2>
+      <SpacePanel />
+
+      <h2>What {regionText.short} needs</h2>
+      <ul>
+        {visibleLevels.map((kp) => (
+          <li>
+            {kp === null ? 'More than the Kp scale can promise' : `About Kp ${kp}`}: {namesAt(regionPlaces, kp)}.
+          </li>
+        ))}
+      </ul>
+      <p class="prose">
+        That is the level for a display you can see with your eyes. A camera at a dark site can pick up a glow on the
+        horizon one or two steps earlier. {regionText.bom}
+      </p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Place</th>
+              <th scope="col">Magnetic latitude</th>
+              <th scope="col">Faint, on camera</th>
+              <th scope="col">Visible</th>
+              <th scope="col">Overhead</th>
+            </tr>
+          </thead>
+          <tbody>
+            {regionPlaces.map((l) => (
+              <tr>
+                <th scope="row"><a href={`/forecast/${l.slug}/`}>{l.name}</a></th>
+                <td>{Math.abs(l.mlat).toFixed(1)}°S</td>
+                <td>{kpOrBeyond(l.kpFaint)}</td>
+                <td>{kpOrBeyond(l.kpVisible)}</td>
+                <td>{kpOrBeyond(l.kpOverhead)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p>
+        Other regions:
+        {regions.filter((r) => r.slug !== region.slug).map((r, i, all) => (
+          <>
+            <a href={`/forecast/${r.slug}/`}>{r.name}</a>{i < all.length - 1 ? ', ' : '.'}
+          </>
+        ))}
+      </p>
+    </>
+  )}
+
+  {location && home && (
+    <>
+      <p class="small muted">
+        <a href="/forecast/">All places</a> › <a href={`/forecast/${home.slug}/`}>{home.name}</a> › {location.name}
+      </p>
+      <h1>Aurora forecast for {location.name} tonight</h1>
+      <p class="lede">
+        A live go or no-go for seeing the aurora australis from {location.name}, {location.area}. It weighs NOAA's space
+        weather against tonight's cloud and darkness at {location.name} itself.
+      </p>
+
+      <Dashboard place={placeFor(location)} />
+
+      <h2>Space weather right now</h2>
+      <SpacePanel />
+
+      <h2>What {location.name} needs</h2>
+      <dl class="facts">
+        <dt>Magnetic latitude</dt>
+        <dd>{absM.toFixed(1)}°S (map latitude {Math.abs(location.lat).toFixed(2)}°S)</dd>
+        <dt>Faint glow, on camera</dt>
+        <dd>{location.kpFaint === null ? 'Out of range even at Kp 9' : `from about Kp ${location.kpFaint}`}</dd>
+        <dt>Display you can see</dt>
+        <dd>{location.kpVisible === null ? 'More than Kp 9: beyond what the scale can promise' : `from about Kp ${location.kpVisible}`}</dd>
+        <dt>Aurora overhead</dt>
+        <dd>{location.kpOverhead === null ? 'Not on the Kp scale' : `from about Kp ${location.kpOverhead}`}</dd>
+        <dt>Where to look</dt>
+        <dd>{look}, about {location.bearing}° true</dd>
+        <dt>Clock</dt>
+        <dd>{zoneName(location.tz)}</dd>
+      </dl>
+      <div class="prose">
+        <p>
+          What decides how often the aurora reaches {location.name} is its magnetic latitude, {absM.toFixed(1)}°S, not
+          its map latitude. The aurora forms a ring around the magnetic pole, and that ring widens as Kp rises.
+        </p>
+        {location.kpVisible !== null && (
+          <p>
+            On NOAA's figures the edge of the ring reaches about {edgeAt(location.kpVisible)}° magnetic latitude at Kp {location.kpVisible}.
+            That is {(edgeAt(location.kpVisible) - absM).toFixed(1)}° from {location.name}, inside the {model.easyMarginDeg}° within
+            which NOAA says the aurora is easily seen. {frequency(location.kpVisible)}
+          </p>
+        )}
+        {location.kpVisible === null && location.kpFaint !== null && (
+          <p>
+            Even at Kp 9 the edge of the ring stops at about {edgeAt(9)}° magnetic latitude, {(edgeAt(9) - absM).toFixed(1)}°
+            short of {location.name}. That is outside the {model.easyMarginDeg}° within which NOAA says the aurora is easily seen,
+            though inside the roughly 1000 km at which a bright display can still show on the horizon. {frequency(null)}
+          </p>
+        )}
+        {location.kpVisible === null && location.kpFaint === null && (
+          <p>
+            Even at Kp 9 the edge of the ring stops at about {edgeAt(9)}° magnetic latitude, {(edgeAt(9) - absM).toFixed(1)}°
+            short of {location.name}: roughly {Math.round(((edgeAt(9) - absM) * 111) / 10) * 10} km. By the rule of thumb used here that is out
+            of range, and this page will only ever say "maybe" for {location.name} during the most extreme storms. {frequency(null)}
+          </p>
+        )}
+        <p>
+          {location.kpOverhead !== null
+            ? `At Kp ${location.kpOverhead} the edge reaches ${location.name} itself, and the aurora can stand high in the sky instead of hugging the horizon.`
+            : `The ring does not reach ${location.name} itself on the Kp scale, so any aurora here stays low in the ${look}.`}
+          These are averages for the middle of the night. Real displays come in bursts and can beat them or fall short.
+          <a href="/how-it-works/">How the rule works, and where it breaks</a>.
+        </p>
+      </div>
+
+      <h2>How dark it gets in {location.name}</h2>
+      <p class="prose">
+        Faint aurora needs a fully dark sky: the sun at least 18 degrees below the horizon. In {location.name} that lasts
+        about {darkText(seasons[0].hours)} in midwinter and {darkText(seasons[2].hours)} in midsummer.
+        {seasons[2].hours < 5 && ' In midsummer the twilight that remains lingers low in the south, right where the aurora would be.'}
+      </p>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th scope="col">Time of year</th><th scope="col">Full darkness each night</th></tr>
+          </thead>
+          <tbody>
+            {seasons.map((s) => (
+              <tr>
+                <th scope="row">{s.label}<span class="sub">{s.note}</span></th>
+                <td>{darkText(s.hours)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Before you go</h2>
+      <ul class="prose">
+        <li>Face {look}. From {location.name} the nearest part of the aurora lies at about {location.bearing}° true.</li>
+        <li>Pick a spot with a low, dark horizon in that direction, away from town lights. A beach or a hill works well.</li>
+        <li>
+          The best hours are usually around the middle of the night, roughly 10 pm to 2 am. The hour-by-hour table above
+          shows which of tonight's dark hours look best.
+        </li>
+        <li>
+          To the eye it often looks grey at these latitudes unless the storm is strong. A phone or camera on a long
+          exposure shows colour sooner.
+        </li>
+        <li>Check again just before you leave. The live Kp and the cloud can both change within the hour.</li>
+      </ul>
+
+      {neighbours.length > 0 && (
+        <>
+          <h2>Nearby places</h2>
+          <ul class="grid">
+            {neighbours.map((l) => (
+              <li>
+                <a class="card" href={`/forecast/${l.slug}/`}>
+                  <h3>{l.name}</h3>
+                  <p>Needs {l.kpVisible === null ? 'more than Kp 9' : `about Kp ${l.kpVisible}`}</p>
+                </a>
+              </li>
+            ))}
+          </ul>
+          <p>
+            <a href={`/forecast/${home.slug}/`}>Compare all of {home.name} tonight</a>, including where the sky is clearest.
+          </p>
+        </>
+      )}
+    </>
+  )}
+</Base>

@@ -1,0 +1,58 @@
+---
+import Base from '../layouts/Base.astro';
+import Dashboard from '../components/Dashboard.astro';
+import SpacePanel from '../components/SpacePanel.astro';
+---
+
+<Base
+  title="Aurora Tonight at My Location: Go or No-Go"
+  description="Check tonight's aurora australis chances for your own spot in Australia or New Zealand. Uses your coordinates for cloud, darkness and distance from the aurora."
+  path="/my-location/"
+>
+  <h1>Aurora tonight at your own spot</h1>
+  <p class="lede">
+    For anywhere in Australia or New Zealand that is not on the <a href="/forecast/">list of places</a>. Share your
+    location, or type coordinates, and the same go or no-go is worked out for that spot.
+  </p>
+
+  <section class="card" data-aurora="custom">
+    <p>
+      <button class="btn" type="button" data-slot="locate">Use my location</button>
+    </p>
+    <form>
+      <div class="formrow">
+        <label>Latitude <input type="number" step="any" inputmode="decimal" placeholder="-42.88" data-slot="lat" /></label>
+        <label>Longitude <input type="number" step="any" inputmode="decimal" placeholder="147.33" data-slot="lon" /></label>
+        <button class="btn quiet" type="submit">Check these</button>
+      </div>
+    </form>
+    <p class="small muted" data-slot="status" role="status" aria-live="polite"></p>
+    <p class="small" data-slot="facts" hidden></p>
+    <p>
+      <button class="btn quiet" type="button" data-slot="forget" hidden>Forget my spot</button>
+    </p>
+    <p class="small muted">
+      Your coordinates are rounded to two decimal places, about 1 km, and kept only in this browser. They are sent to
+      this site's own server to fetch the cloud forecast, and nowhere else. <a href="/privacy/">Privacy details</a>.
+    </p>
+    <noscript><p class="notice">This page needs JavaScript to read your location and load live data.</p></noscript>
+  </section>
+
+  <Dashboard hidden />
+
+  <h2>Space weather right now</h2>
+  <SpacePanel />
+
+  <h2>How your spot is judged</h2>
+  <div class="prose">
+    <p>
+      The page looks up the magnetic latitude of your coordinates from a grid computed with the AACGM-v2 model, then
+      applies the same rule as every other page: the aurora's edge has to come within 5 degrees for a display you can
+      see. Darkness and the moon are calculated for your exact spot, and the cloud forecast is for the nearest point
+      in MET Norway's model.
+    </p>
+    <p>
+      Times on this page are shown in your device's time zone. <a href="/how-it-works/">More on the method</a>.
+    </p>
+  </div>
+</Base>

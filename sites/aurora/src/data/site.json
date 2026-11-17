@@ -1,0 +1,130 @@
+{
+  "updated": "2026-11-17",
+  "sources": [
+    {
+      "id": "noaa-kp",
+      "name": "NOAA SWPC: estimated planetary K index, one-minute values",
+      "url": "https://services.swpc.noaa.gov/json/planetary_k_index_1m.json",
+      "use": "The \"Kp now\" reading and the verdict for the present hour.",
+      "checked": "17 November 2026"
+    },
+    {
+      "id": "noaa-kp-forecast",
+      "name": "NOAA SWPC: planetary K index, observed and 3-day forecast",
+      "url": "https://services.swpc.noaa.gov/products/noaa-planetary-k-index-forecast.json",
+      "use": "The Kp expected in each three-hour block of the next nights.",
+      "checked": "17 November 2026"
+    },
+    {
+      "id": "noaa-wind",
+      "name": "NOAA SWPC: real-time solar wind, propagated to Earth",
+      "url": "https://services.swpc.noaa.gov/products/geospace/propagated-solar-wind-1-hour.json",
+      "use": "Bz, speed, density and the time the solar wind takes to arrive.",
+      "checked": "17 November 2026"
+    },
+    {
+      "id": "noaa-power",
+      "name": "NOAA SWPC: OVATION aurora nowcast, hemispheric power",
+      "url": "https://services.swpc.noaa.gov/text/aurora-nowcast-hemi-power.txt",
+      "use": "The southern hemisphere power reading in gigawatts.",
+      "checked": "17 November 2026"
+    },
+    {
+      "id": "noaa-27",
+      "name": "NOAA SWPC: 27-day outlook of radio flux and geomagnetic indices",
+      "url": "https://www.swpc.noaa.gov/products/27-day-outlook-107-cm-radio-flux-and-geomagnetic-indices",
+      "use": "The largest Kp expected each day for the next 27 days.",
+      "checked": "17 November 2026"
+    },
+    {
+      "id": "noaa-tips",
+      "name": "NOAA SWPC: Tips on Viewing the Aurora",
+      "url": "https://www.spaceweather.gov/content/tips-viewing-aurora",
+      "use": "The aurora's edge sits near 66 degrees magnetic latitude at Kp 0 and moves about 2 degrees per Kp step to 48 degrees at Kp 9. Best hours are around local midnight. A full moon dims what you see.",
+      "checked": "17 November 2026"
+    },
+    {
+      "id": "noaa-tips-old",
+      "name": "NOAA SWPC: Tips on Viewing the Aurora (earlier version, still published)",
+      "url": "https://www.swpc.noaa.gov/content/tips-viewing-aurora-old",
+      "use": "The aurora is easily seen when its edge is 4 to 5 degrees of magnetic latitude poleward of you.",
+      "checked": "17 November 2026"
+    },
+    {
+      "id": "swl-kp",
+      "name": "SpaceWeatherLive: The Kp-index",
+      "url": "https://www.spaceweatherlive.com/en/help/the-kp-index.html",
+      "use": "The aurora's edge in magnetic latitude for each Kp value, from 64.5 degrees at Kp 1 to 48.1 degrees at Kp 9. These match NOAA's description of about 2 degrees per step.",
+      "checked": "17 November 2026"
+    },
+    {
+      "id": "noaa-ovation",
+      "name": "NOAA SWPC: Aurora 30-Minute Forecast",
+      "url": "https://www.swpc.noaa.gov/products/aurora-30-minute-forecast",
+      "use": "Aurora does not need to be overhead: it can be seen from as much as 1000 km away when it is bright and conditions are right.",
+      "checked": "17 November 2026"
+    },
+    {
+      "id": "noaa-scales",
+      "name": "NOAA Space Weather Scales",
+      "url": "https://www.swpc.noaa.gov/sites/default/files/images/NOAAscales.pdf",
+      "use": "Storm names G1 to G5, and how often each level occurs in an 11-year solar cycle: about 900 days at G1, 130 at G3 and 4 at G5.",
+      "checked": "17 November 2026"
+    },
+    {
+      "id": "bom-table",
+      "name": "Bureau of Meteorology, Space Weather Services: geomagnetic indices and the northern limit of aurora visibility",
+      "url": "https://www.sws.bom.gov.au/Aurora/1/1",
+      "use": "An independent check on the Kp each region needs: Kp 3 southern Tasmania, Kp 4 all of Tasmania, Kp 5 the Victorian coastline, Kp 6 the southwest coast of Western Australia, Kp 7 southern New South Wales, Kp 8 southern Queensland.",
+      "checked": "17 November 2026"
+    },
+    {
+      "id": "bom-aurora",
+      "name": "Bureau of Meteorology, Space Weather Services: Aurora",
+      "url": "https://www.sws.bom.gov.au/Aurora",
+      "use": "Australia's official Aurora Watch and Aurora Alert notices.",
+      "checked": "17 November 2026"
+    },
+    {
+      "id": "bom-blog",
+      "name": "Bureau of Meteorology: Catching the aurora (10 October 2018)",
+      "url": "https://media.bom.gov.au/social/blog/1870/catching-the-aurora",
+      "use": "Viewing advice: look south from a dark beach or hill, best around 10 pm to 2 am, most likely near the March and September equinoxes, and often grey to the eye at Australian latitudes.",
+      "checked": "17 November 2026"
+    },
+    {
+      "id": "swl-power",
+      "name": "SpaceWeatherLive: OVATION auroral forecast",
+      "url": "https://www.spaceweatherlive.com/en/auroral-activity/auroral-oval.html",
+      "use": "How to read hemispheric power: under about 20 GW little or nothing to see, 20 to 50 GW you need to be near the aurora, over 50 GW plenty of activity.",
+      "checked": "17 November 2026"
+    },
+    {
+      "id": "met",
+      "name": "MET Norway: Locationforecast 2.0",
+      "url": "https://api.met.no/weatherapi/locationforecast/2.0/documentation",
+      "use": "Hourly cloud cover for each place. Licensed under CC BY 4.0. The site shows the total cloud percentage unchanged apart from rounding.",
+      "checked": "17 November 2026"
+    },
+    {
+      "id": "aacgm",
+      "name": "AACGM-v2 magnetic coordinates (Shepherd 2014, doi:10.1002/2014JA020264), via the aacgmv2 Python package",
+      "url": "https://github.com/aburrell/aacgmv2",
+      "use": "Each place's magnetic latitude, computed for 17 November 2026 at ground level.",
+      "checked": "17 November 2026"
+    },
+    {
+      "id": "suncalc",
+      "name": "SunCalc by Vladimir Agafonkin",
+      "url": "https://github.com/mourner/suncalc",
+      "use": "Darkness times, moon position and moon phase, calculated in your browser.",
+      "checked": "17 November 2026"
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-11-17",
+      "text": "First version: live go or no-go for 36 places in Australia and New Zealand, hour-by-hour view, next nights, 27-day outlook and a check for your own coordinates."
+    }
+  ]
+}

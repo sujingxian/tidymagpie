@@ -1,0 +1,36 @@
+---
+import LiveScript from './LiveScript.astro';
+---
+
+<section class="space" data-aurora="space" aria-label="Space weather right now">
+  <ul class="metrics">
+    <li>
+      <span class="metric-name">Kp now</span>
+      <strong data-slot="kp">…</strong>
+      <span class="metric-note" data-slot="kp-note">loading</span>
+    </li>
+    <li>
+      <span class="metric-name">Bz</span>
+      <strong data-slot="bz">…</strong>
+      <span class="metric-note" data-slot="bz-note">loading</span>
+    </li>
+    <li>
+      <span class="metric-name">Solar wind speed</span>
+      <strong data-slot="speed">…</strong>
+      <span class="metric-note" data-slot="speed-note">loading</span>
+    </li>
+    <li>
+      <span class="metric-name">Aurora power</span>
+      <strong data-slot="power">…</strong>
+      <span class="metric-note" data-slot="power-note">loading</span>
+    </li>
+  </ul>
+  <figure class="spark" data-slot="spark" hidden>
+    <div data-slot="spark-chart"></div>
+    <figcaption>Bz over the last hour. Below the dashed line is south, which is what feeds the aurora.</figcaption>
+  </figure>
+  <p class="space-lead" data-slot="lead"></p>
+  <p class="small muted stamp" data-slot="stamp">Loading live readings from NOAA…</p>
+  <noscript><p class="notice">Live readings need JavaScript. Without it, see NOAA's own pages linked under Sources.</p></noscript>
+</section>
+<LiveScript />

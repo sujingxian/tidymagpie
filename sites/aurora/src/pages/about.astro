@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+import { locations } from '../lib/site';
+---
+
+<Base
+  title="About Aurora Go/No-Go"
+  description="Who is behind Aurora Go/No-Go, why it exists, how it is built and how to report a mistake."
+  path="/about/"
+>
+  <h1>About this site</h1>
+  <p class="lede">
+    Aurora Go/No-Go answers one question for people in Australia and New Zealand: is it worth going out to look for
+    the southern lights tonight?
+  </p>
+
+  <div class="prose">
+    <h2>Why it exists</h2>
+    <p>
+      Most aurora pages show the space weather and leave the rest to you. But a strong storm is no use under cloud, in
+      daylight, or 800 km too far north. This site puts the three together for {locations.length} places, hour by
+      hour, and says what it concludes in plain words.
+    </p>
+
+    <h2>Who runs it</h2>
+    <p>
+      It is part of Tidy Magpie, a small independent publisher based in Australia. It is built and maintained with the
+      help of AI tools, under human direction. It is not affiliated with NOAA, the Bureau of Meteorology or MET Norway.
+    </p>
+
+    <h2>How it is kept honest</h2>
+    <ul>
+      <li>Every input has a named source, listed under <a href="/sources/">Sources and updates</a>.</li>
+      <li>The rules are published in full on <a href="/how-it-works/">How it works</a>, including where they fail.</li>
+      <li>When data is missing or late, the page says so instead of guessing.</li>
+      <li>The verdict rules are covered by automated tests, and the code is public.</li>
+    </ul>
+
+    <h2>Found a mistake?</h2>
+    <p>
+      Please open an issue on the
+      <a href="https://github.com/sujingxian/tidymagpie/issues">project's GitHub page</a>. Say which place and what you
+      saw, and it will be looked at.
+    </p>
+
+    <h2>A word of caution</h2>
+    <p>
+      This is a guide for a night out, not a safety service. Roads, tides, cliffs and cold are real hazards on a dark
+      coast at 1 am. Tell someone where you are going, and take the usual care.
+    </p>
+  </div>
+</Base>

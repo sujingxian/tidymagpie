@@ -1,0 +1,45 @@
+---
+import LiveScript from './LiveScript.astro';
+import { kpOrBeyond, placeFor, type LocationRecord } from '../lib/site';
+
+interface Props {
+  places: LocationRecord[];
+  showArea?: boolean;
+}
+
+const { places, showArea = false } = Astro.props;
+---
+
+<div class="table-scroll">
+  <!-- The roles keep this a table for screen readers when the phone layout turns rows into cards. -->
+  <table class="night-table" role="table">
+    <thead role="rowgroup">
+      <tr role="row">
+        <th scope="col" role="columnheader">Place</th>
+        <th scope="col" role="columnheader">Needs</th>
+        <th scope="col" role="columnheader">Peak Kp tonight</th>
+        <th scope="col" role="columnheader">Cloud tonight</th>
+        <th scope="col" role="columnheader">Verdict</th>
+      </tr>
+    </thead>
+    <tbody role="rowgroup">
+      {places.map((l) => (
+        <tr role="row" data-aurora="row" data-place={JSON.stringify(placeFor(l))}>
+          <th scope="row" role="rowheader">
+            <a href={`/forecast/${l.slug}/`}>{l.name}</a>
+            {showArea && <span class="sub">{l.area}</span>}
+          </th>
+          <td role="cell" data-label="Needs">{kpOrBeyond(l.kpVisible)}</td>
+          <td role="cell" data-label="Peak Kp" data-slot="kp">…</td>
+          <td role="cell" data-label="Cloud" data-slot="cloud">…</td>
+          <td role="cell" data-slot="verdict"><span class="pill" data-verdict="loading">Loading</span></td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+<p class="small muted">
+  "Needs" is the Kp for a display you can see with your eyes. Peak Kp is NOAA's forecast for the dark hours. Cloud is
+  the range across those hours. Times shown are local to each place.
+</p>
+<LiveScript />

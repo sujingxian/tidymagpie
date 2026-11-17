@@ -1,0 +1,77 @@
+---
+import '../styles/global.css';
+import { site } from '../lib/site';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+}
+
+const { title, description, path } = Astro.props;
+const origin = (Astro.site?.href ?? '').replace(/\/$/, '');
+const canonical = `${origin}${path}`;
+
+const nav = [
+  { href: '/', label: 'Tonight' },
+  { href: '/forecast/', label: 'Places' },
+  { href: '/my-location/', label: 'My location' },
+  { href: '/kp-needed/', label: 'Kp you need' },
+  { href: '/reading-the-numbers/', label: 'The numbers' },
+  { href: '/how-it-works/', label: 'How it works' },
+];
+const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#0b1020" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content="Tidy Magpie" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/">Tidy Magpie <span>· Aurora Go/No-Go</span></a>
+        <nav class="site-nav" aria-label="Main">
+          {nav.map((item) => (
+            <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>
+          ))}
+        </nav>
+      </div>
+    </header>
+    <main id="main">
+      <div class="wrap">
+        <slot />
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <nav aria-label="Footer">
+          <a href="/sources/">Sources and updates</a>
+          <a href="/about/">About</a>
+          <a href="/privacy/">Privacy</a>
+        </nav>
+        <p>
+          A rule-of-thumb guide, not an official forecast or warning. Space weather data from the
+          <a href="https://www.swpc.noaa.gov/">NOAA Space Weather Prediction Center</a>. Cloud forecast from
+          <a href="https://api.met.no/">MET Norway</a>, licensed
+          <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>.
+        </p>
+        <p>Site last updated {site.updated}. Live readings update themselves while the page is open.</p>
+      </div>
+    </footer>
+  </body>
+</html>
