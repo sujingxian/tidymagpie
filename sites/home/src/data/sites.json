@@ -1,0 +1,32 @@
+{
+  "updated": "2026-11-17",
+  "sites": [
+    {
+      "slug": "petit",
+      "name": "Petit Planet Companion",
+      "url": "https://petit.tidymagpie.com/",
+      "subject": "For Petit Planet, the life sim from HoYoverse that launches on 4 December 2026 for PC, iOS and Android.",
+      "inside": "All 17 known neighbors and what they like, a gift finder, a birthday calendar you can subscribe to, launch codes and a checklist for launch day.",
+      "status": "Built on data from the final beta, which gets checked against the released game in launch week.",
+      "opened": "2026-11-17"
+    },
+    {
+      "slug": "aurora",
+      "name": "Aurora Go/No-Go",
+      "url": "https://aurora.tidymagpie.com/",
+      "subject": "For anyone in Australia or New Zealand deciding whether the southern lights are worth going out for tonight.",
+      "inside": "A plain go, maybe or no for 36 places, worked out from NOAA space weather, the cloud forecast and how dark it gets. You can add a spot of your own.",
+      "status": "Live readings refresh every five minutes and always show how old they are.",
+      "opened": "2026-11-17"
+    },
+    {
+      "slug": "heaven",
+      "name": "Stranger Than Heaven Tracker",
+      "url": "https://heaven.tidymagpie.com/",
+      "subject": "For Stranger Than Heaven, the next game from RGG Studio, out on 15 January 2027.",
+      "inside": "A tick-off tracker for all 59 achievements, act by act, with story spoilers hidden until you ask. Release details, editions, cast and a timeline sit alongside.",
+      "status": "The achievement list is pre-release and unconfirmed, and gets checked against the released game in launch week.",
+      "opened": "2026-11-17"
+    }
+  ]
+}

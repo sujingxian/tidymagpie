@@ -1,0 +1,88 @@
+---
+import '@fontsource-variable/archivo/wdth.css';
+import archivoLatin from '@fontsource-variable/archivo/files/archivo-latin-wdth-normal.woff2?url';
+import '../styles/global.css';
+import { BRAND, ORIGIN, sites, updated, longDate } from '../lib/site';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+}
+
+const { title, description, path } = Astro.props;
+const canonical = `${ORIGIN}${path}`;
+
+const nav = [
+  { href: '/#sites', label: 'Sites', current: false },
+  { href: '/how-we-work/', label: 'How we work', current: path.startsWith('/how-we-work/') },
+  { href: '/about/', label: 'About', current: path.startsWith('/about/') },
+  { href: '/contact/', label: 'Contact', current: path.startsWith('/contact/') },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#edf2ee" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href={archivoLatin} as="font" type="font/woff2" crossorigin />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={BRAND} />
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap">
+        <a class="brand" href="/"><img src="/favicon.svg" alt="" width="32" height="32" />{BRAND}</a>
+        <nav class="site-nav" aria-label="Main">
+          {nav.map((item) => (
+            <a href={item.href} aria-current={item.current ? 'page' : undefined}>{item.label}</a>
+          ))}
+        </nav>
+      </div>
+    </header>
+    <main id="main">
+      <div class="wrap">
+        <slot />
+      </div>
+    </main>
+    <footer class="site-footer">
+      <div class="wrap">
+        <div>
+          <h2>The sites</h2>
+          <ul>
+            {sites.map((s) => (
+              <li><a href={s.url}>{s.name}</a></li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h2>{BRAND}</h2>
+          <ul>
+            <li><a href="/how-we-work/">How we work</a></li>
+            <li><a href="/about/">About</a></li>
+            <li><a href="/contact/">Contact</a></li>
+            <li><a href="/privacy/">Privacy</a></li>
+          </ul>
+        </div>
+        <div>
+          <p>
+            {BRAND} is independent. It is not affiliated with the companies or agencies whose games and data its sites
+            cover.
+          </p>
+          <p>Last updated {longDate(updated)}.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

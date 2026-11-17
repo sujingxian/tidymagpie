@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+import { BRAND, REPO, sites } from '../lib/site';
+---
+
+<Base
+  title="About Tidy Magpie"
+  description="Tidy Magpie is a small independent publisher in Australia making single-subject reference sites. Who runs it, why the name, and how the sites are made."
+  path="/about/"
+>
+  <section class="page">
+    <h1>About {BRAND}</h1>
+    <p class="lede">
+      {BRAND} is a small independent publisher based in Australia. It makes reference sites that each cover one
+      subject properly, and it started in November 2026.
+    </p>
+
+    <div class="prose">
+      <h2>What we make</h2>
+      <p>
+        Some questions get looked up over and over: which gift a character likes, whether the aurora is worth a drive
+        tonight, which achievements are left. The answers tend to be scattered across announcements, store pages and
+        data feeds. Each {BRAND} site gathers one subject's answers into pages you can scan, filter or tick off.
+      </p>
+      <p>There are {sites.length} sites so far:</p>
+      <ul>
+        {sites.map((s) => (
+          <li><a href={s.url}>{s.name}</a></li>
+        ))}
+      </ul>
+
+      <h2>Why the name</h2>
+      <p>
+        Magpies have a reputation, not entirely deserved, for carrying off anything that catches their eye. We do
+        collect. The tidy part is putting each fact where you can find it, with a note of where it came from.
+      </p>
+
+      <h2>How the sites are made</h2>
+      <ul>
+        <li>
+          They are researched, written and coded with AI tools, under human direction. A person decides what gets made
+          and what gets published.
+        </li>
+        <li>They are plain static pages. There are no accounts, and progress you save stays in your browser.</li>
+        <li>The code and data are public on <a href={REPO}>GitHub</a>.</li>
+      </ul>
+      <p>The rules for sourcing and checking are set out in <a href="/how-we-work/">How we work</a>.</p>
+
+      <h2>Independence</h2>
+      <p>
+        {BRAND} is not affiliated with, sponsored by or endorsed by the companies and agencies whose games and data its
+        sites cover. Game names and other trademarks belong to their owners.
+      </p>
+
+      <h2>Get in touch</h2>
+      <p>Corrections and questions are welcome. The <a href="/contact/">contact page</a> says how.</p>
+    </div>
+  </section>
+</Base>

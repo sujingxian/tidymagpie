@@ -1,0 +1,85 @@
+---
+import Base from '../layouts/Base.astro';
+import Magpie from '../components/Magpie.astro';
+import Emblem from '../components/Emblem.astro';
+import { BRAND, ORIGIN, sites, host } from '../lib/site';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    { '@type': 'Organization', '@id': `${ORIGIN}/#org`, name: BRAND, url: `${ORIGIN}/`, logo: `${ORIGIN}/favicon.svg` },
+    { '@type': 'WebSite', '@id': `${ORIGIN}/#site`, name: BRAND, url: `${ORIGIN}/`, publisher: { '@id': `${ORIGIN}/#org` } },
+  ],
+};
+---
+
+<Base
+  title="Tidy Magpie: Small Reference Sites, Kept Tidy"
+  description="Tidy Magpie makes small single-subject reference sites: game trackers, checklists and a live aurora check. Every fact has a source. Nothing to sign up for."
+  path="/"
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(schema)} />
+
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Small reference sites, kept tidy.</h1>
+      <p class="lede">
+        {BRAND} makes single-subject sites for the things people look up again and again: what a game character likes,
+        whether tonight's aurora is worth the drive, which achievements are still missing. Every fact has a source, and
+        nothing asks you to sign up.
+      </p>
+    </div>
+    <Magpie />
+  </section>
+
+  <section id="sites" aria-labelledby="sites-heading">
+    <h2 id="sites-heading" class="visually-hidden">The sites</h2>
+    <ul class="shelves">
+      {sites.map((s) => (
+        <li class="shelf">
+          <div class="shelf-body">
+            <h3><a href={s.url}>{s.name}</a></h3>
+            <p>{s.subject}</p>
+            <p>{s.inside}</p>
+            <p class="muted small">{s.status}</p>
+          </div>
+          <Emblem slug={s.slug} />
+          <div class="shelf-go">
+            <a class="button" href={s.url}>Open {s.name}</a>
+            <span class="host">{host(s.url)}</span>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="section" aria-labelledby="rules-heading">
+    <h2 id="rules-heading">How the sites are kept</h2>
+    <dl class="rules">
+      <dt>Every fact has a source</dt>
+      <dd>Each site has a Sources page that lists where its facts come from and when they were last checked.</dd>
+      <dt>Unknown stays unknown</dt>
+      <dd>If something has not been announced, or cannot be confirmed, the page says so. Pre-release information is labelled as pre-release.</dd>
+      <dt>Written from scratch</dt>
+      <dd>Descriptions are in our own words. No game artwork, no screenshots, no copied guide text.</dd>
+      <dt>Nothing to sign up for</dt>
+      <dd>There are no accounts. Trackers and checklists save your progress in your own browser, and it stays there.</dd>
+      <dt>Live data shows its age</dt>
+      <dd>A live reading carries the time it was taken. If a feed is down, the page says that and does not fill the gap.</dd>
+    </dl>
+    <p class="after"><a href="/how-we-work/">Read how we work in full</a></p>
+  </section>
+
+  <section class="section" aria-labelledby="who-heading">
+    <h2 id="who-heading">Who is behind this</h2>
+    <div class="prose">
+      <p>
+        {BRAND} is a small independent publisher based in Australia. The sites are built and maintained with the help of
+        AI tools, under human direction.
+      </p>
+      <p>
+        <a href="/about/">More about {BRAND}</a>, or <a href="/contact/">tell us about a mistake</a>.
+      </p>
+    </div>
+  </section>
+</Base>

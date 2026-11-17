@@ -1,9 +1,11 @@
 # Tidy Magpie
 
 Small reference sites under `tidymagpie.com`. Each site lives in its own folder and deploys to its own subdomain.
+The brand homepage at the root domain lists them.
 
-| Folder | Subdomain | What it is |
+| Folder | Address | What it is |
 | --- | --- | --- |
+| `sites/home` | `tidymagpie.com` | Brand homepage: the directory of sites, how we work, about, contact, privacy |
 | `sites/petit` | `petit.tidymagpie.com` | Petit Planet companion: launch info, codes, neighbors, gift finder, birthdays, checklist |
 | `sites/aurora` | `aurora.tidymagpie.com` | Aurora australis go or no-go for Australia and New Zealand: live space weather, cloud and darkness for 36 places |
 | `sites/heaven` | `heaven.tidymagpie.com` | Stranger Than Heaven companion: tracker for all 59 achievements act by act, release, editions, cast, gameplay systems, timeline |
@@ -24,11 +26,33 @@ Create a Pages project connected to this repository with:
 - Root directory: `sites/<name>`
 - Build command: `npm run build`
 - Build output directory: `dist`
-- Custom domain: `<name>.tidymagpie.com`
+- Custom domain: `<name>.tidymagpie.com` (for `sites/home`: `tidymagpie.com` and `www.tidymagpie.com`)
 - Build watch paths (Settings, Build): include `sites/<name>/*`
 
 After that, every push to `main` that touches the site's folder redeploys it. Without the watch path, a push
 rebuilds every project, which uses up the monthly build allowance faster.
+
+## Opening a new site
+
+1. Build it in `sites/<name>` and create its Pages project as above.
+2. Once it is live, add it to `sites/home/src/data/sites.json`, copy its `public/favicon.svg` to
+   `sites/home/src/emblems/<name>.svg` and register that file in `sites/home/src/components/Emblem.astro`.
+   `npm test` in `sites/home` fails until all three agree.
+3. Give the new site a footer link back to `https://tidymagpie.com/`.
+
+## Notes on `sites/home`
+
+Static pages with no scripts. The typeface is Archivo (SIL Open Font License), self-hosted through the
+`@fontsource-variable/archivo` package, so no request goes to an outside font service. The magpie and the brand
+icon are drawn for this site.
+
+```bash
+cd sites/home
+npm install
+npm test                          # the directory matches the real sites in this repository
+npm run build
+node scripts/smoke.mjs            # browser check; needs: npm install --no-save puppeteer-core
+```
 
 ## Notes on `sites/aurora`
 

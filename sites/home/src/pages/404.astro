@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import { sites } from '../lib/site';
+---
+
+<Base title="Page Not Found | Tidy Magpie" description="That page does not exist." path="/404/">
+  <section class="page">
+    <h1>Page not found</h1>
+    <p class="lede">That page does not exist, or it has moved.</p>
+    <div class="prose">
+      <p>Start again from the <a href="/">home page</a>, or go straight to one of the sites:</p>
+      <ul>
+        {sites.map((s) => (
+          <li><a href={s.url}>{s.name}</a></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Base>

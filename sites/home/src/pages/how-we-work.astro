@@ -1,0 +1,105 @@
+---
+import Base from '../layouts/Base.astro';
+import { BRAND, sites } from '../lib/site';
+---
+
+<Base
+  title="How We Work: Sources, Checks and Corrections | Tidy Magpie"
+  description="The rules every Tidy Magpie site follows: where facts come from, how they are checked, how pre-release information is labelled, how AI is used, and who pays."
+  path="/how-we-work/"
+>
+  <section class="page">
+    <h1>How we work</h1>
+    <p class="lede">
+      The same rules apply to every {BRAND} site. They are here so you can tell where a fact came from and how far to
+      trust it.
+    </p>
+
+    <div class="prose">
+      <h2>Where facts come from</h2>
+      <ul>
+        <li>Official sources come first: a publisher's or agency's own announcements, store pages and data feeds.</li>
+        <li>When a news outlet is the source, it is named next to the fact.</li>
+        <li>
+          Every site has a Sources page that lists each source, what it was used for and the date it was last checked.
+        </li>
+        <li>A claim has to be traceable to a page we can link to. If it is not, it does not go in.</li>
+      </ul>
+
+      <h2>Checking</h2>
+      <ul>
+        <li>
+          Before a page is published, the facts on it are compared with the sources they cite. Anything that cannot be
+          confirmed is cut, or attributed to whoever reported it.
+        </li>
+        <li>
+          Where a site works something out from data, such as the aurora verdict or a tracker's count, the rules are
+          covered by automated tests.
+        </li>
+        <li>Pages are checked on a phone-sized screen and a desktop-sized one.</li>
+      </ul>
+
+      <h2>What we do not know</h2>
+      <ul>
+        <li>Details that have not been announced are listed as unannounced. They are not guessed.</li>
+        <li>Pre-release and beta information is labelled, and checked again once the real thing is out.</li>
+        <li>Live readings show the time they were taken. When a feed is down, the page says so.</li>
+      </ul>
+
+      <h2>Updates and corrections</h2>
+      <ul>
+        <li>Each site keeps a log of changes on its Sources page.</li>
+        <li>
+          If you find a mistake, <a href="/contact/">tell us</a>. Corrections are made in the data and noted in that
+          log.
+        </li>
+      </ul>
+
+      <h2>Original writing, no borrowed artwork</h2>
+      <ul>
+        <li>
+          Text is written for the site, in our own words. Names of characters, achievements and places are used as
+          names.
+        </li>
+        <li>
+          No game artwork, screenshots or trailer stills are used. The icons and illustrations are drawn for the sites.
+        </li>
+      </ul>
+
+      <h2>How AI is used</h2>
+      <ul>
+        <li>
+          The sites are researched, written and coded with AI tools. A person decides what gets made and what gets
+          published.
+        </li>
+        <li>
+          AI output is never the source for a fact. Each fact is checked against a page that can be cited, as described
+          above.
+        </li>
+      </ul>
+
+      <h2>Independence</h2>
+      <ul>
+        <li>
+          {BRAND} is not affiliated with, sponsored by or endorsed by the companies and agencies whose games and data
+          its sites cover.
+        </li>
+        <li>There is no sponsored content and there are no affiliate links.</li>
+      </ul>
+
+      <h2>Paying for the sites</h2>
+      <p>
+        The sites are free to use and carry no advertising at the moment. We expect to add advertising later to cover
+        running costs. Before that happens, the <a href="/privacy/">privacy page</a> will be updated to say what is
+        used. Advertising will not decide what the sites say.
+      </p>
+
+      <h2>The sites these rules cover</h2>
+      <ul>
+        {sites.map((s) => (
+          <li><a href={s.url}>{s.name}</a></li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</Base>

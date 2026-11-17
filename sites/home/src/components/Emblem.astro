@@ -1,0 +1,16 @@
+---
+// Each site's own icon, shown as the object on its shelf. The files are copies of the sites' favicons
+// (tests/sites.test.ts fails if they drift apart).
+import petit from '../emblems/petit.svg?raw';
+import aurora from '../emblems/aurora.svg?raw';
+import heaven from '../emblems/heaven.svg?raw';
+
+interface Props {
+  slug: string;
+}
+
+const art: Record<string, string> = { petit, aurora, heaven };
+const svg = (art[Astro.props.slug] ?? '').replace('<svg ', '<svg aria-hidden="true" focusable="false" ');
+---
+
+<span class="emblem"><Fragment set:html={svg} /></span>
