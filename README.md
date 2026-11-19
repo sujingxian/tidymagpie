@@ -7,7 +7,7 @@ The brand homepage at the root domain lists them.
 | --- | --- | --- |
 | `sites/home` | `tidymagpie.com` | Brand homepage: the directory of sites, how we work, about, contact, privacy |
 | `sites/petit` | `petit.tidymagpie.com` | Petit Planet companion: launch info, codes, neighbors, gift finder, birthdays, checklist |
-| `sites/aurora` | `aurora.tidymagpie.com` | Aurora australis go or no-go for Australia and New Zealand: live space weather, cloud and darkness for 36 places |
+| `sites/aurora` | `aurora.tidymagpie.com` | Aurora australis go or no-go for Australia and New Zealand: live space weather, cloud and darkness for 36 places, plus a Geminids 2026 page |
 | `sites/heaven` | `heaven.tidymagpie.com` | Stranger Than Heaven companion: tracker for all 59 achievements act by act, release, editions, cast, gameplay systems, timeline |
 
 ## Working on a site
@@ -74,6 +74,11 @@ npm run build
 node scripts/dev-server.mjs       # preview at http://localhost:4321 with a stand-in cloud API
 node scripts/smoke.mjs            # browser check; needs: npm install --no-save puppeteer-core
 ```
+
+`/geminids/` is a seasonal page for the 2026 Geminids. The shower's figures are in `src/data/geminids.json`
+and the sky geometry in `src/lib/meteors.ts`; both are worked out at build time. Only the cloud check runs in the
+browser (`src/lib/geminids.ts`), and it does not call the cloud API until the first watch is within the 96 hours the
+proxy passes on. For another shower, copy the JSON with that shower's IMO figures and dates.
 
 `scripts/build_locations.py` regenerates the magnetic latitudes (`pip install aacgmv2`). They drift slowly;
 once a year is plenty.

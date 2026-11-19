@@ -152,6 +152,14 @@ select, input[type='number'], input[type='text'] { font: inherit; color: var(--i
 .site-footer nav { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-bottom: 10px; }
 .site-footer p { margin: 0 0 6px; max-width: 60em; }
 
+/* Meteor shower table: three nights side by side in one cell */
+.sky-nights { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: nowrap; gap: 6px 10px; }
+.sky-nights li { margin: 0; min-width: 5.6em; }
+.sky-nights .day { display: block; color: var(--muted); font-size: 12px; }
+.sky-nights .pill { font-size: 13px; padding: 1px 9px; }
+.meteor-table td { white-space: nowrap; }
+.meteor-table td.sky-cell { white-space: normal; }
+
 [hidden] { display: none !important; }
 
 @media (max-width: 640px) {
@@ -174,4 +182,7 @@ select, input[type='number'], input[type='text'] { font: inherit; color: var(--i
   .night-table td[data-label] { order: 4; font-size: 14px; color: var(--muted); white-space: nowrap; }
   .night-table td[data-label]::before { content: attr(data-label) ' '; }
   .night-table td[colspan] { flex-basis: 100%; }
+  .meteor-table td.sky-cell { order: 5; flex-basis: 100%; }
+  .sky-nights { flex-wrap: wrap; }
+  .meteor-table td.sky-cell::before { display: none; }
 }

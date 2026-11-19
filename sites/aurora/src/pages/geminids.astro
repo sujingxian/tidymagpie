@@ -1,0 +1,292 @@
+---
+import Base from '../layouts/Base.astro';
+import shower from '../data/geminids.json';
+import { inRegion, locations, regions, zoneName, type LocationRecord } from '../lib/site';
+import { hourlyRate, planNight, type ShowerNight } from '../lib/meteors.ts';
+
+// Everything on this page except the cloud is fixed by the sky, so it is worked out here, once.
+const PEAK_NIGHT = 2; // index into shower.evenings: the evening of 14 December
+
+const fmt = (tz: string, options: Intl.DateTimeFormatOptions) =>
+  new Intl.DateTimeFormat('en-AU', { timeZone: tz, ...options });
+const tidy = (s: string) => s.replace(/[  ]/g, ' ').replace(',', '');
+const clock = (ms: number, tz: string) => tidy(fmt(tz, { hour: 'numeric', minute: '2-digit', hour12: true }).format(ms));
+const dayClock = (ms: number, tz: string) =>
+  tidy(fmt(tz, { weekday: 'short', day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit', hour12: true }).format(ms));
+const roundTo5 = (n: number) => Math.max(0, Math.round(n / 5) * 5);
+
+const [dark, town] = shower.skies;
+const rate = (alt: number, lm: number) => hourlyRate(shower.zhr, alt, shower.populationIndex, lm);
+
+interface Plan {
+  place: LocationRecord;
+  nights: ShowerNight[];
+  peak: ShowerNight;
+  darkRate: number;
+  townRate: number;
+}
+
+const plans: Plan[] = locations.map((place) => {
+  const nights = shower.evenings.map((evening) => planNight(evening, place.lat, place.lon, shower));
+  const peak = nights[PEAK_NIGHT];
+  return {
+    place,
+    nights,
+    peak,
+    darkRate: roundTo5(rate(peak.bestAltDeg, dark.limitingMagnitude)),
+    townRate: roundTo5(rate(peak.bestAltDeg, town.limitingMagnitude)),
+  };
+});
+const planFor = (slug: string) => plans.find((p) => p.place.slug === slug) as Plan;
+
+const byRate = [...plans].sort((a, b) => b.darkRate - a.darkRate);
+const best = byRate[0];
+const worst = byRate[byRate.length - 1];
+const hobart = planFor('hobart');
+const melbourne = planFor('melbourne');
+const sydney = planFor('sydney');
+const auckland = planFor('auckland');
+
+const peakTimes = shower.peaks.map((p) => ({ ...p, ms: Date.parse(p.time) }));
+const imo = peakTimes.find((p) => p.source === 'imo')!;
+const earthsky = peakTimes.find((p) => p.source === 'earthsky')!;
+const zones = [
+  { tz: 'Australia/Perth', name: 'Perth' },
+  { tz: 'Australia/Adelaide', name: 'Adelaide' },
+  { tz: 'Australia/Brisbane', name: 'Brisbane' },
+  { tz: 'Australia/Sydney', name: 'Sydney, Melbourne, Hobart' },
+  { tz: 'Pacific/Auckland', name: 'New Zealand' },
+];
+
+const nightNames = shower.evenings.map((e) => {
+  const d = new Date(`${e}T12:00:00Z`);
+  const next = new Date(d.getTime() + 86400000);
+  const wd = (x: Date) => x.toLocaleDateString('en-AU', { weekday: 'short', timeZone: 'UTC' });
+  return { short: `${wd(d)} ${d.getUTCDate()}`, long: `${wd(d)} ${d.getUTCDate()} to ${wd(next)} ${next.getUTCDate()} December` };
+});
+
+const firstWatch = Math.min(...plans.map((p) => p.nights[0].watchStart ?? Infinity));
+const forecastFromText = tidy(fmt('Australia/Sydney', { day: 'numeric', month: 'short' }).format(firstWatch - 96 * 3600000));
+
+// How long after the radiant rises the moon is gone, at worst, on the peak night.
+if (plans.some((p) => p.peak.moonWhileWatching === 'up')) throw new Error('The moon text assumes it sets everywhere on the peak night.');
+const moonLagMin = Math.max(
+  ...plans.map((p) => (p.peak.moonSets !== null && p.peak.radiantRises !== null ? (p.peak.moonSets - p.peak.radiantRises) / 60000 : 0)),
+);
+const dayName = (evening: string, offset = 0) =>
+  new Date(Date.parse(`${evening}T12:00:00Z`) + offset * 86400000).toLocaleDateString('en-AU', { weekday: 'long', timeZone: 'UTC' });
+const peakEvening = shower.evenings[PEAK_NIGHT];
+const backupEvening = shower.evenings[PEAK_NIGHT - 1];
+const dayOf = (e: string) => Number(e.slice(8));
+
+const moonPeak = hobart.peak;
+const moonPct = Math.round(moonPeak.moonLit * 100);
+
+const rowData = (p: Plan) =>
+  JSON.stringify({
+    lat: p.place.lat,
+    lon: p.place.lon,
+    watches: p.nights.map((n) => (n.watchStart !== null && n.watchEnd !== null ? { start: n.watchStart, end: n.watchEnd } : null)),
+  });
+---
+
+<Base
+  title="Geminids 2026 from Australia and NZ: Best Times by Place"
+  description={`Geminid meteor shower, 12 to 15 December 2026, for ${locations.length} places in Australia and New Zealand: when the radiant rises, how many meteors an hour to expect, and whether the sky will be clear.`}
+  path="/geminids/"
+>
+  <h1>Geminids 2026 from Australia and New Zealand</h1>
+  <p class="lede">
+    The Geminids are the year's strongest meteor shower, but from down here the radiant stays low in the north and only
+    rises late. This page works out, for {locations.length} places, when to go out, how many meteors the best hour can
+    bring, and whether the sky looks clear.
+  </p>
+
+  <div class="notice" data-geminid-over hidden>
+    The 2026 Geminids are over. The times and counts below stay up as a record of this year's shower.
+  </div>
+
+  <h2>The short answer</h2>
+  <dl class="facts">
+    <dt>Best night</dt>
+    <dd>
+      {dayName(peakEvening)} {dayOf(peakEvening)} to {dayName(peakEvening, 1)} {dayOf(peakEvening) + 1} December, after the
+      radiant rises. {dayName(backupEvening)} {dayOf(backupEvening)} to {dayName(backupEvening, 1)} {dayOf(backupEvening) + 1}
+      is the backup. One prediction puts the peak inside {dayName(peakEvening)} night, the other in the afternoon before
+      it, so both nights are close to it.
+    </dd>
+    <dt>When to look</dt>
+    <dd>
+      From about {clock(hobart.peak.radiantRises ?? hobart.peak.darkStart, 'Australia/Hobart')} in Hobart,
+      {clock(melbourne.peak.radiantRises ?? melbourne.peak.darkStart, 'Australia/Melbourne')} in Melbourne and
+      {clock(sydney.peak.radiantRises ?? sydney.peak.darkStart, 'Australia/Sydney')} in Sydney until dawn twilight.
+      The best hour is the last one before it gets light, when the radiant is highest.
+    </dd>
+    <dt>How many</dt>
+    <dd>
+      In the best hour under a dark country sky, from about {worst.darkRate} an hour ({worst.place.name}) to about
+      {best.darkRate} ({best.place.name}). From the edge of a town, divide by about four. That is a fraction of the
+      150 an hour in the headlines, which assume the radiant straight overhead.
+    </dd>
+    <dt>The moon</dt>
+    <dd>
+      A thin crescent, about {moonPct}% lit on the peak night. Everywhere on this page it has set within
+      {Math.ceil(moonLagMin / 15) * 15} minutes of the radiant rising, while the radiant is still low, so it barely gets in
+      the way.
+    </dd>
+  </dl>
+
+  <h2>When the peak is</h2>
+  <p>
+    The International Meteor Organization predicts the maximum for {dayClock(imo.ms, 'UTC')} UTC. EarthSky gives
+    {dayClock(earthsky.ms, 'UTC')} UTC. In local time:
+  </p>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th scope="col">Time zone</th><th scope="col">IMO prediction</th><th scope="col">EarthSky prediction</th></tr>
+      </thead>
+      <tbody>
+        {zones.map((z) => (
+          <tr>
+            <th scope="row">{z.name}</th>
+            <td>{dayClock(imo.ms, z.tz)}</td>
+            <td>{dayClock(earthsky.ms, z.tz)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <p>
+    The IMO time falls during the night of {dayName(peakEvening)} {dayOf(peakEvening)} December everywhere in Australia
+    and New Zealand. The EarthSky time falls in daylight on {dayName(peakEvening)} {dayOf(peakEvening)}, between the two
+    nights. Either way, {dayName(peakEvening)} night is the one to pick, with {dayName(backupEvening)} night close
+    behind.
+  </p>
+
+  <h2>Place by place</h2>
+  <p>
+    Times are for the peak night, {nightNames[PEAK_NIGHT].long}, in each place's own time. "Best hour" is how many
+    meteors one person could count in the hour when the radiant is highest, if the shower is at full strength. The sky
+    column covers all three nights and fills in from the cloud forecast once it reaches that far, from about
+    {forecastFromText}.
+  </p>
+  <p class="small muted" data-geminid-live hidden>
+    Sky: the average cloud forecast for the hours the radiant is up. Clear means 30% or less, cloudy more than 70%.
+  </p>
+
+  {regions.map((region) => (
+    <section>
+      <h3>{region.name}</h3>
+      <div class="table-scroll">
+        <table class="night-table meteor-table" role="table">
+          <thead role="rowgroup">
+            <tr role="row">
+              <th scope="col" role="columnheader">Place</th>
+              <th scope="col" role="columnheader">Radiant up</th>
+              <th scope="col" role="columnheader">Highest</th>
+              <th scope="col" role="columnheader">Best hour</th>
+              <th scope="col" role="columnheader">Sky, three nights</th>
+            </tr>
+          </thead>
+          <tbody role="rowgroup">
+            {inRegion(region.slug).map((l) => {
+              const p = planFor(l.slug);
+              const n = p.peak;
+              return (
+                <tr role="row" data-geminid={rowData(p)}>
+                  <th scope="row" role="rowheader">
+                    <a href={`/forecast/${l.slug}/`}>{l.name}</a>
+                    <span class="sub">{zoneName(l.tz)}</span>
+                  </th>
+                  <td role="cell" data-label="Radiant up">
+                    {n.watchStart !== null && n.watchEnd !== null
+                      ? `${clock(n.watchStart, l.tz)} to ${clock(n.watchEnd, l.tz)}`
+                      : 'Not while dark'}
+                  </td>
+                  <td role="cell" data-label="Highest">
+                    {Math.round(n.bestAltDeg)}° at {clock(n.bestTime, l.tz)}
+                  </td>
+                  <td role="cell" data-label="Best hour">
+                    about {p.darkRate}
+                    <span class="when">{p.townRate} from a town</span>
+                  </td>
+                  <td role="cell" data-label="Sky" class="sky-cell">
+                    <ul class="sky-nights">
+                      {nightNames.map((name, i) => (
+                        <li data-night={i}>
+                          <span class="day">{name.short}</span>
+                          <span class="pill" data-verdict="none">From {forecastFromText}</span>
+                          <span class="when"></span>
+                        </li>
+                      ))}
+                    </ul>
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  ))}
+
+  <h2>Why the numbers are lower here</h2>
+  <div class="prose">
+    <p>
+      Meteors from a shower all seem to come from one point on the sky, the radiant. For the Geminids it is near the star
+      Castor in Gemini, {shower.radiant.decDeg} degrees north of the celestial equator. From the southern hemisphere that
+      point never climbs high: the further south you are, the lower it stays. It peaks at about
+      {Math.round(best.peak.bestAltDeg)} degrees above the northern horizon ({best.place.name}) and only about
+      {Math.round(worst.peak.bestAltDeg)} degrees ({worst.place.name}). The International Meteor Organization notes that
+      from the southern hemisphere only the second half of the night is useful.
+    </p>
+    <p>
+      The 150 an hour usually quoted is the zenithal hourly rate: what one observer would count with the radiant straight
+      overhead and stars visible down to magnitude 6.5. To get a real count, multiply by the sine of the radiant's height.
+      With the radiant 14 degrees up, as in Hobart, that is about a quarter. A brighter sky costs more: each magnitude of
+      faint stars you lose divides the count by the shower's population index, {shower.populationIndex} for the Geminids.
+      An edge-of-town sky that shows stars to magnitude 5 loses one and a half magnitudes, about a factor of four.
+    </p>
+    <p>
+      The counts above are for the shower at full strength. On the nights either side of the maximum they will be lower.
+      They are a guide to what is possible, not a promise.
+    </p>
+  </div>
+
+  <h2>Where to look</h2>
+  <div class="prose">
+    <p>
+      Meteors can appear anywhere in the sky, not just at the radiant. With the radiant low in the north, facing north
+      and taking in as much sky as you can is a good start. A place with a clear northern horizon and no lights in that
+      direction helps most. Auckland gets the radiant about {Math.round(auckland.peak.bestAltDeg)} degrees up, so the
+      North Island does better than the South.
+    </p>
+  </div>
+
+  <h2>Sources</h2>
+  <ul class="small">
+    <li>
+      Peak time, rate, radiant, population index and activity period ({shower.activity.from.slice(8)} to
+      {shower.activity.to.slice(8)} December): <a href="https://www.imo.net/files/meteor-shower/cal2026de.pdf">IMO Meteor
+      Shower Calendar 2026</a>.
+    </li>
+    <li>
+      Second peak prediction and the waxing crescent moon:
+      <a href="https://earthsky.org/astronomy-essentials/everything-you-need-to-know-geminid-meteor-shower/">EarthSky</a>.
+    </li>
+    <li>
+      Rate formula: the standard zenithal hourly rate calculation, as written in
+      <a href="https://arxiv.org/abs/astro-ph/0201023">Olech and others (2002)</a>.
+    </li>
+    <li>
+      Darkness and the moon: <a href="https://github.com/mourner/suncalc">SunCalc</a>. Cloud:
+      <a href="https://api.met.no/">MET Norway</a>, through this site's own cache. Full list on
+      <a href="/sources/">sources and updates</a>.
+    </li>
+  </ul>
+</Base>
+
+<script>
+  import '../lib/geminids.ts';
+</script>

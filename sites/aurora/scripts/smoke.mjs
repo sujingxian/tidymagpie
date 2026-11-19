@@ -74,8 +74,8 @@ function noaa(scenario, now) {
   };
 }
 
-async function withServer(args, port, fn) {
-  const child = spawn('node', ['scripts/dev-server.mjs', SERVER_CLOCK, ...args], { cwd: SITE, env: { ...process.env, PORT: String(port) }, stdio: ['ignore', 'pipe', 'inherit'] });
+async function withServer(args, port, fn, serverClock = SERVER_CLOCK) {
+  const child = spawn('node', ['scripts/dev-server.mjs', serverClock, ...args], { cwd: SITE, env: { ...process.env, PORT: String(port) }, stdio: ['ignore', 'pipe', 'inherit'] });
   await new Promise((resolve) => child.stdout.once('data', resolve));
   try { return await fn(`http://localhost:${port}`); } finally { child.kill(); }
 }
@@ -246,6 +246,32 @@ await withServer(['--cloud-down'], 4403, async (base) => {
   check('cloud down: sky card says so', (await text(page, '[data-slot="sky-main"]')) === 'Cloud forecast unavailable');
   await page.close();
 });
+
+// 4. Geminids page: weeks ahead, then inside the cloud forecast's reach.
+await withServer(['--cloud-pct=10'], 4404, async (base) => {
+  let { page, errors } = await open(base, '/geminids/', DAY, { shot: 'geminids-early-desktop' });
+  check('geminids early: no script errors', errors.length === 0, errors.join(' | '));
+  check('geminids early: 36 places', (await page.$$('[data-geminid]')).length === 36);
+  const early = await texts(page, '[data-geminid] .pill');
+  check('geminids early: sky waits for the forecast', early.length === 108 && early.every((t) => /^From \d+ Dec$/.test(t)), early[0]);
+  const hobart = await page.$eval('[data-geminid] ', (tr) => [...tr.children].map((c) => c.textContent.replace(/\s+/g, ' ').trim()));
+  check('geminids early: Hobart row', hobart[0].startsWith('Hobart') && hobart[1] === '11:36 pm to 3:10 am' && hobart[2] === '14° at 3:06 am' && hobart[3] === 'about 35 10 from a town', JSON.stringify(hobart));
+  await page.close();
+
+  ({ page, errors } = await open(base, '/geminids/', DAY, { width: 390, shot: 'geminids-early-mobile' }));
+  check('geminids mobile: no horizontal overflow', await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth + 1), String(await page.evaluate(() => document.documentElement.scrollWidth)));
+  await page.close();
+}, '--now=2026-11-16T23:00:00Z');
+
+await withServer(['--cloud-pct=10'], 4405, async (base) => {
+  const SUNDAY = { now: Date.UTC(2026, 11, 13, 0, 0), storm: false }; // 11 am Sunday 13 December in Hobart
+  const { page, errors } = await open(base, '/geminids/', SUNDAY, { shot: 'geminids-live' });
+  check('geminids live: no script errors', errors.length === 0, errors.join(' | '));
+  await page.waitForFunction(() => !document.querySelector('[data-geminid-live]').hidden, { timeout: 8000 }).catch(() => {});
+  const row = await page.$eval('[data-geminid]', (tr) => [...tr.querySelectorAll('[data-night]')].map((li) => li.textContent.replace(/\s+/g, ' ').trim()));
+  check('geminids live: Saturday over, Sunday and Monday clear', row[0] === 'Sat 12 Over' && row[1] === 'Sun 13 Clear 10% cloud' && row[2] === 'Mon 14 Clear 10% cloud', JSON.stringify(row));
+  await page.close();
+}, '--now=2026-12-13T00:00:00Z');
 
 await browser.close();
 console.log(results.join('\n'));

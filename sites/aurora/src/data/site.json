@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-17",
+  "updated": "2026-11-19",
   "sources": [
     {
       "id": "noaa-kp",
@@ -119,9 +119,34 @@
       "url": "https://github.com/mourner/suncalc",
       "use": "Darkness times, moon position and moon phase, calculated in your browser.",
       "checked": "17 November 2026"
+    },
+    {
+      "id": "imo-2026",
+      "name": "International Meteor Organization: Meteor Shower Calendar 2026 (German edition)",
+      "url": "https://www.imo.net/files/meteor-shower/cal2026de.pdf",
+      "use": "Geminids: activity 4 to 20 December, maximum 14 December 14h UT, ZHR 150, radiant at right ascension 112 and declination +33 degrees, population index 2.6, and the note that the southern hemisphere only gets the second half of the night.",
+      "checked": "19 November 2026"
+    },
+    {
+      "id": "earthsky-geminids",
+      "name": "EarthSky: Geminid meteor shower",
+      "url": "https://earthsky.org/astronomy-essentials/everything-you-need-to-know-geminid-meteor-shower/",
+      "use": "A second peak prediction (14 December 05:44 UTC), the radiant's position near Castor, and the waxing crescent moon.",
+      "checked": "19 November 2026"
+    },
+    {
+      "id": "zhr-formula",
+      "name": "Olech and others (2002), An artificial meteors database as a test for the presence of weak showers",
+      "url": "https://arxiv.org/abs/astro-ph/0201023",
+      "use": "The zenithal hourly rate formula, used backwards to turn the ZHR into a count for a given radiant height and sky.",
+      "checked": "19 November 2026"
     }
   ],
   "changelog": [
+    {
+      "date": "2026-11-19",
+      "text": "Added the Geminids 2026 page: radiant times, best-hour counts and a three-night cloud check for all 36 places."
+    },
     {
       "date": "2026-11-17",
       "text": "First version: live go or no-go for 36 places in Australia and New Zealand, hour-by-hour view, next nights, 27-day outlook and a check for your own coordinates."
